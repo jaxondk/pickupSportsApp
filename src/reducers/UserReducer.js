@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN } from '../constants';
+import { USER_LOGGED_IN, UPDATE_HOSTED_GAMES } from '../constants';
 
 const INITIAL_STATE =
 {
@@ -16,6 +16,10 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_LOGGED_IN:
       return action.payload;
+    case UPDATE_HOSTED_GAMES:
+      updatedState = { ...state, hostedGames: action.payload };
+      console.log('in update hosted games, new state:', updatedState);
+      return updatedState;
     default:
       return state;
   }

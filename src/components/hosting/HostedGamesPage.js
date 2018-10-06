@@ -3,6 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text, Icon, List, ListItem } from 'react-native-elements';
 import { colors } from '../../constants';
+import { removeHostedGame } from '../../actions';
 import { getIconFor, displayTime } from '../../utilities';
 
 const styles = {
@@ -21,6 +22,7 @@ class HostedGamesPage extends Component {
       </Text>
     )
   }
+  
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
   renderHostedGamesList(user) {
@@ -36,6 +38,8 @@ class HostedGamesPage extends Component {
                 title={game.name}
                 subtitle={this.buildGameSubtitle(game)}
                 leftIcon={getIconFor(game.sport)}
+                rightIcon={{name: 'cancel', color: 'red'}}
+                onPressRightIcon={() => this.props.removeHostedGame(user.hostedGames, game)}
               />
             ))
           }
@@ -55,4 +59,4 @@ class HostedGamesPage extends Component {
 
 let mapStoreToProps = ({ user }) => ({ user });
 
-export default connect(mapStoreToProps, null)(HostedGamesPage);
+export default connect(mapStoreToProps, { removeHostedGame })(HostedGamesPage);
