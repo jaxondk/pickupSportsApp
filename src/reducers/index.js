@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import mockReducer from './MockReducer'
+import userReducer from './UserReducer'
 
 export default combineReducers({
-  mock: mockReducer
+  user: userReducer,
 });
