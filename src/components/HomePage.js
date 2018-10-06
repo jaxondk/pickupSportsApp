@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { colors, mockUser } from '../constants';
 import { Actions } from 'react-native-router-flux';
@@ -16,12 +16,13 @@ const styles = {
     borderBottomColor: colors.SILVER,
     borderBottomWidth: 1,
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   findingCard: {
     flex: 1,
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 25,
   },
 }
 
@@ -33,16 +34,16 @@ class HomePage extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.pageContainer}>
+      <View style={styles.pageContainer}>
         <TouchableOpacity style={styles.hostingCard} onPress={() => Actions.hostingFlow()}>
           <Icon reverse type='entypo' name='location-pin' color={colors.PRIMARY} size={100} />
           <Text h2>Host Games</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.findingCard} onPress={() => Actions.findingFlow()}>
           <Icon reverse name='search' color={colors.ACCENT} size={100} />
-          <Text h1>Find Games</Text>
+          <Text h2>Find Games</Text>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     );
   }
 }

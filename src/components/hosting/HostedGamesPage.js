@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, Icon, List, ListItem } from 'react-native-elements';
+import { Text, Icon, List, ListItem, Button } from 'react-native-elements';
 import { colors } from '../../constants';
 import { removeHostedGame } from '../../actions';
 import { getIconFor, displayTime } from '../../utilities';
@@ -11,6 +11,13 @@ const styles = {
     flex: 1,
     backgroundColor: 'white',
   },
+  content: {
+    // flex: 14,
+  },
+  footer: {
+    margin: 25,
+    alignItems: 'center'
+  }
 }
 
 class HostedGamesPage extends Component {
@@ -50,9 +57,21 @@ class HostedGamesPage extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.pageContainer}>
-        {this.renderHostedGamesList(this.props.user)}
-      </ScrollView>
+      <View style={styles.pageContainer}>
+        <ScrollView style={styles.content}>
+          {this.renderHostedGamesList(this.props.user)}
+        </ScrollView>
+        <View style={styles.footer}>
+          <Button
+            raised
+            icon={{type: 'material-community', name: 'plus'}}
+            title='Host New Game'
+            borderRadius={20}
+            containerViewStyle={{borderRadius: 20, width: '50%'}}
+            backgroundColor={colors.ACCENT}
+          />
+        </View>
+      </View>
     );
   }
 }

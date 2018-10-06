@@ -10,8 +10,8 @@ export default class RouterComponent extends Component {
       <Router >
         <Scene key='root'>
           <Scene key='main'>
-            <Scene key='homePage' component={HomePage} title='Home' initial />
-            <Scene key='hostingFlow'>
+            <Scene key='homePage' component={HomePage} title='Home'  />
+            <Scene key='hostingFlow' initial>
               <Scene key='hostedGamesPage' component={HostedGamesPage} title='My Hosted Games' initial />
             </Scene>
             <Scene key='findingFlow'>
