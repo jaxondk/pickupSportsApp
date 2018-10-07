@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { colors, mockUser } from '../constants';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { mockLogUserIn } from '../actions';
 
@@ -32,15 +31,19 @@ class HomePage extends Component {
     this.props.mockLogUserIn(mockUser);
   }
 
+  static navigationOptions = {
+    title: 'Home',
+  };
+
   render() {
     return (
       <View style={styles.pageContainer}>
-        <TouchableOpacity style={styles.hostingCard} onPress={() => Actions.hostingFlow()}>
-          <Icon reverse type='entypo' name='location-pin' color={colors.PRIMARY} size={100} />
+        <TouchableOpacity style={styles.hostingCard} onPress={() => this.props.navigation.navigate('HostedGames')}>
+          <Icon reverse type='entypo' name='location-pin' color={colors.ACCENT} size={100} />
           <Text h2>Host Games</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.findingCard} onPress={() => Actions.findingFlow()}>
-          <Icon reverse name='search' color={colors.ACCENT} size={100} />
+        <TouchableOpacity style={styles.findingCard} onPress={() => this.props.navigation.navigate('SubscribedSports')}>
+          <Icon reverse name='search' color={colors.PRIMARY} size={100} />
           <Text h2>Find Games</Text>
         </TouchableOpacity>
       </View>

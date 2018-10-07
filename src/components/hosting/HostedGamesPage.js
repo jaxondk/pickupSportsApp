@@ -21,11 +21,15 @@ const styles = {
 }
 
 class HostedGamesPage extends Component {
+  static navigationOptions = {
+    title: "My Hosted Games",
+  };
+
   buildGameSubtitle(game) {
     return (
       <Text>
-        <Icon type='font-awesome' name='calendar' size={12} /> {'  '+game.date}
-        <Icon type='font-awesome' name='clock-o' size={12} /> {'     ' +displayTime(game.startTime)}
+        <Icon type='font-awesome' name='calendar' size={12} /> {' '+game.date}
+        <Icon type='font-awesome' name='clock-o' size={12} /> {'    ' +displayTime(game.startTime)}
       </Text>
     )
   }

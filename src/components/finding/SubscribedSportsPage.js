@@ -10,7 +10,11 @@ const styles = {
   },
 }
 
-export default class UsersSportsPage extends Component {
+export default class SubscribedSportsPage extends Component {
+  static navigationOptions = {
+    title: "My Sports",
+  };
+
   render () {
     return (
       <ScrollView style={styles.pageContainer}>

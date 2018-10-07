@@ -17,9 +17,7 @@ export default (state = INITIAL_STATE, action) => {
     case USER_LOGGED_IN:
       return action.payload;
     case UPDATE_HOSTED_GAMES:
-      updatedState = { ...state, hostedGames: action.payload };
-      console.log('in update hosted games, new state:', updatedState);
-      return updatedState;
+      return {...state, hostedGames: action.payload};
     default:
       return state;
   }
