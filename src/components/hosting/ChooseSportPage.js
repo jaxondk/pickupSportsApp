@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, Icon } from 'react-native-elements';
-import { selectSport } from '../../actions';
+import { Text } from 'react-native-elements';
+import { selectSport, confirmSportChoice } from '../../actions';
 import { colors, sports } from '../../constants';
 import { getIconFor } from '../../utilities';
 
@@ -34,6 +34,11 @@ class ChooseSportPage extends Component {
     title: "Choose a Sport",
   };
 
+  onPressNextBtn() {
+    this.props.confirmSportChoice(this.props.hostAGame.selectedSport)
+    this.props.navigation.navigate('ChooseTime');
+  }
+
   render () {
     return (
       <View style={styles.pageContainer}>
@@ -48,7 +53,7 @@ class ChooseSportPage extends Component {
             {getIconFor(sports.TENNIS, 100, this.props.hostAGame.selectedSport, () => this.props.selectSport(sports.TENNIS))}
           </View>
         </View>
-        <TouchableOpacity style={styles.footerBtn} onPress={() => this.props.navigation.navigate('ChooseTime')}>
+        <TouchableOpacity style={styles.footerBtn} onPress={() => this.onPressNextBtn()}>
           <Text h3 style={{color: 'white'}}>Next</Text>
         </TouchableOpacity>
       </View>
@@ -58,4 +63,4 @@ class ChooseSportPage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, {selectSport})(ChooseSportPage);
+export default connect(mapStoreToProps, {selectSport, confirmSportChoice})(ChooseSportPage);

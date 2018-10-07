@@ -23,7 +23,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_SPORT:
       return {...state, selectedSport: action.payload}
     case UPDATE_SPORT:
-      return {...state, game: {...state.game, sport: action.payload}}; //TODO: make sure this works
+      return {...state, game: {...state.game, sport: action.payload}};
     default:
       return state;
   }

@@ -26,6 +26,7 @@ class ChooseTimePage extends Component {
   };
 
   render () {
+    console.log(this.props.hostAGame)
     return (
       <View style={styles.pageContainer}>
         <View style={styles.content}>
@@ -38,6 +39,6 @@ class ChooseTimePage extends Component {
   }
 }
 
-let mapStoreToProps = ({ user }) => ({ user });
+let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
 export default connect(mapStoreToProps, {})(ChooseTimePage);
