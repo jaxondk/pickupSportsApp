@@ -48,7 +48,7 @@ class HostedGamesPage extends Component {
                 key={game.id}
                 title={game.name}
                 subtitle={this.buildGameSubtitle(game)}
-                leftIcon={getIconFor(game.sport)}
+                leftIcon={getIconFor(game.sport, 50)}
                 rightIcon={{name: 'cancel', color: 'red'}}
                 onPressRightIcon={() => this.props.removeHostedGame(user.hostedGames, game)}
               />

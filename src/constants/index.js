@@ -4,13 +4,16 @@ export const colors = {
   // SHADE: '',
   ACCENT: '#f2ad34',
   SILVER: '#e2e2e2',
+  SELECTED: '#14772D',
   BBALL_ORANGE: '#f28500',
+  TENNIS_GREEN: '#ccff00',
 }
 
 export const sports = {
   SOCCER: 'Soccer',
   BASKETBALL: 'Basketball',
   VOLLEYBALL: 'Volleyball', 
+  TENNIS: 'Tennis',
 }
 
 export const skillLevels = {

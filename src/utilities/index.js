@@ -2,16 +2,22 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 import { sports, colors } from '../constants';
 
-export const getIconFor = (sport) => {
+export const getIconFor = (sport, size, selected, onPress) => {
   switch (sport) {
     case sports.SOCCER:
-      return <Icon type='material-community' name='soccer' size={50} />;
+      return <Icon type='material-community' name='soccer' color={sports.SOCCER === selected ? colors.SELECTED : null} 
+        size={size} onPress={onPress} />;
     case sports.BASKETBALL:
-      return <Icon type='ionicon' name='ios-basketball' color={colors.BBALL_ORANGE} size={50} />;
-    case sports.VOLLEYBALL:
-      return <Icon type='material-community' name='volleyball' size={50} />;
-    default:
-      return <Icon type='simple-line-icon' name='emotsmile' size={50} />;
+      return <Icon type='ionicon' name='ios-basketball' color={sports.BASKETBALL === selected ? colors.SELECTED : colors.BBALL_ORANGE} 
+        size={size} onPress={onPress} />;
+    // case sports.VOLLEYBALL:
+    //   return <Icon type='font-awesome' name='volleyball-ball' size={size} onPress={onPress} />;
+    case sports.TENNIS:
+      return <Icon type='ionicon' name='ios-tennisball' color={sports.TENNIS === selected ? colors.SELECTED : colors.TENNIS_GREEN}
+        size={size} onPress={onPress} />;
+    default: //TODO
+      return <Icon type='simple-line-icon' name='emotsmile' color={selected ? colors.SELECTED : null}
+        size={size} onPress={onPress} />;
   }
 }
 
