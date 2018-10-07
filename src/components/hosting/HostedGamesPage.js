@@ -28,8 +28,8 @@ class HostedGamesPage extends Component {
   buildGameSubtitle(game) {
     return (
       <Text>
-        <Icon type='font-awesome' name='calendar' size={12} /> {' '+game.date}
-        <Icon type='font-awesome' name='clock-o' size={12} /> {'    ' +displayTime(game.startTime)}
+        <Icon type='font-awesome' name='calendar' size={12} /> {' ' + game.date} {/*TODO - inline icons*/}
+        <Icon type='font-awesome' name='clock-o' size={12} /> {'    ' +displayTime(game.startTime)} 
       </Text>
     )
   }
@@ -73,6 +73,7 @@ class HostedGamesPage extends Component {
             borderRadius={20}
             containerViewStyle={{borderRadius: 20, width: '50%'}}
             backgroundColor={colors.ACCENT}
+            onPress={() => this.props.navigation.navigate('ChooseSport')}
           />
         </View>
       </View>
