@@ -23,7 +23,6 @@ const styles = {
   },
   footerBtn: {
     flex: 1,
-    backgroundColor: colors.PRIMARY,
     alignItems: 'center', //horizontal align
     justifyContent: 'center', //vertical align
   },
@@ -34,8 +33,17 @@ class ChooseSportPage extends Component {
     title: "Choose a Sport",
   };
 
+  renderNextBtn(disabled, style) {
+    var bgColorStyle = disabled ? { backgroundColor: colors.SILVER } : {backgroundColor: colors.PRIMARY};
+    return (
+      <TouchableOpacity style={[style, bgColorStyle]} onPress={() => disabled ? null: this.onPressNextBtn()} disabled={disabled}>
+        <Text h3 style={{ color: 'white' }}>Next</Text>
+      </TouchableOpacity>
+    );
+  }
+
   onPressNextBtn() {
-    this.props.confirmSportChoice(this.props.hostAGame.selectedSport)
+    this.props.confirmSportChoice(this.props.hostAGame.selectedSport);
     this.props.navigation.navigate('ChooseTime');
   }
 
@@ -53,9 +61,7 @@ class ChooseSportPage extends Component {
             {getIconFor(sports.TENNIS, 100, this.props.hostAGame.selectedSport, () => this.props.selectSport(sports.TENNIS))}
           </View>
         </View>
-        <TouchableOpacity style={styles.footerBtn} onPress={() => this.onPressNextBtn()}>
-          <Text h3 style={{color: 'white'}}>Next</Text>
-        </TouchableOpacity>
+        {this.renderNextBtn(this.props.hostAGame.selectedSport === null, styles.footerBtn)}
       </View>
     );
   }

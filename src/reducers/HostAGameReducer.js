@@ -16,6 +16,8 @@ const INITIAL_STATE =
     skillLevel: null,
   },
   selectedSport: null,
+  selectedDate: null,
+  selectedTime: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
