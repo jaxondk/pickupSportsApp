@@ -1,4 +1,4 @@
-import { SELECT_SPORT, UPDATE_SPORT } from "../constants";
+import { SELECT_SPORT, UPDATE_SPORT, SELECT_DATE, SELECT_TIME } from "../constants";
 
 
 const INITIAL_STATE = 
@@ -8,8 +8,9 @@ const INITIAL_STATE =
     name: null,
     hostId: null,
     sport: null,
-    date: null,
-    timeRange: null,
+    moment: null,
+    // date: null,
+    // timeRange: null,
     location: null,
     attendeesAllowed: null, //minmax
     attendees: [],
@@ -26,6 +27,10 @@ export default (state = INITIAL_STATE, action) => {
       return {...state, selectedSport: action.payload}
     case UPDATE_SPORT:
       return {...state, game: {...state.game, sport: action.payload}};
+    case SELECT_DATE:
+      return { ...state, selectedDate: action.payload }
+    case SELECT_TIME:
+      return { ...state, selectedTime: action.payload }
     default:
       return state;
   }

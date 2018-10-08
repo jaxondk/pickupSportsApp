@@ -1,4 +1,5 @@
-import { SELECT_SPORT, UPDATE_SPORT, SELECT_DATE } from '../constants';
+import moment from 'moment';
+import { SELECT_SPORT, UPDATE_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_TIME, UPDATE_MOMENT } from '../constants';
 
 export const selectSport = (sport) => {
   return ({
@@ -22,9 +23,20 @@ export const selectDate = (date) => {
   })
 }
 
-export const confirmDateChoice = (date) => {
+export const confirmDateTimeChoice = (date, time) => {
+  var combined = moment(date.format('YYYY-MM-DD' + ' ' + time.format('HH:mm:ss')))
   return ({
-    type: UPDATE_DATE,
-    payload: date,
+    type: UPDATE_MOMENT,
+    payload: combined
   });
-};
+
+}
+
+export const selectTime = (time) => {
+  console.log('selected time: ', time);
+  console.log('time moment: ', moment(time))
+  return ({
+    type: SELECT_TIME,
+    payload: moment(time),
+  })
+}

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { TouchableOpacity, View, DatePickerIOS } from 'react-native';
 import moment from 'moment';
-import { TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import CalendarPicker from 'react-native-calendar-picker';
-import { selectDate, confirmDateChoice } from '../../actions';
+import { selectDate, selectTime, confirmDateTimeChoice } from '../../actions';
 import { colors } from '../../constants';
 
 const styles = {
@@ -16,8 +16,6 @@ const styles = {
     marginTop: 20,
     marginBottom: 20,
     flex: 9,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
   },
   footerBtn: {
     flex: 1,
@@ -41,23 +39,28 @@ class ChooseTimePage extends Component {
   }
 
   onPressNextBtn () {
-    this.props.confirmDateChoice(this.props.hostAGame.selectedDate);
-    // this.props.confirmTimeChoice(this.props.hostAGame.selectedTime);
-    this.props.navigation.navigate('ChooseLocation');
+    this.props.confirmDateTimeChoice(this.props.hostAGame.selectedDate, this.props.hostAGame.selectedTime);
+    // this.props.navigation.navigate('ChooseLocation');
   }
 
   render () {
     return (
       <View style={styles.pageContainer}>
         <View style={styles.content}>
-          <CalendarPicker
-            onDateChange={(date) => this.props.selectDate(date)}
-            selectedDayColor={colors.SELECTED}
-            minDate={moment().startOf('day')}
+          <View style={{ alignItems: 'center' }}>
+            <CalendarPicker
+              onDateChange={(date) => this.props.selectDate(date)}
+              selectedDayColor={colors.SELECTED}
+              minDate={moment().startOf('day')}
+            />
+          </View>
+          <DatePickerIOS
+            mode='time'
+            date={(this.props.hostAGame.selectedTime) ? this.props.hostAGame.selectedTime._d : new Date()}
+            onDateChange={(date) => this.props.selectTime(date)}
           />
         </View>
-        {this.renderNextBtn(this.props.hostAGame.selectedDate === null, styles.footerBtn)}
-        {/*                                                 ^^^ || this.props.hostAGame.selectedTime === null*/}
+        {this.renderNextBtn(this.props.hostAGame.selectedDate === null || this.props.hostAGame.selectedTime === null, styles.footerBtn)}
       </View>
     );
   }
@@ -65,4 +68,4 @@ class ChooseTimePage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, { selectDate, confirmDateChoice })(ChooseTimePage);
+export default connect(mapStoreToProps, { selectDate, confirmDateTimeChoice, selectTime })(ChooseTimePage);
