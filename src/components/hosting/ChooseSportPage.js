@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
-import { selectSport, confirmSportChoice } from '../../actions';
+import { selectSport, updateSportChoice } from '../../actions';
 import { colors, sports } from '../../constants';
 import { getIconFor } from '../../utilities';
 
@@ -43,7 +43,7 @@ class ChooseSportPage extends Component {
   }
 
   onPressNextBtn() {
-    this.props.confirmSportChoice(this.props.hostAGame.selectedSport);
+    this.props.updateSportChoice(this.props.hostAGame.selectedSport);
     this.props.navigation.navigate('ChooseTime');
   }
 
@@ -69,4 +69,4 @@ class ChooseSportPage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, {selectSport, confirmSportChoice})(ChooseSportPage);
+export default connect(mapStoreToProps, {selectSport, updateSportChoice})(ChooseSportPage);

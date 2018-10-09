@@ -4,7 +4,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import CalendarPicker from 'react-native-calendar-picker';
-import { selectDate, selectTime, confirmDateTimeChoice } from '../../actions';
+import { selectDate, selectTime, updateDateTimeChoice } from '../../actions';
 import { colors } from '../../constants';
 
 const styles = {
@@ -39,8 +39,8 @@ class ChooseTimePage extends Component {
   }
 
   onPressNextBtn () {
-    this.props.confirmDateTimeChoice(this.props.hostAGame.selectedDate, this.props.hostAGame.selectedTime);
-    // this.props.navigation.navigate('ChooseLocation');
+    this.props.updateDateTimeChoice(this.props.hostAGame.selectedDate, this.props.hostAGame.selectedTime);
+    this.props.navigation.navigate('ChooseLocation');
   }
 
   render () {
@@ -68,4 +68,4 @@ class ChooseTimePage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, { selectDate, confirmDateTimeChoice, selectTime })(ChooseTimePage);
+export default connect(mapStoreToProps, { selectDate, updateDateTimeChoice, selectTime })(ChooseTimePage);

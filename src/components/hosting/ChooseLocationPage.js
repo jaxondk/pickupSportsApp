@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
-import { selectSport, confirmSportChoice } from '../../actions';
+import { selectLocation, updateLocation } from '../../actions';
 import { colors, sports } from '../../constants';
 import { getIconFor } from '../../utilities';
 
@@ -15,11 +15,6 @@ const styles = {
     marginTop: 20,
     marginBottom: 20,
     flex: 9,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  sport: {
-    width: '33%',
   },
   footerBtn: {
     flex: 1,
@@ -43,7 +38,7 @@ class ChooseLocationPage extends Component {
   }
 
   onPressNextBtn () {
-    this.props.confirmSportChoice(this.props.hostAGame.selectedSport);
+    this.props.updateSportChoice(this.props.hostAGame.selectedSport);
     this.props.navigation.navigate('ChooseTime');
   }
 
@@ -51,17 +46,8 @@ class ChooseLocationPage extends Component {
     return (
       <View style={styles.pageContainer}>
         <View style={styles.content}>
-          <View style={styles.sport}>
-            {getIconFor(sports.SOCCER, 100, this.props.hostAGame.selectedSport, () => this.props.selectSport(sports.SOCCER))}
-          </View>
-          <View style={styles.sport}>
-            {getIconFor(sports.BASKETBALL, 100, this.props.hostAGame.selectedSport, () => this.props.selectSport(sports.BASKETBALL))}
-          </View>
-          <View style={styles.sport}>
-            {getIconFor(sports.TENNIS, 100, this.props.hostAGame.selectedSport, () => this.props.selectSport(sports.TENNIS))}
-          </View>
         </View>
-        {this.renderNextBtn(this.props.hostAGame.selectedSport === null, styles.footerBtn)}
+        {this.renderNextBtn(this.props.hostAGame.selectedLocation === null, styles.footerBtn)}
       </View>
     );
   }
@@ -69,4 +55,4 @@ class ChooseLocationPage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, { selectSport, confirmSportChoice })(ChooseLocationPage);
+export default connect(mapStoreToProps, { selectLocation, updateLocation })(ChooseLocationPage);

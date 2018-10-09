@@ -1,9 +1,12 @@
+// User/Auth
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 export const UPDATE_HOSTED_GAMES = 'UPDATE_HOSTED_GAMES';
 
-// HostAGameReducer
+// HostAGame
 export const SELECT_SPORT = 'SELECT_SPORT';
 export const UPDATE_SPORT = 'UPDATE_SPORT';
 export const SELECT_DATE = 'SELECT_DATE';
 export const SELECT_TIME = 'SELECT_TIME';
 export const UPDATE_MOMENT = 'UPDATE_MOMENT';
+export const SELECT_LOCATION = 'SELECT_LOCATION';
+export const UPDATE_LOCATION = 'UPDATE_LOCATION';

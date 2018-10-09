@@ -16,7 +16,7 @@ export default RootStack = createStackNavigator(
     HostedGames: HostedGamesPage,
     ChooseSport: ChooseSportPage,
     ChooseTime: ChooseTimePage,
-    // ChooseLocation, ChooseLocationPage,
+    ChooseLocation: ChooseLocationPage,
     // ChooseSize: ChooseSizePage,
     // ChooseSkillLevel: ChooseSkillLevelPage,
     SubscribedSports: SubscribedSportsPage,
