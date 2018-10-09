@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
+import { MapView } from 'expo';
 import { selectLocation, updateLocation } from '../../actions';
 import { colors, sports } from '../../constants';
 import { getIconFor } from '../../utilities';
@@ -10,6 +11,13 @@ const styles = {
   pageContainer: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  map: {
+    bottom: 0,
+    top: 0,
+    right: 0,
+    left: 0,
+    position: 'absolute',
   },
   content: {
     marginTop: 20,
@@ -46,6 +54,13 @@ class ChooseLocationPage extends Component {
     return (
       <View style={styles.pageContainer}>
         <View style={styles.content}>
+          <MapView
+            style={styles.map}
+            // region={this.props.currentRegion}
+            showsUserLocation
+            // showsMyLocationButton={false}
+            // onRegionChangeComplete={(reg) => { this.props.updateRegion(reg, this.searchButtonCallback); }}
+          />
         </View>
         {this.renderNextBtn(this.props.hostAGame.selectedLocation === null, styles.footerBtn)}
       </View>

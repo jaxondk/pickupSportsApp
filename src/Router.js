@@ -22,7 +22,7 @@ export default RootStack = createStackNavigator(
     SubscribedSports: SubscribedSportsPage,
   },
   {
-    initialRouteName: 'ChooseTime',
+    initialRouteName: 'ChooseLocation',
     navigationOptions: {
       headerStyle: {
         backgroundColor: colors.PRIMARY,
