@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, Icon } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import { MapView } from 'expo';
+import uuidv4 from 'uuid/v4';
 import { updateLocation, selectRegion, addHostedGame, clearHostAGameForm } from '../../actions';
 import { colors } from '../../constants';
 import locationPin from '../../../assets/locationPin.png';
@@ -50,15 +51,22 @@ class ChooseLocationPage extends Component {
     );
   }
 
+  finishUpHostingFlow() {
+    var game = this.props.hostAGame.game;
+    game.location = { latitude: this.props.hostAGame.region.latitude, longitude: this.props.hostAGame.region.longitude }
+    game.id = uuidv4();
+    game.hostId = this.props.user.id;
+
+    this.props.addHostedGame(this.props.user.hostedGames, game);
+    this.props.clearHostAGameForm();
+  }
+
   onPressNextBtn () {
     this.props.updateLocation(this.props.hostAGame.region);
     // this.props.navigation.navigate('ChooseSize');
     // TODO - still need to implement choose size and skill level. 
     // These f(x)s below should go in last screen of hostAGame flow
-    var game = this.props.hostAGame.game;
-    game.location = {latitude: this.props.hostAGame.region.latitude, longitude: this.props.hostAGame.region.longitude}
-    this.props.addHostedGame(this.props.user.hostedGames, game);
-    this.props.clearHostAGameForm();
+    this.finishUpHostingFlow();
     this.props.navigation.navigate('HostedGames');
   }
 
