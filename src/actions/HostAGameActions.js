@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, UPDATE_GAME_LOCATION, SELECT_REGION, INIT_REGION } from '../constants';
+import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, UPDATE_GAME_LOCATION, SELECT_REGION, INIT_REGION, CLEAR_HOST_A_GAME_FORM } from '../constants';
 
 export const selectSport = (sport) => {
   return ({
@@ -51,9 +51,15 @@ export const selectRegion = (region) => {
   });
 }
 
-export const updateLocation = (location) => {
+export const updateLocation = ({longitude, latitude}) => {
   return ({
     type: UPDATE_GAME_LOCATION,
-    payload: location
+    payload: {longitude, latitude}
+  });
+}
+
+export const clearHostAGameForm = () => {
+  return ({
+    type: CLEAR_HOST_A_GAME_FORM,
   });
 }

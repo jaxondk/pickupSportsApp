@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Text } from 'react-native-elements';
+import { Text, Icon } from 'react-native-elements';
 import { MapView } from 'expo';
-import { updateLocation, selectRegion } from '../../actions';
+import { updateLocation, selectRegion, addHostedGame, clearHostAGameForm } from '../../actions';
 import { colors } from '../../constants';
+import locationPin from '../../../assets/locationPin.png';
 
 const styles = {
   pageContainer: {
@@ -13,11 +14,17 @@ const styles = {
   },
   map: {
     flex: 1,
-    // bottom: 0,
-    // top: 0,
-    // right: 0,
-    // left: 0,
-    // position: 'absolute',
+  },
+  marker: {
+  },
+  markerFixed: {
+    height: 48,
+    width: 48,
+    left: '50%',
+    marginLeft: -24,
+    marginTop: -320,
+    position: 'absolute',
+    top: '50%'
   },
   content: {
     flex: 9,
@@ -44,8 +51,15 @@ class ChooseLocationPage extends Component {
   }
 
   onPressNextBtn () {
-    this.props.updateSportChoice(this.props.hostAGame.selectedSport);
-    this.props.navigation.navigate('ChooseTime');
+    this.props.updateLocation(this.props.hostAGame.region);
+    // this.props.navigation.navigate('ChooseSize');
+    // TODO - still need to implement choose size and skill level. 
+    // These f(x)s below should go in last screen of hostAGame flow
+    var game = this.props.hostAGame.game;
+    game.location = {latitude: this.props.hostAGame.region.latitude, longitude: this.props.hostAGame.region.longitude}
+    this.props.addHostedGame(this.props.user.hostedGames, game);
+    this.props.clearHostAGameForm();
+    this.props.navigation.navigate('HostedGames');
   }
 
   render () {
@@ -57,8 +71,11 @@ class ChooseLocationPage extends Component {
             style={styles.map}
             region={this.props.hostAGame.region}
             showsUserLocation
-            // onRegionChangeComplete={(reg) => this.props.selectRegion(reg)}
+            onRegionChangeComplete={(reg) => this.props.selectRegion(reg)}
           />
+          <View pointerEvents='none'>
+            <Image style={styles.markerFixed} source={locationPin} />
+          </View>
         </View>
         {this.renderNextBtn(this.props.hostAGame.region === null, styles.footerBtn)}
       </View>
@@ -68,4 +85,4 @@ class ChooseLocationPage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, { updateLocation, selectRegion })(ChooseLocationPage);
+export default connect(mapStoreToProps, { updateLocation, selectRegion, addHostedGame, clearHostAGameForm })(ChooseLocationPage);

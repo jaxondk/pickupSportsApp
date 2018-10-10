@@ -11,6 +11,14 @@ export const removeHostedGame = (hostedGames, gameToRemove) => {
   });
 };
 
+export const addHostedGame = (hostedGames, gameToAdd) => {
+  hostedGames.push(gameToAdd);
+  return ({
+    type: UPDATE_HOSTED_GAMES,
+    payload: hostedGames,
+  });
+}
+
 export const watchLocation = (dispatch) => {
   console.log('in watchLocation');
   return (dispatch) => {
@@ -20,7 +28,7 @@ export const watchLocation = (dispatch) => {
         return ({ type: LOAD_USER_LOCATION_DENIED });
       } else {
         Location.watchPositionAsync(null, ({coords}) => {
-          console.log('cb of watch position. location: ', location)
+          console.log('cb of watch position. coords: ', coords)
           dispatch({
             type: UPDATE_USER_LOCATION,
             payload: { latitude: coords.latitude, longitude: coords.longitude }

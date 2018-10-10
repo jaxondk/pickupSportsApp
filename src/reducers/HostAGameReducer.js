@@ -1,4 +1,4 @@
-import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, SELECT_LOCATION, UPDATE_GAME_LOCATION, INIT_REGION, SELECT_REGION } from "../constants";
+import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, SELECT_LOCATION, UPDATE_GAME_LOCATION, INIT_REGION, SELECT_REGION, UPDATE_HOSTED_GAMES, ADD, CLEAR_HOST_A_GAME_FORM } from "../constants";
 
 
 const INITIAL_STATE =
@@ -36,12 +36,15 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_MOMENT:
       return { ...state, game: { ...state.game, moment: action.payload } };
     case INIT_REGION:
-      console.log('region payload', action.payload)
+      console.log('init region payload', action.payload)
       return { ...state, region: action.payload };
     case SELECT_REGION:
+      console.log('select region payload', action.payload)
       return { ...state, region: action.payload };
     case UPDATE_GAME_LOCATION:
       return { ...state, game: { ...state.game, location: action.payload } };
+    case CLEAR_HOST_A_GAME_FORM:
+      return INITIAL_STATE;
     default:
       return state;
   }
