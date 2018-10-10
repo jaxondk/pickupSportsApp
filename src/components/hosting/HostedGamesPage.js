@@ -11,9 +11,6 @@ const styles = {
     flex: 1,
     backgroundColor: 'white',
   },
-  content: {
-    // flex: 14,
-  },
   footer: {
     margin: 25,
     alignItems: 'center'
@@ -66,7 +63,7 @@ class HostedGamesPage extends Component {
   render () {
     return (
       <View style={styles.pageContainer}>
-        <ScrollView style={styles.content}>
+        <ScrollView>
           {this.renderHostedGamesList(this.props.user)}
         </ScrollView>
         <View style={styles.footer}>

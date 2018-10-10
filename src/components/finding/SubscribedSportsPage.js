@@ -11,9 +11,6 @@ const styles = {
     flex: 1,
     backgroundColor: 'white',
   },
-  content: {
-    // flex: 14,
-  },
   footer: {
     margin: 25,
     alignItems: 'center'
@@ -41,7 +38,7 @@ class SubscribedSportsPage extends Component {
   //        hosted games, games to checkout, my sports, etc.
   renderSubscribedSportsList (user) {
     if (user.subscribedSports.length === 0) {
-      return (<Text>You haven't chosen any sports. To find a game, subscribe to a sport</Text>);
+      return (<Text>You haven't chosen any sports. To find a game, join a sport</Text>);
     } else {
       return (
         <List>
@@ -65,7 +62,7 @@ class SubscribedSportsPage extends Component {
   render () {
     return (
       <View style={styles.pageContainer}>
-        <ScrollView style={styles.content}>
+        <ScrollView>
           {this.renderSubscribedSportsList(this.props.user)}
         </ScrollView>
         <View style={styles.footer}>
