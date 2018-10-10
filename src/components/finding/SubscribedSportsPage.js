@@ -1,25 +1,89 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Text, Icon } from 'react-native-elements';
+import { Text, List, ListItem, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 import { colors } from '../../constants';
+import { removeSubscribedSport } from '../../actions';
+import { getIconFor } from '../../utilities';
 
 const styles = {
   pageContainer: {
     flex: 1,
     backgroundColor: 'white',
   },
+  content: {
+    // flex: 14,
+  },
+  footer: {
+    margin: 25,
+    alignItems: 'center'
+  },
+  btnContainer: {
+    borderRadius: 20,
+    width: '50%'
+  }
 }
 
-export default class SubscribedSportsPage extends Component {
+class SubscribedSportsPage extends Component {
   static navigationOptions = {
     title: "My Sports",
   };
 
+  buildSportSubtitle (sport) {
+    return (
+      <Text>
+        N games today
+      </Text>
+    )
+  }
+
+  // TODO - make this generic so you can use it to render all similar lists in the app -
+  //        hosted games, games to checkout, my sports, etc.
+  renderSubscribedSportsList (user) {
+    if (user.subscribedSports.length === 0) {
+      return (<Text>You haven't chosen any sports. To find a game, subscribe to a sport</Text>);
+    } else {
+      return (
+        <List>
+          {
+            user.subscribedSports.map((subscribedSport) => (
+              <ListItem
+                key={subscribedSport.id}
+                title={subscribedSport.name}
+                subtitle={this.buildSportSubtitle(subscribedSport.name)}
+                leftIcon={getIconFor(subscribedSport.name, 50)}
+                rightIcon={{ name: 'cancel', color: 'red' }}
+                onPressRightIcon={() => this.props.removeSubscribedSport(user.subscribedSports, subscribedSport.id)}
+              />
+            ))
+          }
+        </List>
+      );
+    }
+  }
+
   render () {
     return (
-      <ScrollView style={styles.pageContainer}>
-        <Text>My Sports</Text>
-      </ScrollView>
+      <View style={styles.pageContainer}>
+        <ScrollView style={styles.content}>
+          {this.renderSubscribedSportsList(this.props.user)}
+        </ScrollView>
+        <View style={styles.footer}>
+          <Button
+            raised
+            icon={{ type: 'material-community', name: 'plus' }}
+            title='Join A Sport'
+            borderRadius={20}
+            containerViewStyle={styles.btnContainer}
+            backgroundColor={colors.ACCENT}
+            onPress={() => this.props.navigation.navigate('ChooseSport')}
+          />
+        </View>
+      </View>
     );
   }
 }
+
+let mapStoreToProps = ({ user }) => ({ user });
+
+export default connect(mapStoreToProps, { removeSubscribedSport })(SubscribedSportsPage);

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Text, Icon, List, ListItem, Button } from 'react-native-elements';
 import { colors } from '../../constants';
 import { removeHostedGame } from '../../actions';
-import { getIconFor, displayTime } from '../../utilities';
+import { getIconFor } from '../../utilities';
 
 const styles = {
   pageContainer: {
@@ -52,7 +52,7 @@ class HostedGamesPage extends Component {
                 key={game.id}
                 title={game.name}
                 subtitle={this.buildGameSubtitle(game)}
-                leftIcon={getIconFor(game.sport, 50)}
+                leftIcon={getIconFor(game.sportName, 50)}
                 rightIcon={{name: 'cancel', color: 'red'}}
                 onPressRightIcon={() => this.props.removeHostedGame(user.hostedGames, game)}
               />

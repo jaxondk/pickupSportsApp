@@ -28,7 +28,7 @@ export const mockGame1 = {
   id: 1,
   name: "Game1",
   hostId: 1,
-  sport: sports.SOCCER,
+  sportName: sports.SOCCER,
   moment: moment(new Date()),
   location: { latitude: 21.45, longitude: 90.345 },
   attendeesAllowed: { min: 6, max: 12 },
@@ -44,11 +44,11 @@ export const mockUser = {
   displayName: "El Cucuy",
   hostedGames: [mockGame1],
   attendingGames: [mockGame1],
-  // sports: [], //Unnecessary - filters has this info. Might want this just for convenience tho
   location: null,
-  filters: [
+  subscribedSports: [
     {
-      sport: sports.SOCCER, //TODO - make sport class
+      id: 1,
+      name: sports.SOCCER,
       distance: 5,
       days: [0, 2, 4, 5], // M, W, F, Sat
       times: [{ start: 17, end: 23 }], //TODO - make TimeRange class
