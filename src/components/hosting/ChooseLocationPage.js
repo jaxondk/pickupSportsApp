@@ -3,9 +3,8 @@ import { TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { MapView } from 'expo';
-import { selectLocation, updateLocation } from '../../actions';
-import { colors, sports } from '../../constants';
-import { getIconFor } from '../../utilities';
+import { updateLocation, selectRegion } from '../../actions';
+import { colors } from '../../constants';
 
 const styles = {
   pageContainer: {
@@ -13,11 +12,12 @@ const styles = {
     backgroundColor: 'white',
   },
   map: {
-    bottom: 0,
-    top: 0,
-    right: 0,
-    left: 0,
-    position: 'absolute',
+    flex: 1,
+    // bottom: 0,
+    // top: 0,
+    // right: 0,
+    // left: 0,
+    // position: 'absolute',
   },
   content: {
     flex: 9,
@@ -49,18 +49,18 @@ class ChooseLocationPage extends Component {
   }
 
   render () {
+    console.log(this.props.hostAGame.region);
     return (
       <View style={styles.pageContainer}>
         <View style={styles.content}>
           <MapView
             style={styles.map}
-            // region={this.props.currentRegion}
+            region={this.props.hostAGame.region}
             showsUserLocation
-            // showsMyLocationButton={false}
-            // onRegionChangeComplete={(reg) => { this.props.updateRegion(reg, this.searchButtonCallback); }}
+            // onRegionChangeComplete={(reg) => this.props.selectRegion(reg)}
           />
         </View>
-        {this.renderNextBtn(this.props.hostAGame.selectedLocation === null, styles.footerBtn)}
+        {this.renderNextBtn(this.props.hostAGame.region === null, styles.footerBtn)}
       </View>
     );
   }
@@ -68,4 +68,4 @@ class ChooseLocationPage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, { selectLocation, updateLocation })(ChooseLocationPage);
+export default connect(mapStoreToProps, { updateLocation, selectRegion })(ChooseLocationPage);

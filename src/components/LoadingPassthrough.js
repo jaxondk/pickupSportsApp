@@ -29,7 +29,7 @@ class LoadingPassthrough extends Component {
       );
     } else if (this.props.user.location) {
       console.log('navigate');
-      this.props.navigation.navigate('ChooseLocation');
+      this.props.navigation.navigate('ChooseTime');
     }
     return (
       <View style={styles.pageContainer} >

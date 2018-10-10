@@ -22,7 +22,6 @@ export default (state = INITIAL_STATE, action) => {
     case LOAD_USER_LOCATION_DENIED:
       return { ...state, location: 'DENIED' };
     case UPDATE_USER_LOCATION:
-      console.log('reducing update_user_location. payload: ', action.payload);
       return { ...state, location: action.payload };
     default:
       return state;

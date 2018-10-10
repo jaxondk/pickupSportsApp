@@ -13,7 +13,7 @@ import LoadingPassthrough from './components/LoadingPassthrough';
 
 export default RootStack = createStackNavigator(
   {
-    Init: LoadingPassthrough,
+    Loader: LoadingPassthrough,
     Home: HomePage,
     HostedGames: HostedGamesPage,
     ChooseSport: ChooseSportPage,
@@ -24,7 +24,7 @@ export default RootStack = createStackNavigator(
     SubscribedSports: SubscribedSportsPage,
   },
   {
-    initialRouteName: 'Init',
+    initialRouteName: 'Loader',
     navigationOptions: {
       headerStyle: {
         backgroundColor: colors.PRIMARY,
