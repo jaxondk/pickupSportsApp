@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
-import { colors, mockUser } from '../constants';
+import { colors, mockUser, stateOptions } from '../constants';
 import { mockLogUserIn, watchLocation } from '../actions';
 
 const styles = {
@@ -20,25 +20,24 @@ class LoadingPassthrough extends Component {
                                   //See https://github.com/reduxjs/redux/issues/1676 for chaining async redux actions
   }
   render() {
-    console.log(this.props.user)
-    if (this.props.user.location === 'DENIED') {
+    console.log(this.props.appState.userLocation);
+    if (this.props.appState.userLocation === stateOptions.DENIED) {
       Alert.alert(
         'Location Needed', 
         'The app won\'t work without your location. Please provide permission to access your location while using the app',
         [{text: "Try Again", onPress: () => this.props.watchLocation()}]
       );
-    } else if (this.props.user.location) {
-      console.log('navigate');
+    } else if (this.props.appState.userLocation === stateOptions.SUCCESS) {
       this.props.navigation.navigate('Home');
     }
     return (
       <View style={styles.pageContainer} >
-        <ActivityIndicator size='large' animating={!this.props.user.location} color={colors.ACCENT} />
+        <ActivityIndicator size='large' animating={!this.props.appState.userLocation} color={colors.ACCENT} />
       </View>
     )
   }
 }
 
-let mapStoreToProps = ({ user }) => ({ user });
+let mapStoreToProps = ({ appState }) => ({ appState });
 
 export default connect(mapStoreToProps, { mockLogUserIn, watchLocation })(LoadingPassthrough)

@@ -1,4 +1,5 @@
 import moment from 'moment';
+export * from './actionTypes';
 
 export const colors = {
   PRIMARY: '#2e5ba0',
@@ -24,6 +25,17 @@ export const skillLevels = {
   ADVANCED: 'Advanced',
 }
 
+export const stateOptions = {
+  // UNINITIALIZED: 'unitialized_state',
+  LOADING: 'loading_state',
+  SUCCESS: 'success_state',
+  DENIED: 'denied_state',
+  FAILURE: 'failure_state',
+};
+
+//----------------------------------------------
+//vvvv MOCK DATA vvvvvvvvvvvv
+//----------------------------------------------
 export const mockGame1 = {
   id: 1,
   name: "Game1",
@@ -57,5 +69,3 @@ export const mockUser = {
     }
   ],
 }
-
-export * from './actionTypes';

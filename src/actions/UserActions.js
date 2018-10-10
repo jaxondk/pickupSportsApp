@@ -1,5 +1,5 @@
 import { Location, Permissions } from 'expo';
-import { UPDATE_HOSTED_GAMES, UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, UPDATE_SUBSCRIBED_SPORTS } from '../constants';
+import { UPDATE_HOSTED_GAMES, UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, UPDATE_SUBSCRIBED_SPORTS, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION } from '../constants';
 
 export const removeHostedGame = (hostedGames, gameToRemove) => {
   updated = hostedGames.filter((game) => {
@@ -30,21 +30,24 @@ export const removeSubscribedSport = (subscribedSports, filterIdToRemove) => {
 }
 
 export const watchLocation = (dispatch) => {
-  console.log('in watchLocation');
   return (dispatch) => {
+    dispatch({ type: LOAD_USER_LOCATION });
     Permissions.askAsync(Permissions.LOCATION).then((permission) => {
-      console.log('in .then of ask. permission: ', permission);
       if (permission.status !== 'granted') {
-        return ({ type: LOAD_USER_LOCATION_DENIED });
+        dispatch({ type: LOAD_USER_LOCATION_DENIED });
       } else {
-        Location.watchPositionAsync(null, ({coords}) => {
-          console.log('cb of watch position. coords: ', coords)
+        const options = null;
+        Location.watchPositionAsync(options, ({coords}) => {
           dispatch({
             type: UPDATE_USER_LOCATION,
             payload: { latitude: coords.latitude, longitude: coords.longitude }
           });
+          dispatch({ type: LOAD_USER_LOCATION_SUCCESS });
         });
       }
-    }, (err) => console.log(err));
+    }, (err) => {
+      console.log(err);
+      dispatch({ type: LOAD_USER_LOCATION_FAILURE });
+    });
   }
 }
