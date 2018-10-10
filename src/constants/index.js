@@ -7,7 +7,9 @@ export const colors = {
   // SHADE: '',
   ACCENT: '#f2ad34',
   SILVER: '#e2e2e2',
+  PURPLE: '#83389B',
   SELECTED: '#14772D',
+  CANCEL: 'red', //TODO - find better red
   BBALL_ORANGE: '#f28500',
   TENNIS_GREEN: '#ccff00',
 }

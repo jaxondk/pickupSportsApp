@@ -8,6 +8,7 @@ import ChooseLocationPage from './components/hosting/ChooseLocationPage';
 // import ChooseSizePage from './components/hosting/ChooseSizePage';
 // import ChooseSkillLevelPage from './components/hosting/ChooseSkillLevelPage';
 import SubscribedSportsPage from './components/finding/SubscribedSportsPage';
+import GamesForSportPage from './components/finding/GamesForSportPage';
 import { colors } from './constants';
 import LoadingPassthrough from './components/LoadingPassthrough';
 
@@ -22,6 +23,7 @@ export default RootStack = createStackNavigator(
     // ChooseSize: ChooseSizePage,
     // ChooseSkillLevel: ChooseSkillLevelPage,
     SubscribedSports: SubscribedSportsPage,
+    GamesForSport: GamesForSportPage,
   },
   {
     initialRouteName: 'Loader',

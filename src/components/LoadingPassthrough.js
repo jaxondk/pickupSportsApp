@@ -32,7 +32,7 @@ class LoadingPassthrough extends Component {
     }
     return (
       <View style={styles.pageContainer} >
-        <ActivityIndicator size='large' animating={!this.props.appState.userLocation} color={colors.ACCENT} />
+        <ActivityIndicator size='large' animating={this.props.appState.userLocation !== stateOptions.SUCCESS} color={colors.ACCENT} />
       </View>
     )
   }
