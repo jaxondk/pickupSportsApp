@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const colors = {
   PRIMARY: '#2e5ba0',
   // TINT: '',
@@ -27,13 +29,12 @@ export const mockGame1 = {
   name: "Game1",
   hostId: 1,
   sport: sports.SOCCER,
-  skillLevel: skillLevels.ADVANCED,
-  date: 'Today', // TODO - no internet now to look up JS date
-  startTime: { hr: 18, min: 0},
-  endTime: { hr: 20, min: 30 },
-  loc: { lat: 21.45, lng: 90.345 },
+  moment: moment(new Date()),
+  location: { latitude: 21.45, longitude: 90.345 },
   attendeesAllowed: { min: 6, max: 12 },
-  attendeeIds: [1],
+  attendees: [],
+  skillLevel: skillLevels.ADVANCED,
+  // attendeeIds: [1],
 }
 
 export const mockUser = {

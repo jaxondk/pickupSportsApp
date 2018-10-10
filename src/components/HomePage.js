@@ -27,6 +27,7 @@ const styles = {
 class HomePage extends Component {
   static navigationOptions = {
     title: 'Home',
+    headerLeft: null,
   };
 
   render() {

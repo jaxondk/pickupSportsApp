@@ -17,6 +17,10 @@ const styles = {
   footer: {
     margin: 25,
     alignItems: 'center'
+  },
+  btnContainer: {
+    borderRadius: 20, 
+    width: '50%'
   }
 }
 
@@ -28,8 +32,8 @@ class HostedGamesPage extends Component {
   buildGameSubtitle(game) {
     return (
       <Text>
-        <Icon type='font-awesome' name='calendar' size={12} /> {' ' + game.date} {/*TODO - inline icons*/}
-        <Icon type='font-awesome' name='clock-o' size={12} /> {'    ' +displayTime(game.startTime)} 
+        <Icon type='font-awesome' name='calendar' size={12} /> {' ' + game.moment.format('MM/DD')} {/*TODO - inline icons*/}
+        <Icon type='font-awesome' name='clock-o' size={12} /> {'    ' + game.moment.format('h:mm A')}
       </Text>
     )
   }
@@ -71,7 +75,7 @@ class HostedGamesPage extends Component {
             icon={{type: 'material-community', name: 'plus'}}
             title='Host New Game'
             borderRadius={20}
-            containerViewStyle={{borderRadius: 20, width: '50%'}}
+            containerViewStyle={styles.btnContainer}
             backgroundColor={colors.ACCENT}
             onPress={() => this.props.navigation.navigate('ChooseSport')}
           />
