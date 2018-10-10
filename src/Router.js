@@ -9,9 +9,11 @@ import ChooseLocationPage from './components/hosting/ChooseLocationPage';
 // import ChooseSkillLevelPage from './components/hosting/ChooseSkillLevelPage';
 import SubscribedSportsPage from './components/finding/SubscribedSportsPage';
 import { colors } from './constants';
+import LoadingPassthrough from './components/LoadingPassthrough';
 
 export default RootStack = createStackNavigator(
   {
+    Init: LoadingPassthrough,
     Home: HomePage,
     HostedGames: HostedGamesPage,
     ChooseSport: ChooseSportPage,
@@ -22,7 +24,7 @@ export default RootStack = createStackNavigator(
     SubscribedSports: SubscribedSportsPage,
   },
   {
-    initialRouteName: 'ChooseLocation',
+    initialRouteName: 'Init',
     navigationOptions: {
       headerStyle: {
         backgroundColor: colors.PRIMARY,

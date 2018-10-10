@@ -20,8 +20,6 @@ const styles = {
     position: 'absolute',
   },
   content: {
-    marginTop: 20,
-    marginBottom: 20,
     flex: 9,
   },
   footerBtn: {

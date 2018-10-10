@@ -44,6 +44,7 @@ export const mockUser = {
   hostedGames: [mockGame1],
   attendingGames: [mockGame1],
   // sports: [], //Unnecessary - filters has this info. Might want this just for convenience tho
+  location: null,
   filters: [
     {
       sport: sports.SOCCER, //TODO - make sport class

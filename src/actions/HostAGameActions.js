@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { SELECT_SPORT, UPDATE_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_TIME, UPDATE_MOMENT, SELECT_LOCATION, UPDATE_LOCATION } from '../constants';
+import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_TIME, UPDATE_MOMENT, SELECT_LOCATION, UPDATE_GAME_LOCATION } from '../constants';
 
 export const selectSport = (sport) => {
   return ({
@@ -10,7 +10,7 @@ export const selectSport = (sport) => {
 
 export const updateSportChoice = (sport) => {
   return ({
-    type: UPDATE_SPORT,
+    type: UPDATE_GAME_SPORT,
     payload: sport,
   });
 };
@@ -47,7 +47,7 @@ export const selectLocation = (location) => {
 
 export const updateLocation = (location) => {
   return ({
-    type: UPDATE_LOCATION,
+    type: UPDATE_GAME_LOCATION,
     payload: location
   });
 }

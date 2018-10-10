@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
-import { colors, mockUser } from '../constants';
+import { colors } from '../constants';
 import { connect } from 'react-redux';
-import { mockLogUserIn } from '../actions';
 
 const styles = {
   pageContainer: {
@@ -26,11 +25,6 @@ const styles = {
 }
 
 class HomePage extends Component {
-  componentWillMount() {
-    //TODO - connect to db, load model objects. This should actually be done after auth
-    this.props.mockLogUserIn(mockUser);
-  }
-
   static navigationOptions = {
     title: 'Home',
   };
@@ -51,4 +45,4 @@ class HomePage extends Component {
   }
 }
 
-export default connect(null, { mockLogUserIn })(HomePage)
+export default connect(null, {})(HomePage)

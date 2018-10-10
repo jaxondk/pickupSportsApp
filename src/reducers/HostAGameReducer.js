@@ -1,7 +1,7 @@
-import { SELECT_SPORT, UPDATE_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, SELECT_LOCATION, UPDATE_LOCATION } from "../constants";
+import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, SELECT_LOCATION, UPDATE_GAME_LOCATION } from "../constants";
 
 
-const INITIAL_STATE = 
+const INITIAL_STATE =
 {
   game: {
     id: null,
@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SELECT_SPORT:
       return { ...state, selectedSport: action.payload };
-    case UPDATE_SPORT:
+    case UPDATE_GAME_SPORT:
       return { ...state, game: { ...state.game, sport: action.payload } };
     case SELECT_DATE:
       return { ...state, selectedDate: action.payload };
@@ -36,7 +36,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, game: { ...state.game, moment: action.payload } };
     case SELECT_LOCATION:
       return { ...state, selectedLocation: action.payload };
-    case UPDATE_LOCATION:
+    case UPDATE_GAME_LOCATION:
       return { ...state, game: { ...state.game, location: action.payload } };
     default:
       return state;
