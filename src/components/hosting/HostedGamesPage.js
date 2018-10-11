@@ -39,6 +39,7 @@ class HostedGamesPage extends Component {
               <GameListItem
                 key={game.id}
                 game={game}
+                userLocation={user.location}
                 rightIcon={{ name: 'cancel', color: 'red' }}
                 onPressRightIcon={() => this.props.removeHostedGame(user.hostedGames, game)}
                 editable

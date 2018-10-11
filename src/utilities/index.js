@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, Text } from 'react-native-elements';
+import haversine from 'haversine';
 import { sports, colors, icons } from '../constants';
 
 //TODO - needs some serious refactoring
@@ -22,6 +23,8 @@ export const getIconFor = (name, size, selected, onPress) => {
       return <Icon type='font-awesome' name='calendar' size={size} />
     case icons.PENCIL.name:
       return <Icon type={icons.PENCIL.type} name={icons.PENCIL.name} size={size} />
+    case icons.LOCATION.name:
+      return <Icon type={icons.LOCATION.type} name={icons.LOCATION.name} size={size} />
     default: //TODO
       return <Icon type='simple-line-icon' name='emotsmile' color={selected ? colors.SELECTED : null}
         size={size} onPress={onPress} />;
@@ -35,4 +38,8 @@ export const buildGameSubtitle = (game) => {
       <Icon type='font-awesome' name='clock-o' size={12} /> {game.moment.format('h:mm A')}
     </Text>
   )
+}
+
+export const displayDistance = (location1, location2) => {
+  return haversine(location1, location2, { unit: 'mile' }).toFixed(2) + ' mi'
 }

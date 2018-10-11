@@ -55,6 +55,7 @@ class GamesForSportPage extends Component {
               <GameListItem
                 key={game.id}
                 game={game}
+                userLocation={this.props.user.location}
                 rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle', color: colors.SELECTED }}
                 onPressRightIcon={() => {
                   this.props.unattendGame(AGList, game.id);
@@ -82,6 +83,7 @@ class GamesForSportPage extends Component {
               <GameListItem
                 key={game.id}
                 game={game}
+                userLocation={this.props.user.location}
                 rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle-outline', color: colors.SELECTED }}
                 onPressRightIcon={() => {
                   this.props.attendGame(this.props.user.attendingGames, game);

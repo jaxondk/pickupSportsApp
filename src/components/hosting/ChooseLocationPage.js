@@ -7,6 +7,7 @@ import uuidv4 from 'uuid/v4';
 import { updateLocation, selectRegion, addHostedGame, clearHostAGameForm } from '../../actions';
 import { colors } from '../../constants';
 import locationPin from '../../../assets/locationPin.png';
+import SaveSelectionBtn from '../common/SaveSelectionBtn';
 
 const styles = {
   pageContainer: {
@@ -42,15 +43,6 @@ class ChooseLocationPage extends Component {
     title: "Choose a Location",
   };
 
-  renderNextBtn (disabled, style) {
-    var bgColorStyle = disabled ? { backgroundColor: colors.SILVER } : { backgroundColor: colors.PRIMARY };
-    return (
-      <TouchableOpacity style={[style, bgColorStyle]} onPress={() => disabled ? null : this.onPressNextBtn()} disabled={disabled}>
-        <Text h3 style={{ color: 'white' }}>Next</Text>
-      </TouchableOpacity>
-    );
-  }
-
   finishUpHostingFlow() {
     var game = this.props.hostAGame.game;
     game.location = { latitude: this.props.hostAGame.region.latitude, longitude: this.props.hostAGame.region.longitude }
@@ -61,7 +53,7 @@ class ChooseLocationPage extends Component {
     this.props.clearHostAGameForm();
   }
 
-  onPressNextBtn () {
+  onPressSaveBtn () {
     this.props.updateLocation(this.props.hostAGame.region);
     // this.props.navigation.navigate('ChooseSize');
     // TODO - still need to implement choose size and skill level. 
@@ -85,7 +77,10 @@ class ChooseLocationPage extends Component {
             <Image style={styles.markerFixed} source={locationPin} />
           </View>
         </View>
-        {this.renderNextBtn(this.props.hostAGame.region === null, styles.footerBtn)}
+        <SaveSelectionBtn
+          onPress={() => this.onPressSaveBtn()}
+          disabled={this.props.hostAGame.region === null}
+        />
       </View>
     );
   }

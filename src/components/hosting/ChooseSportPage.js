@@ -5,6 +5,7 @@ import { Text } from 'react-native-elements';
 import { selectSport, updateSportChoice } from '../../actions';
 import { colors, sports } from '../../constants';
 import { getIconFor } from '../../utilities';
+import SaveSelectionBtn from '../common/SaveSelectionBtn';
 
 const styles = {
   pageContainer: {
@@ -21,11 +22,6 @@ const styles = {
   sport: {
     width: '33%',
   },
-  footerBtn: {
-    flex: 1,
-    alignItems: 'center', //horizontal align
-    justifyContent: 'center', //vertical align
-  },
 }
 
 class ChooseSportPage extends Component {
@@ -33,16 +29,16 @@ class ChooseSportPage extends Component {
     title: "Choose a Sport",
   };
 
-  renderNextBtn(disabled, style) {
-    var bgColorStyle = disabled ? { backgroundColor: colors.SILVER } : {backgroundColor: colors.PRIMARY};
-    return (
-      <TouchableOpacity style={[style, bgColorStyle]} onPress={() => disabled ? null: this.onPressNextBtn()} disabled={disabled}>
-        <Text h3 style={{ color: 'white' }}>Next</Text>
-      </TouchableOpacity>
-    );
-  }
+  // renderNextBtn(disabled, style) {
+  //   var bgColorStyle = disabled ? { backgroundColor: colors.SILVER } : {backgroundColor: colors.PRIMARY};
+  //   return (
+  //     <TouchableOpacity style={[style, bgColorStyle]} onPress={() => disabled ? null: this.onPressSaveBtn()} disabled={disabled}>
+  //       <Text h3 style={{ color: 'white' }}>Next</Text>
+  //     </TouchableOpacity>
+  //   );
+  // }
 
-  onPressNextBtn() {
+  onPressSaveBtn() {
     this.props.updateSportChoice(this.props.hostAGame.selectedSport);
     this.props.navigation.navigate('ChooseTime');
   }
@@ -61,7 +57,10 @@ class ChooseSportPage extends Component {
             {getIconFor(sports.TENNIS, 100, this.props.hostAGame.selectedSport, () => this.props.selectSport(sports.TENNIS))}
           </View>
         </View>
-        {this.renderNextBtn(this.props.hostAGame.selectedSport === null, styles.footerBtn)}
+        <SaveSelectionBtn 
+          onPress={() => this.onPressSaveBtn()} 
+          disabled={this.props.hostAGame.selectedSport === null} 
+        />
       </View>
     );
   }

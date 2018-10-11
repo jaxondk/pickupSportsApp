@@ -6,6 +6,7 @@ import { Text } from 'react-native-elements';
 import CalendarPicker from 'react-native-calendar-picker';
 import { selectDate, selectTime, updateDateTimeChoice, initRegion } from '../../actions';
 import { colors } from '../../constants';
+import SaveSelectionBtn from '../common/SaveSelectionBtn';
 
 const styles = {
   pageContainer: {
@@ -32,13 +33,13 @@ class ChooseTimePage extends Component {
   renderNextBtn (disabled, style) {
     var bgColorStyle = disabled ? { backgroundColor: colors.SILVER } : { backgroundColor: colors.PRIMARY };
     return (
-      <TouchableOpacity style={[style, bgColorStyle]} onPress={() => disabled ? null : this.onPressNextBtn()} disabled={disabled}>
+      <TouchableOpacity style={[style, bgColorStyle]} onPress={() => disabled ? null : this.onPressSaveBtn()} disabled={disabled}>
         <Text h3 style={{ color: 'white' }}>Next</Text>
       </TouchableOpacity>
     );
   }
 
-  onPressNextBtn () {
+  onPressSaveBtn () {
     this.props.updateDateTimeChoice(this.props.hostAGame.selectedDate, this.props.hostAGame.selectedTime);
     this.props.initRegion(this.props.user.location);
     this.props.navigation.navigate('ChooseLocation');
@@ -61,7 +62,10 @@ class ChooseTimePage extends Component {
             onDateChange={(date) => this.props.selectTime(date)}
           />
         </View>
-        {this.renderNextBtn(this.props.hostAGame.selectedDate === null || this.props.hostAGame.selectedTime === null, styles.footerBtn)}
+        <SaveSelectionBtn
+          onPress={() => this.onPressSaveBtn()}
+          disabled={this.props.hostAGame.selectedDate === null || this.props.hostAGame.selectedTime === null}
+        />
       </View>
     );
   }

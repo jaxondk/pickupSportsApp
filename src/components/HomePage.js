@@ -34,7 +34,7 @@ class HomePage extends Component {
     return (
       <View style={styles.pageContainer}>
         <TouchableOpacity style={styles.hostingCard} onPress={() => this.props.navigation.navigate('HostedGames')}>
-          <Icon reverse type={icons.LOC.type} name={icons.LOC.name} color={colors.ACCENT} size={100} />
+          <Icon reverse type={icons.LOCATION.type} name={icons.LOCATION.name} color={colors.ACCENT} size={100} />
           <Text h2>Host Games</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.findingCard} onPress={() => this.props.navigation.navigate('SubscribedSports')}>

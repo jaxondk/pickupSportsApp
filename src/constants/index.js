@@ -26,7 +26,7 @@ export const icons = {
   CAL: { type: 'font-awesome', name: 'calendar' },
   PENCIL: { type: 'material-community', name: 'pencil' },
   SEARCH: { name: 'search' },
-  LOC: { type: 'entypo', name: 'location-pin' },
+  LOCATION: { type: 'entypo', name: 'location-pin' },
 }
 
 export const skillLevels = {

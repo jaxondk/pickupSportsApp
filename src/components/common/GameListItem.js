@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import { ListItem, List } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import { getIconFor, buildGameSubtitle } from '../../utilities';
+import { getIconFor, buildGameSubtitle, displayDistance } from '../../utilities';
 import { icons } from '../../constants';
-
-// const styles = {
-//   hidden: {
-//     display: 'none',
-//   },
-// }
 
 export default class GameListItem extends Component {
   constructor(props) {
@@ -20,19 +14,22 @@ export default class GameListItem extends Component {
   renderDetails() {
     if (this.state.showDetails) {
       return (
-        // <ScrollView>
-          <List>
-            {
-              <ListItem
-                title={' ' + this.props.game.moment.format('MM/DD h:mm A')}
-                leftIcon={getIconFor(icons.CLOCK.name, 24)}
-                rightIcon={getIconFor(icons.PENCIL.name, 24)}
-                hideChevron={!this.props.editable}
-              // onPressRightIcon={navigate to edit} TODO
-              />
-            }
-          </List>
-        // </ScrollView>
+        <List>
+          <ListItem
+            title={' ' + this.props.game.moment.format('MM/DD') + ' at ' + this.props.game.moment.format('h:mm A')}
+            leftIcon={getIconFor(icons.CLOCK.name, 24)}
+            rightIcon={getIconFor(icons.PENCIL.name, 24)}
+            hideChevron={!this.props.editable}
+          // onPressRightIcon={navigate to edit} TODO
+          />
+          <ListItem
+            title={' ' + displayDistance(this.props.userLocation, this.props.game.location)}
+            leftIcon={getIconFor(icons.LOCATION.name, 24)}
+            rightIcon={getIconFor(icons.PENCIL.name, 24)}
+            hideChevron={!this.props.editable}
+          // onPressRightIcon={navigate to edit} TODO
+          />
+        </List>
       );
     }
   }
@@ -58,6 +55,7 @@ export default class GameListItem extends Component {
 
 GameListItem.propTypes = {
   game: PropTypes.object.isRequired,
+  userLocation: PropTypes.object.isRequired,
   rightIcon: PropTypes.object.isRequired,
   onPressRightIcon: PropTypes.func.isRequired,
   editable: PropTypes.bool,
