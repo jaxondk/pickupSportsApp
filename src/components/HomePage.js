@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
-import { colors } from '../constants';
+import { colors, icons } from '../constants';
 import { connect } from 'react-redux';
 
 const styles = {
@@ -34,11 +34,11 @@ class HomePage extends Component {
     return (
       <View style={styles.pageContainer}>
         <TouchableOpacity style={styles.hostingCard} onPress={() => this.props.navigation.navigate('HostedGames')}>
-          <Icon reverse type='entypo' name='location-pin' color={colors.ACCENT} size={100} />
+          <Icon reverse type={icons.LOC.type} name={icons.LOC.name} color={colors.ACCENT} size={100} />
           <Text h2>Host Games</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.findingCard} onPress={() => this.props.navigation.navigate('SubscribedSports')}>
-          <Icon reverse name='search' color={colors.PRIMARY} size={100} />
+          <Icon reverse name={icons.SEARCH.name} color={colors.PRIMARY} size={100} />
           <Text h2>Find Games</Text>
         </TouchableOpacity>
       </View>

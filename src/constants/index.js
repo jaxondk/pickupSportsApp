@@ -21,6 +21,14 @@ export const sports = {
   TENNIS: 'Tennis',
 }
 
+export const icons = {
+  CLOCK: {type: 'font-awesome', name: 'clock-o'},
+  CAL: { type: 'font-awesome', name: 'calendar' },
+  PENCIL: { type: 'material-community', name: 'pencil' },
+  SEARCH: { name: 'search' },
+  LOC: { type: 'entypo', name: 'location-pin' },
+}
+
 export const skillLevels = {
   BEGINNER: 'Beginner',
   INTERMEDIATE: 'Intermediate',

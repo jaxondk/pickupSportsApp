@@ -1,9 +1,10 @@
 import React from 'react';
 import { Icon, Text } from 'react-native-elements';
-import { sports, colors } from '../constants';
+import { sports, colors, icons } from '../constants';
 
-export const getIconFor = (sport, size, selected, onPress) => {
-  switch (sport) {
+//TODO - needs some serious refactoring
+export const getIconFor = (name, size, selected, onPress) => {
+  switch (name) {
     case sports.SOCCER:
       return <Icon type='material-community' name='soccer' color={sports.SOCCER === selected ? colors.SELECTED : null} 
         size={size} onPress={onPress} />;
@@ -15,6 +16,12 @@ export const getIconFor = (sport, size, selected, onPress) => {
     case sports.TENNIS:
       return <Icon type='ionicon' name='ios-tennisball' color={sports.TENNIS === selected ? colors.SELECTED : colors.TENNIS_GREEN}
         size={size} onPress={onPress} />;
+    case icons.CLOCK.name:
+      return <Icon type='font-awesome' name='clock-o' size={size} />
+    case icons.CAL.name:
+      return <Icon type='font-awesome' name='calendar' size={size} />
+    case icons.PENCIL.name:
+      return <Icon type={icons.PENCIL.type} name={icons.PENCIL.name} size={size} />
     default: //TODO
       return <Icon type='simple-line-icon' name='emotsmile' color={selected ? colors.SELECTED : null}
         size={size} onPress={onPress} />;
@@ -29,19 +36,3 @@ export const buildGameSubtitle = (game) => {
     </Text>
   )
 }
-
-// const to12HrTimeStr = (time) => {
-//   var amOrPm = time.hr > 11 ? 'PM' : 'AM';
-//   var hr = time.hr > 12 ? time.hr - 12 : time.hr;
-//   var min = time.min < 10 ? '0' + time.min : time.min;
-//   return hr + ':' + min + ' ' + amOrPm;
-// }
-
-// // Can display a single time or, if time2 included, a time range
-// export const displayTime = (time1, time2) => {
-//   var displayTime = to12HrTimeStr(time1);
-//   if (time2) {
-//     displayTime += '-' + to12HrTimeStr(time2)
-//   }
-//   return displayTime;
-// }
