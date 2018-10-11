@@ -7,7 +7,7 @@ const INITIAL_STATE =
     id: null,
     name: 'Name', //TODO
     hostId: null,
-    sport: null,
+    sportName: null,
     moment: null,
     location: null,
     attendeesAllowed: {min: 6, max: 12}, //minmax TODO
@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_SPORT:
       return { ...state, selectedSport: action.payload };
     case UPDATE_GAME_SPORT:
-      return { ...state, game: { ...state.game, sport: action.payload } };
+      return { ...state, game: { ...state.game, sportName: action.payload } };
     case SELECT_DATE:
       return { ...state, selectedDate: action.payload };
     case SELECT_TIME:

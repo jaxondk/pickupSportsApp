@@ -24,8 +24,8 @@ export const getIconFor = (sport, size, selected, onPress) => {
 export const buildGameSubtitle = (game) => {
   return (
     <Text>
-      <Icon type='font-awesome' name='calendar' size={12} /> {' ' + game.moment.format('MM/DD')} {/*TODO - inline icons*/}
-      <Icon type='font-awesome' name='clock-o' size={12} /> {'    ' + game.moment.format('h:mm A')}
+      <Icon type='font-awesome' name='calendar' size={12} /> {game.moment.format('MM/DD')} {/*TODO - inline icons*/}
+      <Icon type='font-awesome' name='clock-o' size={12} /> {game.moment.format('h:mm A')}
     </Text>
   )
 }
