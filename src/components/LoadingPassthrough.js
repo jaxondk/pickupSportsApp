@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
-import { colors, mockUser, stateOptions } from '../constants';
+import { colors, stateOptions } from '../constants';
+import { mockUser } from '../../assets/MockData';
 import { mockLogUserIn, watchLocation } from '../actions';
 
 const styles = {

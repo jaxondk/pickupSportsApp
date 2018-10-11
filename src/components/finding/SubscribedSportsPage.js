@@ -48,7 +48,7 @@ class SubscribedSportsPage extends Component {
                 key={subscribedSport.id}
                 title={subscribedSport.name}
                 subtitle={this.buildSportSubtitle(subscribedSport.name)}
-                onPress={() => this.props.navigation.navigate('GamesForSport')}
+                onPress={() => this.props.navigation.navigate('GamesForSport', {currentSport: subscribedSport})}
                 leftIcon={getIconFor(subscribedSport.name, 50)}
                 rightIcon={{ name: 'cancel', color: 'red' }}
                 onPressRightIcon={() => this.props.removeSubscribedSport(user.subscribedSports, subscribedSport.id)}

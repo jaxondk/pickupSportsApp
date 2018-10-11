@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, UPDATE_HOSTED_GAMES, UPDATE_USER_LOCATION, UPDATE_SUBSCRIBED_SPORTS, UPDATE_ATTENDING_GAMES } from '../constants';
+import { USER_LOGGED_IN, UPDATE_HOSTED_GAMES, UPDATE_USER_LOCATION, UPDATE_SUBSCRIBED_SPORTS, UPDATE_ATTENDING_GAMES, UPDATE_GAMES_OF_INTEREST } from '../constants';
 
 const INITIAL_STATE =
 {
@@ -9,7 +9,6 @@ const INITIAL_STATE =
   hostedGames: [],
   attendingGames: [],
   location: null,
-  // sports: [], //Unnecessary - subscribedSports has this info. Might want this just for convenience tho
   subscribedSports: [],
 };
 
@@ -25,6 +24,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, subscribedSports: action.payload };
     case UPDATE_ATTENDING_GAMES:
       return { ...state, attendingGames: action.payload };
+    // case UPDATE_GAMES_OF_INTEREST:
+    //   return { ...state, subscribedSports: [...state.subscribedSports, action.payload] };
     default:
       return state;
   }

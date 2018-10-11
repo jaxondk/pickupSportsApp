@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Text, List, ListItem, Button } from 'react-native-elements';
 import { colors } from '../../constants';
 import { buildGameSubtitle, getIconFor } from '../../utilities';
-import { unattendGame } from '../../actions';
+import { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
 
 const styles = {
   pageContainer: {
@@ -22,27 +22,62 @@ const styles = {
 }
 
 class GamesForSportPage extends Component {
-  static navigationOptions = {
-    title: "Games", //TODO - add a parameter so that this says the sport they clicked on too. IE "Soccer Games"
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('currentSport').name + " Games",
+    }
   };
 
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
-  renderAttendingGamesList (list) {
-    if (list.length == 0) {
+  renderAttendingGamesList (AGList, subscribedSports, currentSport) {
+    if (AGList.length == 0) {
       return (<Text>You haven't joined any games yet</Text>);
     } else {
       return (
         <List>
           {
-            list.map((game) => (
+            AGList.map((game) => (
               <ListItem
                 key={game.id}
                 title={game.name}
                 subtitle={buildGameSubtitle(game)}
                 leftIcon={getIconFor(game.sportName, 50)}
-                rightIcon={{ name: 'cancel', color: 'red' }}
-                onPressRightIcon={() => this.props.unattendGame(list, game.id)}
+                rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle', color: colors.SELECTED }}
+                onPressRightIcon={() => {
+                  this.props.unattendGame(AGList, game.id);
+                  this.props.addGameOfInterest(subscribedSports, currentSport.id, game);
+                  //TODO - filters need to be applied somewhere
+                }}
+              />
+            ))
+          }
+        </List>
+      );
+    }
+  }
+
+  // Probably can't genericize
+  renderGamesOfInterestList (subscribedSports, currentSport) {
+    console.log('current sport', currentSport)
+    var GOIList = currentSport.gamesOfInterest;
+    if (GOIList.length == 0) {
+      return (<Text>No games that match your filter criteria for this sport. Try adjusting the filters to broaden your search results</Text>);
+    } else {
+      return (
+        <List>
+          {
+            GOIList.map((game) => (
+              <ListItem
+                key={game.id}
+                title={game.name}
+                subtitle={buildGameSubtitle(game)}
+                leftIcon={getIconFor(game.sportName, 50)}
+                rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle-outline', color: colors.SELECTED }}
+                onPressRightIcon={() => {
+                  this.props.attendGame(this.props.user.attendingGames, game);
+                  this.props.removeGameOfInterest(subscribedSports, currentSport.id, game.id);
+                }}
               />
             ))
           }
@@ -55,7 +90,10 @@ class GamesForSportPage extends Component {
     return (
       <View style={styles.pageContainer}>
         <ScrollView>
-          {this.renderAttendingGamesList(this.props.user.attendingGames)}
+          {this.renderAttendingGamesList(this.props.user.attendingGames, this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
+        </ScrollView>
+        <ScrollView>
+          {this.renderGamesOfInterestList(this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
         </ScrollView>
         <View style={styles.footer}>
           <Button
@@ -75,4 +113,4 @@ class GamesForSportPage extends Component {
 
 let mapStoreToProps = ({ user }) => ({ user });
 
-export default connect(mapStoreToProps, { unattendGame })(GamesForSportPage);
+export default connect(mapStoreToProps, { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest })(GamesForSportPage);

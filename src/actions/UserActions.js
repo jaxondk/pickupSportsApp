@@ -1,5 +1,5 @@
 import { Location, Permissions } from 'expo';
-import { UPDATE_HOSTED_GAMES, UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, UPDATE_SUBSCRIBED_SPORTS, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, UPDATE_ATTENDING_GAMES } from '../constants';
+import { UPDATE_HOSTED_GAMES, UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, UPDATE_SUBSCRIBED_SPORTS, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, UPDATE_ATTENDING_GAMES, UPDATE_GAMES_OF_INTEREST } from '../constants';
 
 export const removeHostedGame = (hostedGames, gameToRemove) => {
   updated = hostedGames.filter((game) => {
@@ -29,13 +29,39 @@ export const removeSubscribedSport = (subscribedSports, filterIdToRemove) => {
   });
 }
 
-export const unattendGame = (attendingGames, gameIdToUnattend) => {
-  updated = attendingGames.filter((game) => {
-    return (game.id != gameIdToUnattend);
+export const attendGame = (attendingGames, gameToAttend) => {
+  attendingGames.push(gameToAttend);
+  return ({
+    type: UPDATE_ATTENDING_GAMES,
+    payload: attendingGames,
   });
+}
+
+export const unattendGame = (attendingGames, gameIdToUnattend) => {
+  updated = attendingGames.filter((game) => (game.id != gameIdToUnattend));
   return ({
     type: UPDATE_ATTENDING_GAMES,
     payload: updated,
+  });
+}
+
+export const addGameOfInterest = (subscribedSports, subscribedSportId, gameToAdd) => {
+  //Since games of interest are nested in subscribed sports, need to modify subscribed sports
+  sport = subscribedSports.find((sport) => (sport.id === subscribedSportId));
+  sport.gamesOfInterest.push(gameToAdd);
+  return ({
+    type: UPDATE_SUBSCRIBED_SPORTS,
+    payload: subscribedSports,
+  });
+}
+
+export const removeGameOfInterest = (subscribedSports, subscribedSportId, gameIdToRemove) => {
+  //Since games of interest are nested in subscribed sports, need to modify subscribed sports
+  sport = subscribedSports.find((sport) => (sport.id === subscribedSportId));
+  sport.gamesOfInterest = sport.gamesOfInterest.filter((game) => (game.id != gameIdToRemove));
+  return ({
+    type: UPDATE_SUBSCRIBED_SPORTS,
+    payload: subscribedSports,
   });
 }
 
