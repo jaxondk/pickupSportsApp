@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, List, ListItem, Button } from 'react-native-elements';
+import { Text, List, Button } from 'react-native-elements';
 import { colors } from '../../constants';
 import { removeHostedGame } from '../../actions';
-import { getIconFor, buildGameSubtitle } from '../../utilities';
+import GameListItem from '../common/GameListItem';
 
 const styles = {
   pageContainer: {
@@ -36,13 +36,12 @@ class HostedGamesPage extends Component {
         <List>
           {
             user.hostedGames.map((game) => (
-              <ListItem
+              <GameListItem
                 key={game.id}
-                title={game.name}
-                subtitle={buildGameSubtitle(game)}
-                leftIcon={getIconFor(game.sportName, 50)}
-                rightIcon={{name: 'cancel', color: 'red'}}
+                game={game}
+                rightIcon={{ name: 'cancel', color: 'red' }}
                 onPressRightIcon={() => this.props.removeHostedGame(user.hostedGames, game)}
+                editable
               />
             ))
           }

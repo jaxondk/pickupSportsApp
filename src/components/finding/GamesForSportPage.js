@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, List, ListItem, Button } from 'react-native-elements';
+import { Text, List, Button } from 'react-native-elements';
 import { colors } from '../../constants';
-import { buildGameSubtitle, getIconFor } from '../../utilities';
 import { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
+import GameListItem from '../common/GameListItem';
 
 const styles = {
   pageContainer: {
@@ -52,11 +52,9 @@ class GamesForSportPage extends Component {
         <List style={styles.list}>
           {
             AGList.map((game) => (
-              <ListItem
+              <GameListItem
                 key={game.id}
-                title={game.name}
-                subtitle={buildGameSubtitle(game)}
-                leftIcon={getIconFor(game.sportName, 50)}
+                game={game}
                 rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle', color: colors.SELECTED }}
                 onPressRightIcon={() => {
                   this.props.unattendGame(AGList, game.id);
@@ -81,11 +79,9 @@ class GamesForSportPage extends Component {
         <List>
           {
             GOIList.map((game) => (
-              <ListItem
+              <GameListItem
                 key={game.id}
-                title={game.name}
-                subtitle={buildGameSubtitle(game)}
-                leftIcon={getIconFor(game.sportName, 50)}
+                game={game}
                 rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle-outline', color: colors.SELECTED }}
                 onPressRightIcon={() => {
                   this.props.attendGame(this.props.user.attendingGames, game);
