@@ -12,8 +12,22 @@ const styles = {
     backgroundColor: 'white',
   },
   footer: {
-    margin: 25,
+    marginBottom: 25,
     alignItems: 'center'
+  },
+  list: {
+    margin: 1,
+    padding: 1,
+  },
+  sectionHeading: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginTop: 10,
+    marginLeft: 20,
+  },
+  textInfo: { //TODO - make this pretty
+    margin: 30,
+    backgroundColor: colors.SILVER
   },
   btnContainer: {
     borderRadius: 20,
@@ -32,10 +46,10 @@ class GamesForSportPage extends Component {
   //        hosted games, games to checkout, my sports, etc.
   renderAttendingGamesList (AGList, subscribedSports, currentSport) {
     if (AGList.length == 0) {
-      return (<Text>You haven't joined any games yet</Text>);
+      return (<Text style={styles.textInfo}>You haven't joined any games yet</Text>);
     } else {
       return (
-        <List>
+        <List style={styles.list}>
           {
             AGList.map((game) => (
               <ListItem
@@ -59,10 +73,9 @@ class GamesForSportPage extends Component {
 
   // Probably can't genericize
   renderGamesOfInterestList (subscribedSports, currentSport) {
-    console.log('current sport', currentSport)
     var GOIList = currentSport.gamesOfInterest;
     if (GOIList.length == 0) {
-      return (<Text>No games that match your filter criteria for this sport. Try adjusting the filters to broaden your search results</Text>);
+      return (<Text style={styles.textInfo}>No other games of interest in your area</Text>);
     } else {
       return (
         <List>
@@ -86,12 +99,16 @@ class GamesForSportPage extends Component {
     }
   }
 
+  //TODO - use a sectionlist instead and combine the two lists into one with section headings. Can probably still use RNE's ListItem, 
+  //       just use it inside of a <SectionList>
   render () {
     return (
       <View style={styles.pageContainer}>
+        <Text style={styles.sectionHeading}>Games you're attending</Text>
         <ScrollView>
           {this.renderAttendingGamesList(this.props.user.attendingGames, this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
         </ScrollView>
+        <Text style={styles.sectionHeading}>Games you may be interested in</Text>
         <ScrollView>
           {this.renderGamesOfInterestList(this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
         </ScrollView>

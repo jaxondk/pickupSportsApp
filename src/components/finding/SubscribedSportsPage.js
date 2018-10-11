@@ -12,7 +12,7 @@ const styles = {
     backgroundColor: 'white',
   },
   footer: {
-    margin: 25,
+    marginBottom: 25,
     alignItems: 'center'
   },
   btnContainer: {
@@ -29,7 +29,7 @@ class SubscribedSportsPage extends Component {
   buildSportSubtitle (sport) {
     return (
       <Text>
-        N games today
+        {sport.gamesOfInterest.length + this.props.user.attendingGames.length} game(s) coming up
       </Text>
     )
   }
@@ -47,7 +47,7 @@ class SubscribedSportsPage extends Component {
               <ListItem
                 key={subscribedSport.id}
                 title={subscribedSport.name}
-                subtitle={this.buildSportSubtitle(subscribedSport.name)}
+                subtitle={this.buildSportSubtitle(subscribedSport)}
                 onPress={() => this.props.navigation.navigate('GamesForSport', {currentSport: subscribedSport})}
                 leftIcon={getIconFor(subscribedSport.name, 50)}
                 rightIcon={{ name: 'cancel', color: 'red' }}
