@@ -20,3 +20,8 @@ export const INIT_REGION = 'INIT_REGION';
 export const SELECT_REGION = 'SELECT_REGION';
 export const UPDATE_GAME_LOCATION = 'UPDATE_GAME_LOCATION';
 export const CLEAR_HOST_A_GAME_FORM = 'CLEAR_HOST_A_GAME_FORM';
+
+// All Games
+export const ADD_GAME = 'ADD_GAME';
+export const UPDATE_GAME = 'UPDATE_GAME';
+export const DELETE_GAME = 'DELETE_GAME';

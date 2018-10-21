@@ -8,7 +8,7 @@ const locations = {
   IPF: { latitude: 40.247328, longitude: -111.656783 },
 }
 
-const mockSoccerGame1 = {
+export const mockSoccerGame1 = {
   id: 1,
   name: "SoccerGame1",
   hostId: 1,
@@ -21,7 +21,7 @@ const mockSoccerGame1 = {
   // attendeeIds: [1],
 }
 
-const mockSoccerGame2 = {
+export const mockSoccerGame2 = {
   id: 2,
   name: "SoccerGame2",
   hostId: 99,
