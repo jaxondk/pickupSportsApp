@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, Linking, Platform } from 'react-native';
+import { ListItem, List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
+import { getIconFor, displayDistance } from '../../utilities';
+import { icons, colors } from '../../constants';
 import gstyles from '../../styles';
+import FooterBlockBtn from '../common/FooterBlockBtn';
+import { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
 
 const styles = {
   map: {
@@ -31,27 +36,60 @@ class GameDetailsPage extends Component {
     Linking.openURL(url);
   }
 
+  renderDetails(game, hosting) {
+    return (
+      <List>
+        <ListItem
+          title={' ' + game.moment.format('MM/DD') + ' at ' + game.moment.format('h:mm A')}
+          leftIcon={getIconFor(icons.CLOCK.name, 24)}
+          rightIcon={getIconFor(icons.PENCIL.name, 24)}
+          hideChevron={!hosting}
+        // onPressRightIcon={navigate to edit} TODO
+        />
+        <ListItem
+          title={' ' + displayDistance(this.props.user.location, game.location) + ' from you'}
+          leftIcon={getIconFor(icons.LOCATION.name, 24)}
+          rightIcon={getIconFor(icons.PENCIL.name, 24)}
+          hideChevron={!hosting}
+          onPress={() => this.navigateInNativeMaps(game.location, game.name)}
+        // onPressRightIcon={navigate to edit} TODO
+        />
+      </List>
+    )
+  }
+
   render() {
     const game = this.props.navigation.getParam('game');
+    const hosting = game.hostId === this.props.user.id
+    const attendingGames = this.props.user.attendingGames;
+    const attending = attendingGames.indexOf(game) > -1
     return (
       <View style={gstyles.pageContainer}>
-        <MapView
-          style={styles.map}
-          region={{
-            ...game.location,
-            latitudeDelta: 0.025, 
-            longitudeDelta: 0.025,
-          }}
-          showsUserLocation
-        >
-          <MapView.Marker 
-            coordinate={{...game.location}} 
-            title='Get Directions'
-            onCalloutPress={() => this.navigateInNativeMaps(game.location, game.name)} />
-        </MapView>
-        <View style={styles.detailItemsContainer}>
-          <Text>{game.name}</Text>
+        <View style={gstyles.content} >
+          <MapView
+            style={styles.map}
+            region={{
+              ...game.location,
+              latitudeDelta: 0.025, 
+              longitudeDelta: 0.025,
+            }}
+            showsUserLocation
+          >
+            <MapView.Marker 
+              coordinate={{...game.location}} 
+              title='Get Directions'
+              onCalloutPress={() => this.navigateInNativeMaps(game.location, game.name)} />
+          </MapView>
+          <View style={styles.detailItemsContainer}>
+            {this.renderDetails(game, hosting)}
+          </View>
         </View>
+        {/* TODO: remove game from games of interest on attend, add game to games of interest on leave. This should be handled automatically by filters */}
+        <FooterBlockBtn
+          bgColor={!attending ? colors.SELECTED : colors.CANCEL}
+          text={!attending ? 'Join Game' : 'Leave Game'}
+          onPress={!attending ? () => this.props.attendGame(attendingGames, game) : () => this.props.unattendGame(attendingGames, game.id)}
+        />
       </View>
     )
   }
@@ -59,4 +97,4 @@ class GameDetailsPage extends Component {
 
 let mapStoreToProps = ({ user }) => ({ user });
 
-export default connect(mapStoreToProps, {})(GameDetailsPage);
+export default connect(mapStoreToProps, { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest})(GameDetailsPage);

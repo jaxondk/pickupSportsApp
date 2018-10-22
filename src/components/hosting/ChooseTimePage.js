@@ -6,7 +6,7 @@ import { Text } from 'react-native-elements';
 import CalendarPicker from 'react-native-calendar-picker';
 import { selectDate, selectTime, updateDateTimeChoice, initRegion } from '../../actions';
 import { colors } from '../../constants';
-import SaveSelectionBtn from '../common/SaveSelectionBtn';
+import FooterBlockBtn from '../common/FooterBlockBtn';
 
 const styles = {
   pageContainer: {
@@ -17,11 +17,6 @@ const styles = {
     marginTop: 20,
     marginBottom: 20,
     flex: 9,
-  },
-  footerBtn: {
-    flex: 1,
-    alignItems: 'center', //horizontal align
-    justifyContent: 'center', //vertical align
   },
 }
 
@@ -62,7 +57,7 @@ class ChooseTimePage extends Component {
             onDateChange={(date) => this.props.selectTime(date)}
           />
         </View>
-        <SaveSelectionBtn
+        <FooterBlockBtn
           onPress={() => this.onPressSaveBtn()}
           disabled={this.props.hostAGame.selectedDate === null || this.props.hostAGame.selectedTime === null}
         />

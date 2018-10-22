@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import { ListItem, List } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import { getIconFor, buildGameSubtitle, displayDistance } from '../../utilities';
-import { icons } from '../../constants';
+import { getIconFor, buildGameSubtitle } from '../../utilities';
+
 
 export default class GameListItem extends Component {
 

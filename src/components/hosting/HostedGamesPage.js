@@ -40,9 +40,10 @@ class HostedGamesPage extends Component {
                 key={game.id}
                 game={game}
                 userLocation={user.location}
-                rightIcon={{ name: 'cancel', color: 'red' }}
-                onPressRightIcon={() => this.props.removeHostedGame(user.hostedGames, game)}
-                editable
+                onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
+                // rightIcon={{ name: 'cancel', color: 'red' }}
+                // onPressRightIcon={() => this.props.removeHostedGame(user.hostedGames, game)}
+                // editable
               />
             ))
           }

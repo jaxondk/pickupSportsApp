@@ -3,4 +3,7 @@ export default gstyles = {
     flex: 1,
     backgroundColor: 'white',
   },
+  content: {
+    flex: 9,
+  },
 }
