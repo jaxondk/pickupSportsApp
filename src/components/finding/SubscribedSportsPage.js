@@ -71,7 +71,7 @@ class SubscribedSportsPage extends Component {
           <Button
             raised
             icon={{ type: 'material-community', name: 'plus' }}
-            title='Join A Sport'
+            title='Follow A Sport'
             borderRadius={20}
             containerViewStyle={styles.btnContainer}
             backgroundColor={colors.ACCENT}

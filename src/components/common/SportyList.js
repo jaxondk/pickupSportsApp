@@ -6,7 +6,7 @@ import { colors } from '../constants';
 import { removeSubscribedSport, joinGame } from '../actions';
 
 export default class SportyList extends Component {
-  render() {
+  render () {
     var iconName = 'cancel';
     var iconColor = colors.CANCEL;
     var iconType;
@@ -16,7 +16,7 @@ export default class SportyList extends Component {
       iconType = 'ionicon';
     }
     var sportNameKey = 'sportName'
-    if(this.props.type === 'sport') {
+    if (this.props.type === 'sport') {
       sportNameKey = 'name';
     }
 
@@ -43,7 +43,7 @@ export default class SportyList extends Component {
 SportyList.propTypes = {
   data: PropTypes.array.isRequired,
   buildSubtitle: PropTypes.func.isRequired,
-  onPressIcon: PropTypes.func.oneOf([removeHostedGame, removeSubscribedSport, joinGame]).isRequired,
+  onPressIcon: PropTypes.func.oneOf([removeGame, removeSubscribedSport, joinGame]).isRequired,
   onPress: PropTypes.func.isRequired,
   type: PropTypes.oneOf(['game', 'sport']),
   rightIconPurpose: PropTypes.oneOf(['remove', 'join']),
@@ -54,6 +54,6 @@ SportyList.defaultProps = {
   type: 'game',
   rightIconPurpose: 'remove',
   // buildSubtitle: (item) => buildGameSubtitle(item),
-  // onPressIcon: removeHostedGame,
+  // onPressIcon: removeGame,
   // onPress: null, //TODO
 };

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native-elements';
 import { MapView } from 'expo';
 import uuidv4 from 'uuid/v4';
-import { updateLocation, selectRegion, addHostedGame, clearHostAGameForm } from '../../actions';
+import { updateLocation, selectRegion, createGame, clearHostAGameForm } from '../../actions';
 import { colors } from '../../constants';
 import locationPin from '../../../assets/locationPin.png';
 import FooterBlockBtn from '../common/FooterBlockBtn';
@@ -36,7 +36,7 @@ class ChooseLocationPage extends Component {
     game.id = uuidv4();
     game.hostId = this.props.user.id;
 
-    this.props.addHostedGame(this.props.user.hostedGames, game);
+    this.props.createGame(game);
     this.props.clearHostAGameForm();
   }
 
@@ -50,7 +50,6 @@ class ChooseLocationPage extends Component {
   }
 
   render () {
-    console.log(this.props.hostAGame.region);
     return (
       <View style={gstyles.pageContainer}>
         <View style={gstyles.content}>
@@ -75,4 +74,4 @@ class ChooseLocationPage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, { updateLocation, selectRegion, addHostedGame, clearHostAGameForm })(ChooseLocationPage);
+export default connect(mapStoreToProps, { updateLocation, selectRegion, createGame, clearHostAGameForm })(ChooseLocationPage);

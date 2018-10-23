@@ -14,8 +14,8 @@ export default class GameListItem extends Component {
           title={this.props.game.name}
           subtitle={buildGameSubtitle(this.props.game)}
           leftIcon={getIconFor(this.props.game.sportName, 50)}
-          // rightIcon={this.props.rightIcon}
-          // onPressRightIcon={this.props.onPressRightIcon}
+          rightIcon={this.props.rightIcon}
+          onPressRightIcon={this.props.onPressRightIcon}
           onPress={this.props.onPress}
         />
       </View>
@@ -27,8 +27,8 @@ GameListItem.propTypes = {
   game: PropTypes.object.isRequired,
   userLocation: PropTypes.object.isRequired,
   onPress: PropTypes.func.isRequired,
-  // rightIcon: PropTypes.object.isRequired,
-  // onPressRightIcon: PropTypes.func.isRequired,
+  rightIcon: PropTypes.object,
+  onPressRightIcon: PropTypes.func,
   editable: PropTypes.bool,
 };
 

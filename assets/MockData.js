@@ -8,21 +8,20 @@ const locations = {
   IPF: { latitude: 40.247328, longitude: -111.656783 },
 }
 
-export const mockSoccerGame1 = {
-  id: 1,
+export const mockSoccerGame0 = {
+  id: 0,
   name: "SoccerGame1",
-  hostId: 1,
+  hostId: 0,
   sportName: sports.SOCCER,
   moment: moment(new Date()),
   location: locations.IPF,
   attendeesAllowed: { min: 6, max: 12 },
   attendees: [],
   skillLevel: skillLevels.ADVANCED,
-  // attendeeIds: [1],
 }
 
-export const mockSoccerGame2 = {
-  id: 2,
+export const mockSoccerGame1 = {
+  id: 1,
   name: "SoccerGame2",
   hostId: 99,
   sportName: sports.SOCCER,
@@ -31,20 +30,19 @@ export const mockSoccerGame2 = {
   attendeesAllowed: { min: 6, max: 12 },
   attendees: [],
   skillLevel: skillLevels.ADVANCED,
-  // attendeeIds: [1],
 }
 
 export const mockUser = {
-  id: 1,
+  id: 0,
   firstName: "Jaxon",
   lastName: "Keeler",
   displayName: "El Cucuy",
-  hostedGames: [mockSoccerGame1],
-  attendingGames: [mockSoccerGame1],
+  hostedGamesIds: [0],
+  attendingGames: [0],
   location: null,
   subscribedSports: [
     {
-      id: 1, //Right now, this is just so that when iterating over a user's subscribed sports there's a unique key
+      id: 0, //Right now, this is just so that when iterating over a user's subscribed sports there's a unique key
       name: sports.SOCCER,
       filter: {
         distance: 5,
@@ -53,7 +51,7 @@ export const mockUser = {
         skillLevels: ['Advanced'],
         gender: ['Men\'s', 'Co-ed'],
       },
-      gamesOfInterest: [mockSoccerGame2] //TODO - apply filters to find these
+      gamesOfInterest: [1] //TODO - apply filters to find these
     },
   ],
 }
