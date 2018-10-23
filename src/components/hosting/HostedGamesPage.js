@@ -57,6 +57,7 @@ class HostedGamesPage extends Component {
   }
 
   render () {
+    console.log(this.props.user.hostedGamesIds)
     return (
       <View style={styles.pageContainer}>
         <ScrollView>

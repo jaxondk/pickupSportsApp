@@ -1,4 +1,5 @@
 import { USER_LOGGED_IN, CREATE_GAME, REMOVE_GAME, UPDATE_USER_LOCATION, UPDATE_SUBSCRIBED_SPORTS, UPDATE_ATTENDING_GAMES, UPDATE_GAMES_OF_INTEREST } from '../constants';
+import {removeElement} from '../utilities';
 
 const INITIAL_STATE =
 {
@@ -18,20 +19,24 @@ export default (state = INITIAL_STATE, action) => {
       return action.payload;
     case CREATE_GAME:
       const game = action.payload;
-      console.log('game hostId:', game.hostId);
-      console.log('user Id who is hosting:', state.id);
       if (game.hostId === state.id) {
         state.hostedGamesIds.push(game.id)
       }
-      return state;
+      return {...state};
     case REMOVE_GAME:
+      console.log('state before remove',state);
       game = action.payload
       if (game.hostId === state.id) {
-        delete state.hostedGamesIds[game.id]
+        console.log('should remove id from hostedGamesIds')
+        removeElement(state.hostedGamesIds, game.id);
       }
-      delete state.attendingGamesIds[game.id]
-      delete state.subscribedSports.gamesOfInterestIds[game.id]
-      return state;
+      removeElement(state.attendingGamesIds, game.id);
+      sport = state.subscribedSports.find((sport) => (sport.name === game.sportName));
+      if (sport) {
+        removeElement(sport.gamesOfInterestIds, game.id)
+      }
+      console.log('state after remove', state);
+      return {...state};
     case UPDATE_USER_LOCATION:
       return { ...state, location: action.payload };
     case UPDATE_SUBSCRIBED_SPORTS:

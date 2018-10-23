@@ -43,3 +43,11 @@ export const buildGameSubtitle = (game) => {
 export const displayDistance = (location1, location2) => {
   return haversine(location1, location2, { unit: 'mile' }).toFixed(2) + ' mi'
 }
+
+// Removes element from array in place
+export const removeElement = (array, elementToRemove) => {
+  const i = array.indexOf(elementToRemove);
+  if (i > -1) {
+    array.splice(i, 1);
+  }
+}
