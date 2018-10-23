@@ -21,13 +21,12 @@ export default (state = INITIAL_STATE, action) => {
       const game = action.payload;
       if (game.hostId === state.id) {
         state.hostedGamesIds.push(game.id)
+        state.attendingGamesIds.push(game.id)
       }
       return {...state};
     case REMOVE_GAME:
-      console.log('state before remove',state);
       game = action.payload
       if (game.hostId === state.id) {
-        console.log('should remove id from hostedGamesIds')
         removeElement(state.hostedGamesIds, game.id);
       }
       removeElement(state.attendingGamesIds, game.id);
@@ -35,7 +34,6 @@ export default (state = INITIAL_STATE, action) => {
       if (sport) {
         removeElement(sport.gamesOfInterestIds, game.id)
       }
-      console.log('state after remove', state);
       return {...state};
     case UPDATE_USER_LOCATION:
       return { ...state, location: action.payload };

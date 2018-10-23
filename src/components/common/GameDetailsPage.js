@@ -62,7 +62,7 @@ class GameDetailsPage extends Component {
     const game = this.props.navigation.getParam('game');
     const hosting = game.hostId === this.props.user.id
     const attendingGamesIds = this.props.user.attendingGamesIds;
-    const attending = attendingGamesIds.indexOf(game) > -1
+    const attending = attendingGamesIds.indexOf(game.id) > -1
     return (
       <View style={gstyles.pageContainer}>
         <View style={gstyles.content} >
