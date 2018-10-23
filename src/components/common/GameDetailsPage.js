@@ -7,7 +7,7 @@ import { getIconFor, displayDistance } from '../../utilities';
 import { icons, colors } from '../../constants';
 import gstyles from '../../styles';
 import FooterBlockBtn from '../common/FooterBlockBtn';
-import { leaveGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
+import { leaveGame, attendGame, removeGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
 
 const styles = {
   map: {
@@ -58,6 +58,11 @@ class GameDetailsPage extends Component {
     )
   }
 
+  cancelGame(game) {
+    this.props.removeGame(game);
+    this.props.navigation.goBack();
+  }
+
   render () {
     const game = this.props.navigation.getParam('game');
     const hosting = game.hostId === this.props.user.id
@@ -87,8 +92,8 @@ class GameDetailsPage extends Component {
         {/* TODO: remove game from games of interest on attend, add game to games of interest on leave. This should be handled automatically by filters */}
         <FooterBlockBtn
           bgColor={!attending ? colors.SELECTED : colors.CANCEL}
-          text={!attending ? 'Join Game' : 'Leave Game'}
-          onPress={!attending ? () => this.props.attendGame(game) : () => this.props.leaveGame(game)}
+          text={hosting ? 'Cancel Game' : !attending ? 'Join Game' : 'Leave Game'}
+          onPress={hosting ? () => this.cancelGame(game) : !attending ? () => this.props.attendGame(game) : () => this.props.leaveGame(game)}
         />
       </View>
     )
@@ -97,4 +102,4 @@ class GameDetailsPage extends Component {
 
 let mapStoreToProps = ({ user }) => ({ user });
 
-export default connect(mapStoreToProps, { leaveGame, attendGame, removeGameOfInterest, addGameOfInterest })(GameDetailsPage);
+export default connect(mapStoreToProps, { leaveGame, attendGame, removeGame, removeGameOfInterest, addGameOfInterest })(GameDetailsPage);
