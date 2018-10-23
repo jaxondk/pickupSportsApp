@@ -5,7 +5,7 @@ import { Text } from 'react-native-elements';
 import { selectSport, updateSportChoice } from '../../actions';
 import { colors, sports } from '../../constants';
 import { getIconFor } from '../../utilities';
-import SaveSelectionBtn from '../common/SaveSelectionBtn';
+import FooterBlockBtn from '../common/FooterBlockBtn';
 
 const styles = {
   pageContainer: {
@@ -29,16 +29,7 @@ class ChooseSportPage extends Component {
     title: "Choose a Sport",
   };
 
-  // renderNextBtn(disabled, style) {
-  //   var bgColorStyle = disabled ? { backgroundColor: colors.SILVER } : {backgroundColor: colors.PRIMARY};
-  //   return (
-  //     <TouchableOpacity style={[style, bgColorStyle]} onPress={() => disabled ? null: this.onPressSaveBtn()} disabled={disabled}>
-  //       <Text h3 style={{ color: 'white' }}>Next</Text>
-  //     </TouchableOpacity>
-  //   );
-  // }
-
-  onPressSaveBtn() {
+  onPressSaveBtn () {
     this.props.updateSportChoice(this.props.hostAGame.selectedSport);
     this.props.navigation.navigate('ChooseTime');
   }
@@ -57,9 +48,9 @@ class ChooseSportPage extends Component {
             {getIconFor(sports.TENNIS, 100, this.props.hostAGame.selectedSport, () => this.props.selectSport(sports.TENNIS))}
           </View>
         </View>
-        <SaveSelectionBtn 
-          onPress={() => this.onPressSaveBtn()} 
-          disabled={this.props.hostAGame.selectedSport === null} 
+        <FooterBlockBtn
+          onPress={() => this.onPressSaveBtn()}
+          disabled={this.props.hostAGame.selectedSport === null}
         />
       </View>
     );
@@ -68,4 +59,4 @@ class ChooseSportPage extends Component {
 
 let mapStoreToProps = ({ user, hostAGame }) => ({ user, hostAGame });
 
-export default connect(mapStoreToProps, {selectSport, updateSportChoice})(ChooseSportPage);
+export default connect(mapStoreToProps, { selectSport, updateSportChoice })(ChooseSportPage);

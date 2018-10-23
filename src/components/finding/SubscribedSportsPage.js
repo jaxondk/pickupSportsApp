@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import { colors } from '../../constants';
 import { removeSubscribedSport } from '../../actions';
 import { getIconFor } from '../../utilities';
+import gstyles from '../../styles';
 
 const styles = {
-  pageContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
+  // pageContainer: {
+  //   flex: 1,
+  //   backgroundColor: 'white',
+  // },
   footer: {
     marginBottom: 25,
     alignItems: 'center'
@@ -62,7 +63,7 @@ class SubscribedSportsPage extends Component {
 
   render () {
     return (
-      <View style={styles.pageContainer}>
+      <View style={gstyles.pageContainer}>
         <ScrollView>
           {this.renderSubscribedSportsList(this.props.user)}
         </ScrollView>

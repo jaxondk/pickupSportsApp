@@ -7,17 +7,12 @@ import uuidv4 from 'uuid/v4';
 import { updateLocation, selectRegion, addHostedGame, clearHostAGameForm } from '../../actions';
 import { colors } from '../../constants';
 import locationPin from '../../../assets/locationPin.png';
-import SaveSelectionBtn from '../common/SaveSelectionBtn';
+import FooterBlockBtn from '../common/FooterBlockBtn';
+import gstyles from '../../styles';
 
 const styles = {
-  pageContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
   map: {
     flex: 1,
-  },
-  marker: {
   },
   markerFixed: {
     height: 48,
@@ -28,14 +23,6 @@ const styles = {
     position: 'absolute',
     top: '50%'
   },
-  content: {
-    flex: 9,
-  },
-  footerBtn: {
-    flex: 1,
-    alignItems: 'center', //horizontal align
-    justifyContent: 'center', //vertical align
-  },
 }
 
 class ChooseLocationPage extends Component {
@@ -43,7 +30,7 @@ class ChooseLocationPage extends Component {
     title: "Choose a Location",
   };
 
-  finishUpHostingFlow() {
+  finishUpHostingFlow () {
     var game = this.props.hostAGame.game;
     game.location = { latitude: this.props.hostAGame.region.latitude, longitude: this.props.hostAGame.region.longitude }
     game.id = uuidv4();
@@ -65,8 +52,8 @@ class ChooseLocationPage extends Component {
   render () {
     console.log(this.props.hostAGame.region);
     return (
-      <View style={styles.pageContainer}>
-        <View style={styles.content}>
+      <View style={gstyles.pageContainer}>
+        <View style={gstyles.content}>
           <MapView
             style={styles.map}
             region={this.props.hostAGame.region}
@@ -77,7 +64,7 @@ class ChooseLocationPage extends Component {
             <Image style={styles.markerFixed} source={locationPin} />
           </View>
         </View>
-        <SaveSelectionBtn
+        <FooterBlockBtn
           onPress={() => this.onPressSaveBtn()}
           disabled={this.props.hostAGame.region === null}
         />
