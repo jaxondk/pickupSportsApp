@@ -8,10 +8,6 @@ import { getIconFor } from '../../utilities';
 import gstyles from '../../styles';
 
 const styles = {
-  // pageContainer: {
-  //   flex: 1,
-  //   backgroundColor: 'white',
-  // },
   footer: {
     marginBottom: 25,
     alignItems: 'center'
@@ -30,7 +26,7 @@ class SubscribedSportsPage extends Component {
   buildSportSubtitle (sport) {
     return (
       <Text>
-        {sport.gamesOfInterest.length + this.props.user.attendingGames.length} game(s) coming up
+        {sport.gamesOfInterestIds.length + this.props.user.attendingGamesIds.length} game(s) coming up
       </Text>
     )
   }
@@ -49,7 +45,7 @@ class SubscribedSportsPage extends Component {
                 key={subscribedSport.id}
                 title={subscribedSport.name}
                 subtitle={this.buildSportSubtitle(subscribedSport)}
-                onPress={() => this.props.navigation.navigate('GamesForSport', {currentSport: subscribedSport})}
+                onPress={() => this.props.navigation.navigate('GamesForSport', { currentSport: subscribedSport })}
                 leftIcon={getIconFor(subscribedSport.name, 50)}
                 rightIcon={{ name: 'cancel', color: 'red' }}
                 onPressRightIcon={() => this.props.removeSubscribedSport(user.subscribedSports, subscribedSport.id)}

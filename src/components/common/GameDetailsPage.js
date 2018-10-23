@@ -36,7 +36,7 @@ class GameDetailsPage extends Component {
     Linking.openURL(url);
   }
 
-  renderDetails(game, hosting) {
+  renderDetails (game, hosting) {
     return (
       <List>
         <ListItem
@@ -58,11 +58,11 @@ class GameDetailsPage extends Component {
     )
   }
 
-  render() {
+  render () {
     const game = this.props.navigation.getParam('game');
     const hosting = game.hostId === this.props.user.id
-    const attendingGames = this.props.user.attendingGames;
-    const attending = attendingGames.indexOf(game) > -1
+    const attendingGamesIds = this.props.user.attendingGamesIds;
+    const attending = attendingGamesIds.indexOf(game) > -1
     return (
       <View style={gstyles.pageContainer}>
         <View style={gstyles.content} >
@@ -70,13 +70,13 @@ class GameDetailsPage extends Component {
             style={styles.map}
             region={{
               ...game.location,
-              latitudeDelta: 0.025, 
+              latitudeDelta: 0.025,
               longitudeDelta: 0.025,
             }}
             showsUserLocation
           >
-            <MapView.Marker 
-              coordinate={{...game.location}} 
+            <MapView.Marker
+              coordinate={{ ...game.location }}
               title='Get Directions'
               onCalloutPress={() => this.navigateInNativeMaps(game.location, game.name)} />
           </MapView>
@@ -88,7 +88,7 @@ class GameDetailsPage extends Component {
         <FooterBlockBtn
           bgColor={!attending ? colors.SELECTED : colors.CANCEL}
           text={!attending ? 'Join Game' : 'Leave Game'}
-          onPress={!attending ? () => this.props.attendGame(attendingGames, game) : () => this.props.unattendGame(attendingGames, game.id)}
+          onPress={!attending ? () => this.props.attendGame(attendingGamesIds, game) : () => this.props.unattendGame(attendingGamesIds, game.id)}
         />
       </View>
     )
@@ -97,4 +97,4 @@ class GameDetailsPage extends Component {
 
 let mapStoreToProps = ({ user }) => ({ user });
 
-export default connect(mapStoreToProps, { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest})(GameDetailsPage);
+export default connect(mapStoreToProps, { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest })(GameDetailsPage);

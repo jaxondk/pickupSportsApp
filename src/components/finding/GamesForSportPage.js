@@ -44,27 +44,30 @@ class GamesForSportPage extends Component {
 
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
-  renderAttendingGamesList (AGList, subscribedSports, currentSport) {
-    if (AGList.length == 0) {
+  renderAttendingGamesList (attendingGamesIds, subscribedSports, currentSport) {
+    if (attendingGamesIds.length == 0) {
       return (<Text style={styles.textInfo}>You haven't joined any games yet</Text>);
     } else {
       return (
         <List style={styles.list}>
           {
-            AGList.map((game) => (
-              <GameListItem
-                key={game.id}
-                game={game}
-                userLocation={this.props.user.location}
-                onPress={() => this.props.navigation.navigate('GameDetails', {game: game})}
+            attendingGamesIds.map((gameId) => {
+              const game = this.props.allGames[gameId]
+              return (
+                <GameListItem
+                  key={gameId}
+                  game={game}
+                  userLocation={this.props.user.location}
+                  onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
                 // rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle', color: colors.SELECTED }}
                 // onPressRightIcon={() => {
-                //   this.props.unattendGame(AGList, game.id);
+                //   this.props.unattendGame(attendingGamesIds, game.id);
                 //   this.props.addGameOfInterest(subscribedSports, currentSport.id, game);
                 //   //TODO - filters need to be applied somewhere
                 // }}
-              />
-            ))
+                />
+              );
+            })
           }
         </List>
       );
@@ -73,26 +76,29 @@ class GamesForSportPage extends Component {
 
   // Probably can't genericize
   renderGamesOfInterestList (subscribedSports, currentSport) {
-    var GOIList = currentSport.gamesOfInterest;
-    if (GOIList.length == 0) {
+    var gamesOfInterestIds = currentSport.gamesOfInterestIds;
+    if (gamesOfInterestIds.length === 0) {
       return (<Text style={styles.textInfo}>No other games of interest in your area</Text>);
     } else {
       return (
         <List>
           {
-            GOIList.map((game) => (
-              <GameListItem
-                key={game.id}
-                game={game}
-                userLocation={this.props.user.location}
-                onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
+            gamesOfInterestIds.map((gameId) => {
+              const game = this.props.allGames[gameId];
+              return (
+                <GameListItem
+                  key={gameId}
+                  game={game}
+                  userLocation={this.props.user.location}
+                  onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
                 // rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle-outline', color: colors.SELECTED }}
                 // onPressRightIcon={() => {
-                //   this.props.attendGame(this.props.user.attendingGames, game);
+                //   this.props.attendGame(this.props.user.attendingGamesIds, game);
                 //   this.props.removeGameOfInterest(subscribedSports, currentSport.id, game.id);
                 // }}
-              />
-            ))
+                />
+              );
+            })
           }
         </List>
       );
@@ -106,7 +112,7 @@ class GamesForSportPage extends Component {
       <View style={styles.pageContainer}>
         <Text style={styles.sectionHeading}>Games you're attending</Text>
         <ScrollView>
-          {this.renderAttendingGamesList(this.props.user.attendingGames, this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
+          {this.renderAttendingGamesList(this.props.user.attendingGamesIds, this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
         </ScrollView>
         <Text style={styles.sectionHeading}>Games you may be interested in</Text>
         <ScrollView>
@@ -120,7 +126,7 @@ class GamesForSportPage extends Component {
             borderRadius={20}
             containerViewStyle={styles.btnContainer}
             backgroundColor={colors.PURPLE}
-            onPress={null} 
+            onPress={null}
           />
         </View>
       </View>
@@ -128,6 +134,6 @@ class GamesForSportPage extends Component {
   }
 }
 
-let mapStoreToProps = ({ user }) => ({ user });
+let mapStoreToProps = ({ user, allGames }) => ({ user, allGames });
 
 export default connect(mapStoreToProps, { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest })(GamesForSportPage);

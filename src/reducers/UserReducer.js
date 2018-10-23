@@ -7,7 +7,7 @@ const INITIAL_STATE =
   lastName: "",
   displayName: "",
   hostedGamesIds: [],
-  attendingGames: [],
+  attendingGamesIds: [],
   location: null,
   subscribedSports: [],
 };
@@ -29,15 +29,15 @@ export default (state = INITIAL_STATE, action) => {
       if (game.hostId === state.id) {
         delete state.hostedGamesIds[game.id]
       }
-      delete state.attendingGames[game.id]
-      delete state.subscribedSports.gamesOfInterest[game.id]
+      delete state.attendingGamesIds[game.id]
+      delete state.subscribedSports.gamesOfInterestIds[game.id]
       return state;
     case UPDATE_USER_LOCATION:
       return { ...state, location: action.payload };
     case UPDATE_SUBSCRIBED_SPORTS:
       return { ...state, subscribedSports: action.payload };
     case UPDATE_ATTENDING_GAMES:
-      return { ...state, attendingGames: action.payload };
+      return { ...state, attendingGamesIds: action.payload };
     // case UPDATE_GAMES_OF_INTEREST:
     //   return { ...state, subscribedSports: [...state.subscribedSports, action.payload] };
     default:

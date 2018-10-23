@@ -11,16 +11,16 @@ export const removeSubscribedSport = (subscribedSports, filterIdToRemove) => {
   });
 }
 
-export const attendGame = (attendingGames, gameToAttend) => {
-  attendingGames.push(gameToAttend);
+export const attendGame = (attendingGamesIds, gameToAttend) => {
+  attendingGamesIds.push(gameToAttend);
   return ({
     type: UPDATE_ATTENDING_GAMES,
-    payload: attendingGames,
+    payload: attendingGamesIds,
   });
 }
 
-export const unattendGame = (attendingGames, gameIdToUnattend) => {
-  updated = attendingGames.filter((game) => (game.id != gameIdToUnattend));
+export const unattendGame = (attendingGamesIds, gameIdToUnattend) => {
+  updated = attendingGamesIds.filter((game) => (game.id != gameIdToUnattend));
   return ({
     type: UPDATE_ATTENDING_GAMES,
     payload: updated,
@@ -30,7 +30,7 @@ export const unattendGame = (attendingGames, gameIdToUnattend) => {
 export const addGameOfInterest = (subscribedSports, subscribedSportId, gameToAdd) => {
   //Since games of interest are nested in subscribed sports, need to modify subscribed sports
   sport = subscribedSports.find((sport) => (sport.id === subscribedSportId));
-  sport.gamesOfInterest.push(gameToAdd);
+  sport.gamesOfInterestIds.push(gameToAdd);
   return ({
     type: UPDATE_SUBSCRIBED_SPORTS,
     payload: subscribedSports,
@@ -40,7 +40,7 @@ export const addGameOfInterest = (subscribedSports, subscribedSportId, gameToAdd
 export const removeGameOfInterest = (subscribedSports, subscribedSportId, gameIdToRemove) => {
   //Since games of interest are nested in subscribed sports, need to modify subscribed sports
   sport = subscribedSports.find((sport) => (sport.id === subscribedSportId));
-  sport.gamesOfInterest = sport.gamesOfInterest.filter((game) => (game.id != gameIdToRemove));
+  sport.gamesOfInterestIds = sport.gamesOfInterestIds.filter((game) => (game.id != gameIdToRemove));
   return ({
     type: UPDATE_SUBSCRIBED_SPORTS,
     payload: subscribedSports,
@@ -55,7 +55,7 @@ export const watchLocation = () => {
         dispatch({ type: LOAD_USER_LOCATION_DENIED });
       } else {
         const options = null;
-        Location.watchPositionAsync(options, ({coords}) => {
+        Location.watchPositionAsync(options, ({ coords }) => {
           dispatch({
             type: UPDATE_USER_LOCATION,
             payload: { latitude: coords.latitude, longitude: coords.longitude }

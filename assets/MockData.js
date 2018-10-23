@@ -38,7 +38,7 @@ export const mockUser = {
   lastName: "Keeler",
   displayName: "El Cucuy",
   hostedGamesIds: [0],
-  attendingGames: [0],
+  attendingGamesIds: [0],
   location: null,
   subscribedSports: [
     {
@@ -51,7 +51,7 @@ export const mockUser = {
         skillLevels: ['Advanced'],
         gender: ['Men\'s', 'Co-ed'],
       },
-      gamesOfInterest: [1] //TODO - apply filters to find these
+      gamesOfInterestIds: [1] //TODO - apply filters to find these
     },
   ],
 }
