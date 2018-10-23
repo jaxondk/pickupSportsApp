@@ -43,8 +43,7 @@ export default (state = INITIAL_STATE, action) => {
       state.attendingGamesIds.push(action.payload.id);
       return {...state};
     case LEAVE_GAME:
-      game = action.payload;
-      removeElement(state.attendingGamesIds, game.id);
+      removeElement(state.attendingGamesIds, action.payload.id);
       return {...state};
     // case UPDATE_GAMES_OF_INTEREST:
     //   return { ...state, subscribedSports: [...state.subscribedSports, action.payload] };
