@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Text, List, Button } from 'react-native-elements';
 import { colors } from '../../constants';
-import { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
+import { leaveGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
 import GameListItem from '../common/GameListItem';
 
 const styles = {
@@ -45,7 +45,7 @@ class GamesForSportPage extends Component {
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
   renderAttendingGamesList (attendingGamesIds, subscribedSports, currentSport) {
-    if (attendingGamesIds.length == 0) {
+    if (attendingGamesIds.length === 0) {
       return (<Text style={styles.textInfo}>You haven't joined any games yet</Text>);
     } else {
       return (
@@ -61,7 +61,7 @@ class GamesForSportPage extends Component {
                   onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
                 // rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle', color: colors.SELECTED }}
                 // onPressRightIcon={() => {
-                //   this.props.unattendGame(attendingGamesIds, game.id);
+                //   this.props.leaveGame(game);
                 //   this.props.addGameOfInterest(subscribedSports, currentSport.id, game);
                 //   //TODO - filters need to be applied somewhere
                 // }}
@@ -93,7 +93,7 @@ class GamesForSportPage extends Component {
                   onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
                 // rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle-outline', color: colors.SELECTED }}
                 // onPressRightIcon={() => {
-                //   this.props.attendGame(this.props.user.attendingGamesIds, game);
+                //   this.props.attendGame(game);
                 //   this.props.removeGameOfInterest(subscribedSports, currentSport.id, game.id);
                 // }}
                 />
@@ -112,6 +112,7 @@ class GamesForSportPage extends Component {
       <View style={styles.pageContainer}>
         <Text style={styles.sectionHeading}>Games you're attending</Text>
         <ScrollView>
+          {console.log(this.props.user.attendingGamesIds)}
           {this.renderAttendingGamesList(this.props.user.attendingGamesIds, this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
         </ScrollView>
         <Text style={styles.sectionHeading}>Games you may be interested in</Text>
@@ -136,4 +137,4 @@ class GamesForSportPage extends Component {
 
 let mapStoreToProps = ({ user, allGames }) => ({ user, allGames });
 
-export default connect(mapStoreToProps, { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest })(GamesForSportPage);
+export default connect(mapStoreToProps, { leaveGame, attendGame, removeGameOfInterest, addGameOfInterest })(GamesForSportPage);

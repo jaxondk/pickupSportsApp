@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, CREATE_GAME, REMOVE_GAME, UPDATE_USER_LOCATION, UPDATE_SUBSCRIBED_SPORTS, UPDATE_ATTENDING_GAMES, UPDATE_GAMES_OF_INTEREST } from '../constants';
+import { USER_LOGGED_IN, CREATE_GAME, REMOVE_GAME, UPDATE_USER_LOCATION, UPDATE_SUBSCRIBED_SPORTS, ATTEND_GAME, LEAVE_GAME, UPDATE_GAMES_OF_INTEREST } from '../constants';
 import {removeElement} from '../utilities';
 
 const INITIAL_STATE =
@@ -39,8 +39,13 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, location: action.payload };
     case UPDATE_SUBSCRIBED_SPORTS:
       return { ...state, subscribedSports: action.payload };
-    case UPDATE_ATTENDING_GAMES:
-      return { ...state, attendingGamesIds: action.payload };
+    case ATTEND_GAME:
+      state.attendingGamesIds.push(action.payload.id);
+      return {...state};
+    case LEAVE_GAME:
+      game = action.payload;
+      removeElement(state.attendingGamesIds, game.id);
+      return {...state};
     // case UPDATE_GAMES_OF_INTEREST:
     //   return { ...state, subscribedSports: [...state.subscribedSports, action.payload] };
     default:

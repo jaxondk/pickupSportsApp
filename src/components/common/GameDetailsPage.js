@@ -7,7 +7,7 @@ import { getIconFor, displayDistance } from '../../utilities';
 import { icons, colors } from '../../constants';
 import gstyles from '../../styles';
 import FooterBlockBtn from '../common/FooterBlockBtn';
-import { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
+import { leaveGame, attendGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
 
 const styles = {
   map: {
@@ -88,7 +88,7 @@ class GameDetailsPage extends Component {
         <FooterBlockBtn
           bgColor={!attending ? colors.SELECTED : colors.CANCEL}
           text={!attending ? 'Join Game' : 'Leave Game'}
-          onPress={!attending ? () => this.props.attendGame(attendingGamesIds, game) : () => this.props.unattendGame(attendingGamesIds, game.id)}
+          onPress={!attending ? () => this.props.attendGame(game) : () => this.props.leaveGame(game)}
         />
       </View>
     )
@@ -97,4 +97,4 @@ class GameDetailsPage extends Component {
 
 let mapStoreToProps = ({ user }) => ({ user });
 
-export default connect(mapStoreToProps, { unattendGame, attendGame, removeGameOfInterest, addGameOfInterest })(GameDetailsPage);
+export default connect(mapStoreToProps, { leaveGame, attendGame, removeGameOfInterest, addGameOfInterest })(GameDetailsPage);

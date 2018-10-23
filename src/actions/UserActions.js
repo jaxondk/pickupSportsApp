@@ -1,5 +1,5 @@
 import { Location, Permissions } from 'expo';
-import { UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, UPDATE_SUBSCRIBED_SPORTS, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, UPDATE_ATTENDING_GAMES, UPDATE_GAMES_OF_INTEREST } from '../constants';
+import { UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, UPDATE_SUBSCRIBED_SPORTS, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, ATTEND_GAME, LEAVE_GAME, UPDATE_GAMES_OF_INTEREST } from '../constants';
 
 export const removeSubscribedSport = (subscribedSports, filterIdToRemove) => {
   updated = subscribedSports.filter((subscribedSport) => {
@@ -11,19 +11,17 @@ export const removeSubscribedSport = (subscribedSports, filterIdToRemove) => {
   });
 }
 
-export const attendGame = (attendingGamesIds, gameToAttend) => {
-  attendingGamesIds.push(gameToAttend);
+export const attendGame = (game) => {
   return ({
-    type: UPDATE_ATTENDING_GAMES,
-    payload: attendingGamesIds,
+    type: ATTEND_GAME,
+    payload: game,
   });
 }
 
-export const unattendGame = (attendingGamesIds, gameIdToUnattend) => {
-  updated = attendingGamesIds.filter((game) => (game.id != gameIdToUnattend));
+export const leaveGame = (game) => {
   return ({
-    type: UPDATE_ATTENDING_GAMES,
-    payload: updated,
+    type: LEAVE_GAME,
+    payload: game,
   });
 }
 
