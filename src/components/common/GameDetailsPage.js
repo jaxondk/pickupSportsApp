@@ -65,8 +65,9 @@ class GameDetailsPage extends Component {
 
   render () {
     const game = this.props.navigation.getParam('game');
-    const hosting = game.hostId === this.props.user.id
-    const attendingGamesIds = this.props.user.attendingGamesIds;
+    const hosting = game.hostId === this.props.user.id;
+    const sport = this.props.user.subscribedSports.find((sport) => (sport.name === game.sportName));
+    const attendingGamesIds = sport.attendingGamesIds;
     const attending = attendingGamesIds.indexOf(game.id) > -1
     return (
       <View style={gstyles.pageContainer}>

@@ -44,7 +44,7 @@ class HostedGamesPage extends Component {
                   game={game}
                   userLocation={user.location}
                   onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
-                  rightIcon={{ name: 'cancel', color: 'red' }}
+                  rightIcon={{ name: 'cancel', color: colors.CANCEL }}
                   onPressRightIcon={() => this.props.removeGame(game)}
                 // editable
                 />
@@ -57,7 +57,6 @@ class HostedGamesPage extends Component {
   }
 
   render () {
-    console.log(this.props.user.hostedGamesIds)
     return (
       <View style={styles.pageContainer}>
         <ScrollView>

@@ -26,7 +26,7 @@ class SubscribedSportsPage extends Component {
   buildSportSubtitle (sport) {
     return (
       <Text>
-        {sport.gamesOfInterestIds.length + this.props.user.attendingGamesIds.length} game(s) coming up
+        {sport.gamesOfInterestIds.length + sport.attendingGamesIds.length} game(s) coming up
       </Text>
     )
   }
@@ -34,7 +34,6 @@ class SubscribedSportsPage extends Component {
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
   renderSubscribedSportsList (user) {
-    console.log('user.subscribedSports:', user.subscribedSports)
     if (user.subscribedSports.length === 0) {
       return (<Text>You haven't chosen any sports. To find a game, join a sport</Text>);
     } else {
@@ -48,7 +47,7 @@ class SubscribedSportsPage extends Component {
                 subtitle={this.buildSportSubtitle(subscribedSport)}
                 onPress={() => this.props.navigation.navigate('GamesForSport', { currentSport: subscribedSport })}
                 leftIcon={getIconFor(subscribedSport.name, 50)}
-                rightIcon={{ name: 'cancel', color: 'red' }}
+                rightIcon={{ name: 'cancel', color: colors.CANCEL }}
                 onPressRightIcon={() => this.props.unfollowSport(subscribedSport)}
               />
             ))

@@ -20,11 +20,12 @@ export const followSport = (sportName) => {
     name: sportName,
     filter: defaultFilter,
     gamesOfInterestIds: [],
-  }
+    attendingGamesIds: [],
+  };
   return ({
     type: FOLLOW_SPORT,
     payload: sport,
-  })
+  });
 }
 
 export const unfollowSport = (sport) => {

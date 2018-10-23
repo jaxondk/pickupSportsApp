@@ -21,14 +21,14 @@ class LoadingPassthrough extends Component {
                                   //See https://github.com/reduxjs/redux/issues/1676 for chaining async redux actions
   }
   render() {
-    console.log(this.props.appState.userLocation);
     if (this.props.appState.userLocation === stateOptions.DENIED) {
       Alert.alert(
         'Location Needed', 
         'The app won\'t work without your location. Please provide permission to access your location while using the app',
         [{text: "Try Again", onPress: () => this.props.watchLocation()}]
       );
-    } else if (this.props.appState.userLocation === stateOptions.SUCCESS) {
+    } else if (this.props.appState.userLocation === stateOptions.SUCCESS && this.props.appState.navigateToHomeFromLoader != stateOptions.SUCCESS) {
+      console.log('Navigate');
       this.props.navigation.navigate('Home');
     }
     return (

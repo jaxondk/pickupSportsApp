@@ -9,7 +9,7 @@ export const colors = {
   SILVER: '#e2e2e2',
   PURPLE: '#83389B',
   SELECTED: '#14772D',
-  CANCEL: 'red', //TODO - find better red
+  CANCEL: '#c20000', //TODO - find better red
   BBALL_ORANGE: '#f28500',
   TENNIS_GREEN: '#ccff00',
 };

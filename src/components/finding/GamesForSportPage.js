@@ -44,7 +44,7 @@ class GamesForSportPage extends Component {
 
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
-  renderAttendingGamesList (attendingGamesIds, subscribedSports, currentSport) {
+  renderAttendingGamesList (attendingGamesIds) {
     if (attendingGamesIds.length === 0) {
       return (<Text style={styles.textInfo}>You haven't joined any games yet</Text>);
     } else {
@@ -69,8 +69,7 @@ class GamesForSportPage extends Component {
   }
 
   // Probably can't genericize
-  renderGamesOfInterestList (subscribedSports, currentSport) {
-    var gamesOfInterestIds = currentSport.gamesOfInterestIds;
+  renderGamesOfInterestList (gamesOfInterestIds) {
     if (gamesOfInterestIds.length === 0) {
       return (<Text style={styles.textInfo}>No other games of interest in your area</Text>);
     } else {
@@ -97,16 +96,16 @@ class GamesForSportPage extends Component {
   //TODO - use a sectionlist instead and combine the two lists into one with section headings. Can probably still use RNE's ListItem, 
   //       just use it inside of a <SectionList>
   render () {
+    const currentSport = this.props.navigation.getParam('currentSport');
     return (
       <View style={styles.pageContainer}>
         <Text style={styles.sectionHeading}>Games you're attending</Text>
         <ScrollView>
-          {console.log(this.props.user.attendingGamesIds)}
-          {this.renderAttendingGamesList(this.props.user.attendingGamesIds, this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
+          {this.renderAttendingGamesList(currentSport.attendingGamesIds) }
         </ScrollView>
         <Text style={styles.sectionHeading}>Games you may be interested in</Text>
         <ScrollView>
-          {this.renderGamesOfInterestList(this.props.user.subscribedSports, this.props.navigation.getParam('currentSport'))}
+          {this.renderGamesOfInterestList(currentSport.gamesOfInterestIds)}
         </ScrollView>
         <View style={styles.footer}>
           <Button
