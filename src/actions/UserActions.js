@@ -1,15 +1,5 @@
 import { Location, Permissions } from 'expo';
-import { UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, UPDATE_SUBSCRIBED_SPORTS, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, ATTEND_GAME, LEAVE_GAME, UPDATE_GAMES_OF_INTEREST } from '../constants';
-
-export const removeSubscribedSport = (subscribedSports, filterIdToRemove) => {
-  updated = subscribedSports.filter((subscribedSport) => {
-    return (subscribedSport.id != filterIdToRemove);
-  });
-  return ({
-    type: UPDATE_SUBSCRIBED_SPORTS,
-    payload: updated,
-  });
-}
+import { UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, ATTEND_GAME, LEAVE_GAME, FOLLOW_SPORT, UNFOLLOW_SPORT, defaultFilter } from '../constants';
 
 export const attendGame = (game) => {
   return ({
@@ -25,24 +15,31 @@ export const leaveGame = (game) => {
   });
 }
 
-export const addGameOfInterest = (subscribedSports, subscribedSportId, gameToAdd) => {
-  //Since games of interest are nested in subscribed sports, need to modify subscribed sports
-  sport = subscribedSports.find((sport) => (sport.id === subscribedSportId));
-  sport.gamesOfInterestIds.push(gameToAdd);
+export const followSport = (sportName) => {
+  const sport = {
+    name: sportName,
+    filter: defaultFilter,
+    gamesOfInterestIds: [],
+  }
   return ({
-    type: UPDATE_SUBSCRIBED_SPORTS,
-    payload: subscribedSports,
+    type: FOLLOW_SPORT,
+    payload: sport,
+  })
+}
+
+export const unfollowSport = (sport) => {
+  return ({
+    type: UNFOLLOW_SPORT,
+    payload: sport,
   });
 }
 
-export const removeGameOfInterest = (subscribedSports, subscribedSportId, gameIdToRemove) => {
-  //Since games of interest are nested in subscribed sports, need to modify subscribed sports
-  sport = subscribedSports.find((sport) => (sport.id === subscribedSportId));
-  sport.gamesOfInterestIds = sport.gamesOfInterestIds.filter((game) => (game.id != gameIdToRemove));
-  return ({
-    type: UPDATE_SUBSCRIBED_SPORTS,
-    payload: subscribedSports,
-  });
+export const addGameOfInterest = () => {
+  //TODO
+}
+
+export const removeGameOfInterest = () => {
+  //TODO
 }
 
 export const watchLocation = () => {

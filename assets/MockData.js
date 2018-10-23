@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { sports, skillLevels } from "../src/constants";
+import { sports, skillLevels, defaultFilter } from "../src/constants";
 
 
 const locations = {
@@ -42,15 +42,8 @@ export const mockUser = {
   location: null,
   subscribedSports: [
     {
-      id: 0, //Right now, this is just so that when iterating over a user's subscribed sports there's a unique key
-      name: sports.SOCCER,
-      filter: {
-        distance: 5,
-        days: [0, 2, 4, 5], // M, W, F, Sat
-        times: [{ start: 17, end: 23 }], //TODO - make TimeRange class
-        skillLevels: ['Advanced'],
-        gender: ['Men\'s', 'Co-ed'],
-      },
+      name: sports.SOCCER, // must be unique - used as identifier
+      filter: defaultFilter,
       gamesOfInterestIds: [1] //TODO - apply filters to find these
     },
   ],

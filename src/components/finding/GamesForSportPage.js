@@ -59,12 +59,6 @@ class GamesForSportPage extends Component {
                   game={game}
                   userLocation={this.props.user.location}
                   onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
-                // rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle', color: colors.SELECTED }}
-                // onPressRightIcon={() => {
-                //   this.props.leaveGame(game);
-                //   this.props.addGameOfInterest(subscribedSports, currentSport.id, game);
-                //   //TODO - filters need to be applied somewhere
-                // }}
                 />
               );
             })
@@ -91,11 +85,6 @@ class GamesForSportPage extends Component {
                   game={game}
                   userLocation={this.props.user.location}
                   onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
-                // rightIcon={{ type: 'ionicon', name: 'ios-checkmark-circle-outline', color: colors.SELECTED }}
-                // onPressRightIcon={() => {
-                //   this.props.attendGame(game);
-                //   this.props.removeGameOfInterest(subscribedSports, currentSport.id, game.id);
-                // }}
                 />
               );
             })

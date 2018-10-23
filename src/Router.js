@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation';
 import HomePage from './components/HomePage';
 import HostedGamesPage from './components/hosting/HostedGamesPage';
 import ChooseSportPage from './components/hosting/ChooseSportPage';
+import FollowSportPage from './components/finding/FollowSportPage';
 import ChooseTimePage from './components/hosting/ChooseTimePage';
 import ChooseLocationPage from './components/hosting/ChooseLocationPage';
 // import ChooseSizePage from './components/hosting/ChooseSizePage';
@@ -19,6 +20,7 @@ export default RootStack = createStackNavigator(
     Home: HomePage,
     HostedGames: HostedGamesPage,
     ChooseSport: ChooseSportPage,
+    FollowSport: FollowSportPage,
     ChooseTime: ChooseTimePage,
     ChooseLocation: ChooseLocationPage,
     // ChooseSize: ChooseSizePage,

@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, CREATE_GAME, REMOVE_GAME, UPDATE_USER_LOCATION, UPDATE_SUBSCRIBED_SPORTS, ATTEND_GAME, LEAVE_GAME, UPDATE_GAMES_OF_INTEREST } from '../constants';
+import { USER_LOGGED_IN, CREATE_GAME, REMOVE_GAME, UPDATE_USER_LOCATION, UPDATE_SUBSCRIBED_SPORTS, ATTEND_GAME, LEAVE_GAME, UPDATE_GAMES_OF_INTEREST, FOLLOW_SPORT, UNFOLLOW_SPORT } from '../constants';
 import {removeElement} from '../utilities';
 
 const INITIAL_STATE =
@@ -34,17 +34,21 @@ export default (state = INITIAL_STATE, action) => {
       if (sport) {
         removeElement(sport.gamesOfInterestIds, game.id)
       }
-      return {...state};
+      return {...state };
     case UPDATE_USER_LOCATION:
       return { ...state, location: action.payload };
-    case UPDATE_SUBSCRIBED_SPORTS:
-      return { ...state, subscribedSports: action.payload };
     case ATTEND_GAME:
       state.attendingGamesIds.push(action.payload.id);
-      return {...state};
+      return {...state };
     case LEAVE_GAME:
       removeElement(state.attendingGamesIds, action.payload.id);
-      return {...state};
+      return {...state };
+    case FOLLOW_SPORT:
+      state.subscribedSports.push(action.payload);
+      return {...state };
+    case UNFOLLOW_SPORT:
+      removeElement(state.subscribedSports, action.payload);
+      return {...state };
     // case UPDATE_GAMES_OF_INTEREST:
     //   return { ...state, subscribedSports: [...state.subscribedSports, action.payload] };
     default:

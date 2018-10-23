@@ -3,7 +3,7 @@ import { ScrollView, View } from 'react-native';
 import { Text, List, ListItem, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { colors } from '../../constants';
-import { removeSubscribedSport } from '../../actions';
+import { unfollowSport } from '../../actions';
 import { getIconFor } from '../../utilities';
 import gstyles from '../../styles';
 
@@ -34,6 +34,7 @@ class SubscribedSportsPage extends Component {
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
   renderSubscribedSportsList (user) {
+    console.log('user.subscribedSports:', user.subscribedSports)
     if (user.subscribedSports.length === 0) {
       return (<Text>You haven't chosen any sports. To find a game, join a sport</Text>);
     } else {
@@ -42,13 +43,13 @@ class SubscribedSportsPage extends Component {
           {
             user.subscribedSports.map((subscribedSport) => (
               <ListItem
-                key={subscribedSport.id}
+                key={subscribedSport.name}
                 title={subscribedSport.name}
                 subtitle={this.buildSportSubtitle(subscribedSport)}
                 onPress={() => this.props.navigation.navigate('GamesForSport', { currentSport: subscribedSport })}
                 leftIcon={getIconFor(subscribedSport.name, 50)}
                 rightIcon={{ name: 'cancel', color: 'red' }}
-                onPressRightIcon={() => this.props.removeSubscribedSport(user.subscribedSports, subscribedSport.id)}
+                onPressRightIcon={() => this.props.unfollowSport(subscribedSport)}
               />
             ))
           }
@@ -71,7 +72,7 @@ class SubscribedSportsPage extends Component {
             borderRadius={20}
             containerViewStyle={styles.btnContainer}
             backgroundColor={colors.ACCENT}
-            onPress={() => this.props.navigation.navigate('ChooseSport')}
+            onPress={() => this.props.navigation.navigate('FollowSport')}
           />
         </View>
       </View>
@@ -81,4 +82,4 @@ class SubscribedSportsPage extends Component {
 
 let mapStoreToProps = ({ user }) => ({ user });
 
-export default connect(mapStoreToProps, { removeSubscribedSport })(SubscribedSportsPage);
+export default connect(mapStoreToProps, { unfollowSport })(SubscribedSportsPage);
