@@ -3,20 +3,31 @@ import { Icon, Text } from 'react-native-elements';
 import haversine from 'haversine';
 import { sports, colors, icons } from '../constants';
 
+const styles = {
+  selectedIcon: { 
+    borderBottomColor: colors.SELECTED, 
+    borderBottomWidth: 10, 
+    margin: 5, 
+  },
+  unselectedIcon: {
+    margin: 5,
+  },
+};
+
 //TODO - needs some serious refactoring
 export const getIconFor = (name, size, selected, onPress) => {
   switch (name) {
     case sports.SOCCER:
-      return <Icon type='material-community' name='soccer' color={sports.SOCCER === selected ? colors.SELECTED : null} 
+      return <Icon type='material-community' name='soccer' containerStyle={sports.SOCCER === selected ? styles.selectedIcon : styles.unselectedIcon} 
         size={size} onPress={onPress} />;
     case sports.BASKETBALL:
-      return <Icon type='ionicon' name='ios-basketball' color={sports.BASKETBALL === selected ? colors.SELECTED : colors.BBALL_ORANGE} 
-        size={size} onPress={onPress} />;
+      return <Icon type='ionicon' name='ios-basketball' containerStyle={sports.BASKETBALL === selected ? styles.selectedIcon : styles.unselectedIcon} 
+        color={colors.BBALL_ORANGE} size={size} onPress={onPress} />;
     // case sports.VOLLEYBALL:
     //   return <Icon type='font-awesome' name='volleyball-ball' size={size} onPress={onPress} />;
     case sports.TENNIS:
-      return <Icon type='ionicon' name='ios-tennisball' color={sports.TENNIS === selected ? colors.SELECTED : colors.TENNIS_GREEN}
-        size={size} onPress={onPress} />;
+      return <Icon type='ionicon' name='ios-tennisball' containerStyle={sports.TENNIS === selected ? styles.selectedIcon : styles.unselectedIcon} 
+        color={colors.TENNIS_GREEN} size={size} onPress={onPress} />;
     case icons.CLOCK.name:
       return <Icon type='font-awesome' name='clock-o' size={size} />
     case icons.CAL.name:

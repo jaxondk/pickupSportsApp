@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Text } from 'react-native-elements';
 import { selectSport, updateSportChoice } from '../../actions';
-import { colors, sports } from '../../constants';
+import { sports, colors } from '../../constants';
 import { getIconFor } from '../../utilities';
 import FooterBlockBtn from '../common/FooterBlockBtn';
 
