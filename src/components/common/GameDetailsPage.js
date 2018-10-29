@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Linking, Platform } from 'react-native';
+import { View, Alert, Linking, Platform } from 'react-native';
 import { ListItem, List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
+import Toast, { DURATION } from 'react-native-easy-toast';
 import { getIconFor, displayDistance } from '../../utilities';
 import { icons, colors } from '../../constants';
 import gstyles from '../../styles';
@@ -58,9 +59,25 @@ class GameDetailsPage extends Component {
     )
   }
 
-  cancelGame(game) {
-    this.props.removeGame(game);
-    this.props.navigation.goBack();
+  footerBtnOnPress(game, attending, hosting) {
+    if (hosting) {
+      Alert.alert(
+        'Remove Hosted Game?',
+        'Are you sure you want to stop hosting this game? This will permanently remove the game and cannot be undone',
+        [
+          { text: "Yes, Remove It", onPress: () => { this.props.removeGame(game); this.props.navigation.goBack();} },
+          { text: "No, Keep It"}
+        ]
+      );
+    }
+    else if (attending) {
+      this.props.leaveGame(game);
+      this.refs.toast.show('Success! You\'re no longer attending '+game.name, DURATION.LENGTH_LONG)
+    }
+    else {
+      this.props.attendGame(game);
+      this.refs.toast.show('Success! You\'re now attending '+game.name, DURATION.LENGTH_LONG);
+    }
   }
 
   render () {
@@ -94,7 +111,15 @@ class GameDetailsPage extends Component {
         <FooterBlockBtn
           bgColor={!attending ? colors.SELECTED : colors.CANCEL}
           text={hosting ? 'Cancel Game' : !attending ? 'Join Game' : 'Leave Game'}
-          onPress={hosting ? () => this.cancelGame(game) : !attending ? () => this.props.attendGame(game) : () => this.props.leaveGame(game)}
+          onPress={() => this.footerBtnOnPress(game, attending, hosting)}
+        />
+        <Toast 
+          ref="toast" 
+          style={{backgroundColor: colors.SELECTED}} 
+          position='top'
+          positionValue={50}
+          fadeInDuration={750}
+          fadeOutDuration={1250}
         />
       </View>
     )

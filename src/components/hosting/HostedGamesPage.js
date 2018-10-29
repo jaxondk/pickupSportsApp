@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { Text, List, Button } from 'react-native-elements';
 import { colors } from '../../constants';
 import { removeGame } from '../../actions';
 import GameListItem from '../common/GameListItem';
+import Toast, { DURATION } from 'react-native-easy-toast';
 
 const styles = {
   pageContainer: {
@@ -26,6 +27,20 @@ class HostedGamesPage extends Component {
     title: "My Hosted Games",
   };
 
+  removeHostedGame(game) {
+    Alert.alert(
+      'Remove Hosted Game?',
+      'Are you sure you want to stop hosting this game? This will permanently remove the game and cannot be undone',
+      [
+        { text: "Yes, Remove It", onPress: () => { 
+          this.props.removeGame(game);
+          this.refs.toast.show('Success! You\'re no longer hosting '+game.name, DURATION.LENGTH_LONG);
+        }},
+        { text: "No, Keep It" }
+      ]
+    );
+  }
+
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
   renderHostedGamesList (user) {
@@ -45,7 +60,7 @@ class HostedGamesPage extends Component {
                   userLocation={user.location}
                   onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
                   rightIcon={{ name: 'cancel', color: colors.CANCEL }}
-                  onPressRightIcon={() => this.props.removeGame(game)}
+                  onPressRightIcon={() => this.removeHostedGame(game)}
                 // editable
                 />
               );
@@ -73,6 +88,14 @@ class HostedGamesPage extends Component {
             onPress={() => this.props.navigation.navigate('ChooseSport')}
           />
         </View>
+        <Toast
+          ref="toast"
+          style={{ backgroundColor: colors.SELECTED }}
+          position='top'
+          positionValue={50}
+          fadeInDuration={750}
+          fadeOutDuration={1250}
+        />
       </View>
     );
   }

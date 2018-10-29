@@ -3,7 +3,7 @@ import { Alert, ActivityIndicator, View } from 'react-native';
 import { connect } from 'react-redux';
 import { colors, stateOptions } from '../constants';
 import { mockUser } from '../../assets/MockData';
-import { mockLogUserIn, watchLocation } from '../actions';
+import { mockLogUserIn, watchLocation, disableLoaderNavigation } from '../actions';
 
 const styles = {
   pageContainer: {
@@ -28,7 +28,8 @@ class LoadingPassthrough extends Component {
         [{text: "Try Again", onPress: () => this.props.watchLocation()}]
       );
     } else if (this.props.appState.userLocation === stateOptions.SUCCESS && this.props.appState.navigateToHomeFromLoader != stateOptions.SUCCESS) {
-      console.log('Navigate');
+      this.props.disableLoaderNavigation();
+      console.log('Navigate from loader');
       this.props.navigation.navigate('Home');
     }
     return (
@@ -41,4 +42,4 @@ class LoadingPassthrough extends Component {
 
 let mapStoreToProps = ({ appState }) => ({ appState });
 
-export default connect(mapStoreToProps, { mockLogUserIn, watchLocation })(LoadingPassthrough)
+export default connect(mapStoreToProps, { mockLogUserIn, watchLocation, disableLoaderNavigation })(LoadingPassthrough)

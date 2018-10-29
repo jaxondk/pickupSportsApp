@@ -7,18 +7,19 @@ import { selectDate, selectTime, updateDateTimeChoice, initRegion } from '../../
 import { colors } from '../../constants';
 import FooterBlockBtn from '../common/FooterBlockBtn';
 import gstyles from '../../styles';
+import { FormLabel } from 'react-native-elements';
 
 const styles = {
-  content: {
-    marginTop: 20,
+  calendar: {
+    marginTop: 15,
     marginBottom: 20,
-    flex: 9,
+    alignItems: 'center', 
   },
 }
 
 class ChooseTimePage extends Component {
   static navigationOptions = {
-    title: "Choose When",
+    title: "Choose Day And Time",
   };
 
   // This is a workaround for datepickerIOS's broken minuteInterval
@@ -41,8 +42,9 @@ class ChooseTimePage extends Component {
   render () {
     return (
       <View style={gstyles.pageContainer}>
-        <View style={styles.content}>
-          <View style={{ alignItems: 'center' }}>
+        <View style={gstyles.content}>
+          {/* <FormLabel labelStyle={gstyles.label}>Choose a Day and Time</FormLabel> */}
+          <View style={styles.calendar}>
             <CalendarPicker
               onDateChange={(date) => this.props.selectDate(date)}
               selectedDayColor={colors.SELECTED}
