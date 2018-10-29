@@ -40,7 +40,7 @@ class ChooseLocationPage extends Component {
     this.props.clearHostAGameForm();
   }
 
-  onPressSaveBtn () {
+  onPressNextBtn () {
     this.props.updateLocation(this.props.hostAGame.region);
     // this.props.navigation.navigate('ChooseSize');
     // TODO - still need to implement choose size and skill level. 
@@ -64,7 +64,7 @@ class ChooseLocationPage extends Component {
           </View>
         </View>
         <FooterBlockBtn
-          onPress={() => this.onPressSaveBtn()}
+          onPress={() => this.onPressNextBtn()}
           disabled={this.props.hostAGame.region === null}
         />
       </View>

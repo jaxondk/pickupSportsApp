@@ -1,20 +1,21 @@
-import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, UPDATE_GAME_LOCATION, INIT_REGION, SELECT_REGION, CLEAR_HOST_A_GAME_FORM, skillLevels } from "../constants";
+import { SELECT_SPORT, UPDATE_GAME_SPORT, SELECT_DATE, SELECT_TIME, UPDATE_MOMENT, UPDATE_GAME_LOCATION, INIT_REGION, SELECT_REGION, CLEAR_HOST_A_GAME_FORM, skillLevels, HOST_A_GAME_NAME_CHANGED, UPDATE_GAME_NAME } from "../constants";
 
 
 const INITIAL_STATE =
 {
   game: {
     id: null,
-    name: 'Name', //TODO
+    name: null,
     hostId: null,
     sportName: null,
     moment: null,
     location: null,
-    attendeesAllowed: {min: 6, max: 12}, //minmax TODO
+    // attendeesAllowed: {min: 6, max: 12}, //minmax TODO
     attendees: [],
-    skillLevel: skillLevels.INTERMEDIATE, //TODO
+    // skillLevel: skillLevels.INTERMEDIATE, //TODO
   },
   selectedSport: null,
+  currentGameName: null,
   selectedDate: null,
   selectedTime: null,
   selectedLocation: null,
@@ -27,6 +28,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, selectedSport: action.payload };
     case UPDATE_GAME_SPORT:
       return { ...state, game: { ...state.game, sportName: action.payload } };
+    case HOST_A_GAME_NAME_CHANGED:
+      return { ...state, currentGameName: action.payload };
+    case UPDATE_GAME_NAME:
+      return { ...state, game: { ...state.game, name: action.payload } };
     case SELECT_DATE:
       return { ...state, selectedDate: action.payload };
     case SELECT_TIME:

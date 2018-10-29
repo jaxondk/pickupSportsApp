@@ -6,4 +6,7 @@ export default gstyles = {
   content: {
     flex: 9,
   },
+  label: {
+    fontSize: 25,
+  },
 }

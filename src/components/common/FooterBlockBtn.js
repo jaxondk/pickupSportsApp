@@ -39,5 +39,5 @@ FooterBlockBtn.defaultProps = {
   disabled: false,
   bgColor: colors.PRIMARY,
   disabledColor: colors.SILVER,
-  text: 'Save',
+  text: 'Next',
 }
