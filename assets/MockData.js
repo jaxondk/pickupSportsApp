@@ -36,15 +36,8 @@ export const mockUser = {
   id: 0,
   firstName: "Jaxon",
   lastName: "Keeler",
-  displayName: "El Cucuy",
   hostedGamesIds: [0],
+  gamesOfInterestIds: [1], //TODO - apply filters to find these
+  attendingGamesIds: [0],
   location: null,
-  subscribedSports: [
-    {
-      name: sports.SOCCER, // must be unique - used as identifier
-      filter: defaultFilter,
-      gamesOfInterestIds: [1], //TODO - apply filters to find these
-      attendingGamesIds: [0],
-    },
-  ],
 }

@@ -4,7 +4,7 @@ import { CheckBox, FormLabel } from 'react-native-elements';
 import { HeaderBackButton } from 'react-navigation';
 import { connect } from 'react-redux';
 import gstyles from '../../styles';
-import { colors, sports, TOGGLE_SOCCER, TOGGLE_BASKETBALL, TOGGLE_TENNIS, TOGGLE_ATTENDING_GAMES, TOGGLE_GAMES_OF_INTEREST } from '../../constants';
+import { colors, sports, TOGGLE_SOCCER, TOGGLE_BASKETBALL, TOGGLE_TENNIS, TOGGLE_ATTENDING_GAMES, TOGGLE_GAMES_OF_INTEREST, TOGGLE_HOSTED_GAMES } from '../../constants';
 import { getPinColor } from '../../utilities';
 import FooterBlockBtn from '../common/FooterBlockBtn';
 import { toggle, restoreSavedFilter, saveTmpFilter } from '../../actions';
@@ -65,6 +65,9 @@ class FilterPage extends Component {
           <CheckBox 
             title="Games you may be interested in" checkedColor={colors.SELECTED} 
             checked={this.props.tmpFilter.gamesOfInterest} onPress={() => this.props.toggle(TOGGLE_GAMES_OF_INTEREST)} />
+          <CheckBox
+            title="Games you're hosting" checkedColor={colors.SELECTED}
+            checked={this.props.tmpFilter.hostedGames} onPress={() => this.props.toggle(TOGGLE_HOSTED_GAMES)} />
         </View>
         <View style={styles.multiBtnFooter}>
           <FooterBlockBtn

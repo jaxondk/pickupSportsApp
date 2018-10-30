@@ -15,11 +15,24 @@ const styles = {
 
 class GamesMapPage extends Component {
   static navigationOptions = {
-    title: "Nearby Games",
+    title: "Games For You",
   };
 
   renderGameMarkers() {
-    return Object.values(this.props.allGames).map((game) => (
+    const allGamesArray = Object.values(this.props.allGames)
+    const filteredGames = allGamesArray.filter((game) => {
+      const sportVisible = this.props.savedFilter[game.sportName];
+      const attending = this.props.user.attendingGamesIds.indexOf(game.id) > -1;
+      const interested = this.props.user.gamesOfInterestIds.indexOf(game.id) > -1;
+      const hosting = this.props.user.hostedGamesIds.indexOf(game.id) > -1;
+      return sportVisible && (
+        (this.props.savedFilter.attendingGames && attending) ||
+        (this.props.savedFilter.gamesOfInterest && interested) ||
+        (this.props.savedFilter.hostedGames && hosting)
+      );
+    });
+
+    return filteredGames.map((game) => (
       <MapView.Marker
         key={game.id}
         identifier={game.id+''}
@@ -56,6 +69,6 @@ class GamesMapPage extends Component {
   }
 }
 
-let mapStoreToProps = ({ user, allGames }) => ({ user, allGames });
+let mapStoreToProps = ({ user, allGames, filter }) => ({ user, allGames, savedFilter: filter.savedFilter });
 
 export default connect(mapStoreToProps, {})(GamesMapPage);

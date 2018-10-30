@@ -1,5 +1,5 @@
 import { Location, Permissions } from 'expo';
-import { UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, ATTEND_GAME, LEAVE_GAME, FOLLOW_SPORT, UNFOLLOW_SPORT, defaultFilter } from '../constants';
+import { UPDATE_USER_LOCATION, LOAD_USER_LOCATION_DENIED, LOAD_USER_LOCATION_SUCCESS, LOAD_USER_LOCATION, ATTEND_GAME, LEAVE_GAME, } from '../constants';
 
 export const attendGame = (game) => {
   return ({
@@ -13,34 +13,6 @@ export const leaveGame = (game) => {
     type: LEAVE_GAME,
     payload: game,
   });
-}
-
-export const followSport = (sportName) => {
-  const sport = {
-    name: sportName,
-    filter: defaultFilter,
-    gamesOfInterestIds: [],
-    attendingGamesIds: [],
-  };
-  return ({
-    type: FOLLOW_SPORT,
-    payload: sport,
-  });
-}
-
-export const unfollowSport = (sport) => {
-  return ({
-    type: UNFOLLOW_SPORT,
-    payload: sport,
-  });
-}
-
-export const addGameOfInterest = () => {
-  //TODO
-}
-
-export const removeGameOfInterest = () => {
-  //TODO
 }
 
 export const watchLocation = () => {

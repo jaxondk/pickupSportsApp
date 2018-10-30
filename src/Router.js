@@ -5,7 +5,6 @@ import ChooseSportPage from './components/hosting/ChooseSportPage';
 import FollowSportPage from './components/finding/FollowSportPage';
 import ChooseTimePage from './components/hosting/ChooseTimePage';
 import ChooseLocationPage from './components/hosting/ChooseLocationPage';
-import SubscribedSportsPage from './components/finding/SubscribedSportsPage';
 import GamesForSportPage from './components/finding/GamesForSportPage';
 import GameDetailsPage from './components/common/GameDetailsPage';
 import GamesMapPage from './components/finding/GamesMapPage';
@@ -22,7 +21,6 @@ export default RootStack = createStackNavigator(
     FollowSport: FollowSportPage,
     ChooseTime: ChooseTimePage,
     ChooseLocation: ChooseLocationPage,
-    SubscribedSports: SubscribedSportsPage,
     GamesForSport: GamesForSportPage,
     GameDetails: GameDetailsPage,
     GamesMap: GamesMapPage,
