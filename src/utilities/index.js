@@ -42,6 +42,19 @@ export const getIconFor = (name, size, selected, onPress) => {
   }
 }
 
+export const getPinColor = (sportName) => {
+  switch (sportName) {
+    case sports.BASKETBALL:
+      return colors.BBALL_ORANGE;
+    case sports.SOCCER:
+      return 'black';
+    case sports.TENNIS:
+      return colors.TENNIS_GREEN;
+    default:
+      return null;
+  }
+};
+
 export const buildGameSubtitle = (game) => {
   return (
     <Text>

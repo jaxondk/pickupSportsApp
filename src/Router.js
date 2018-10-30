@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
 import HomePage from './components/HomePage';
 import HostedGamesPage from './components/hosting/HostedGamesPage';
@@ -9,6 +8,7 @@ import ChooseLocationPage from './components/hosting/ChooseLocationPage';
 import SubscribedSportsPage from './components/finding/SubscribedSportsPage';
 import GamesForSportPage from './components/finding/GamesForSportPage';
 import GameDetailsPage from './components/common/GameDetailsPage';
+import GamesMapPage from './components/finding/GamesMapPage';
 import { colors } from './constants';
 import LoadingPassthrough from './components/LoadingPassthrough';
 
@@ -24,6 +24,7 @@ export default RootStack = createStackNavigator(
     SubscribedSports: SubscribedSportsPage,
     GamesForSport: GamesForSportPage,
     GameDetails: GameDetailsPage,
+    GamesMap: GamesMapPage,
   },
   {
     initialRouteName: 'Loader',

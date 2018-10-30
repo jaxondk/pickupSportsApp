@@ -4,7 +4,7 @@ import { ListItem, List } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import Toast, { DURATION } from 'react-native-easy-toast';
-import { getIconFor, displayDistance } from '../../utilities';
+import { getIconFor, displayDistance, getPinColor } from '../../utilities';
 import { icons, colors } from '../../constants';
 import gstyles from '../../styles';
 import FooterBlockBtn from '../common/FooterBlockBtn';
@@ -101,6 +101,7 @@ class GameDetailsPage extends Component {
             <MapView.Marker
               coordinate={{ ...game.location }}
               title='Get Directions'
+              pinColor={getPinColor(game.sportName)}
               onCalloutPress={() => this.navigateInNativeMaps(game.location, game.name)} />
           </MapView>
           <View style={styles.detailItemsContainer}>

@@ -9,14 +9,14 @@ const styles = {
     flex: 1,
     backgroundColor: 'white',
   },
-  hostingCard: {
+  topCard: {
     flex: 1,
     borderBottomColor: colors.SILVER,
     borderBottomWidth: 1,
     width: '100%',
     alignItems: 'center',
   },
-  findingCard: {
+  bottomCard: {
     flex: 1,
     width: '100%',
     alignItems: 'center',
@@ -33,11 +33,11 @@ class HomePage extends Component {
   render() {
     return (
       <View style={styles.pageContainer}>
-        <TouchableOpacity style={styles.hostingCard} onPress={() => this.props.navigation.navigate('SubscribedSports')}>
+        <TouchableOpacity style={styles.topCard} onPress={() => this.props.navigation.navigate('GamesMap')}>
           <Icon reverse name={icons.SEARCH.name} color={colors.ACCENT} size={100} />
           <Text h2>Find Games</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.findingCard} onPress={() => this.props.navigation.navigate('HostedGames')}>
+        <TouchableOpacity style={styles.bottomCard} onPress={() => this.props.navigation.navigate('HostedGames')}>
           <Icon reverse type={icons.LOCATION.type} name={icons.LOCATION.name} color={colors.PRIMARY} size={100} />
           <Text h2>Host Games</Text>
         </TouchableOpacity>
