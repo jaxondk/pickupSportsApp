@@ -1,14 +1,14 @@
 import { sports, TOGGLE_BASKETBALL, TOGGLE_TENNIS, TOGGLE_GAMES_OF_INTEREST, TOGGLE_ATTENDING_GAMES, TOGGLE_SOCCER, SAVE_TMP_FILTER, RESTORE_SAVED_FILTER, TOGGLE_HOSTED_GAMES } from '../constants';
 
+// Initial state assumes they only want to see games of interest (so not games they're hosting or attending)
 const INITIAL_STATE = { 
-  // savedFilter and tmpFilter must have their attributes in same order. 
-  // Otherwise comparing them with JSON.stringify will always eval to unequal
+  // savedFilter and tmpFilter must have their attributes in same order for comparing them with JSON.stringify
   savedFilter: {
     [sports.SOCCER]: true,
     [sports.BASKETBALL]: true,
     [sports.TENNIS]: true,
     gamesOfInterest: true,
-    attendingGames: true,
+    attendingGames: false,
     hostedGames: false,
   },
   tmpFilter: {
@@ -16,7 +16,7 @@ const INITIAL_STATE = {
     [sports.BASKETBALL]: true,
     [sports.TENNIS]: true,
     gamesOfInterest: true,
-    attendingGames: true,
+    attendingGames: false,
     hostedGames: false,
   },
 };

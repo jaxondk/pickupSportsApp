@@ -58,7 +58,7 @@ export const getPinColor = (sportName) => {
 export const buildGameSubtitle = (game) => {
   return (
     <Text>
-      <Icon type='font-awesome' name='calendar' size={12} /> {game.moment.format('MM/DD')} {/*TODO - inline icons*/}
+      <Icon type='font-awesome' name='calendar' size={12} /> {game.moment.format('MM/DD ddd')} {/*TODO - inline icons*/}
       <Icon type='font-awesome' name='clock-o' size={12} /> {game.moment.format('h:mm A')}
     </Text>
   )

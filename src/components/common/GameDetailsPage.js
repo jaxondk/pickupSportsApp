@@ -41,19 +41,20 @@ class GameDetailsPage extends Component {
     return (
       <List>
         <ListItem
-          title={' ' + game.moment.format('MM/DD') + ' at ' + game.moment.format('h:mm A')}
+          title={' ' + game.moment.format('ddd, MM/DD') + ' at ' + game.moment.format('h:mm A')}
           leftIcon={getIconFor(icons.CLOCK.name, 24)}
-          rightIcon={getIconFor(icons.PENCIL.name, 24)}
-          hideChevron={!hosting}
-        // onPressRightIcon={navigate to edit} TODO
+          // rightIcon={getIconFor(icons.PENCIL.name, 24)}
+          // hideChevron={!hosting}
+          hideChevron
+          // onPressRightIcon={navigate to edit} TODO
         />
         <ListItem
           title={' ' + displayDistance(this.props.user.location, game.location) + ' from you'}
           leftIcon={getIconFor(icons.LOCATION.name, 24)}
-          rightIcon={getIconFor(icons.PENCIL.name, 24)}
-          hideChevron={!hosting}
           onPress={() => this.navigateInNativeMaps(game.location, game.name)}
-        // onPressRightIcon={navigate to edit} TODO
+          // rightIcon={getIconFor(icons.PENCIL.name, 24)}
+          // hideChevron={!hosting}
+          // onPressRightIcon={navigate to edit} TODO
         />
       </List>
     )
