@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { MapView } from 'expo';
 import gstyles from '../../styles';
 import { getPinColor } from '../../utilities';
+import { colors } from '../../constants';
 
 const styles = {
   map: {
@@ -33,13 +35,22 @@ class GamesMapPage extends Component {
   render () {
     return (
       <View style={gstyles.pageContainer}>
-          <MapView
-            style={styles.map}
-            region={{...this.props.user.location, latitudeDelta: 0.05, longitudeDelta: 0.05}}
-            showsUserLocation
-          >
-            {this.renderGameMarkers()}
-          </MapView>
+        <MapView
+          style={styles.map}
+          region={{...this.props.user.location, latitudeDelta: 0.05, longitudeDelta: 0.05}}
+          showsUserLocation
+        >
+          {this.renderGameMarkers()}
+        </MapView>
+        <Button
+          raised
+          icon={{ name: 'filter-list' }}
+          title='Filter Games'
+          borderRadius={20}
+          containerViewStyle={gstyles.fabContainer}
+          backgroundColor={colors.ACCENT}
+          onPress={null}
+        />
       </View>
     );
   }
