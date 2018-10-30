@@ -11,6 +11,7 @@ import GameDetailsPage from './components/common/GameDetailsPage';
 import GamesMapPage from './components/finding/GamesMapPage';
 import { colors } from './constants';
 import LoadingPassthrough from './components/LoadingPassthrough';
+import FilterPage from './components/finding/FilterPage';
 
 export default RootStack = createStackNavigator(
   {
@@ -25,6 +26,7 @@ export default RootStack = createStackNavigator(
     GamesForSport: GamesForSportPage,
     GameDetails: GameDetailsPage,
     GamesMap: GamesMapPage,
+    Filter: FilterPage,
   },
   {
     initialRouteName: 'Loader',

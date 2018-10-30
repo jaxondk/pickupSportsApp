@@ -3,3 +3,4 @@ export * from './UserActions';
 export * from './HostAGameActions';
 export * from './GameActions';
 export * from './AppStateActions';
+export * from './FilterActions';

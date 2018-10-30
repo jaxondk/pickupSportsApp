@@ -49,7 +49,7 @@ class GamesMapPage extends Component {
           borderRadius={20}
           containerViewStyle={gstyles.fabContainer}
           backgroundColor={colors.ACCENT}
-          onPress={null}
+          onPress={() => this.props.navigation.navigate('Filter')}
         />
       </View>
     );
