@@ -1,10 +1,8 @@
 import { mockSoccerGame0, mockSoccerGame1 } from '../../assets/MockData';
-import { sports, TOGGLE_BASKETBALL, TOGGLE_TENNIS, TOGGLE_GAMES_OF_INTEREST, TOGGLE_ATTENDING_GAMES, TOGGLE_SOCCER } from '../constants';
+import { sports, TOGGLE_BASKETBALL, TOGGLE_TENNIS, TOGGLE_GAMES_OF_INTEREST, TOGGLE_ATTENDING_GAMES, TOGGLE_SOCCER, SAVE_TMP_FILTER, RESTORE_SAVED_FILTER } from '../constants';
 
-// The state object represents a dictionary w/ key-value pairs of gameId: game object. 
-// The game object redundantly has this same id as an attribute. This is for ease of refactoring but should probably be removed later
 const INITIAL_STATE = { 
-  gamesForDisplay: {
+  gamesForDisplay: { //Maybe I can put these in the allGames reducer, and on SAVE_TMP_FILTER I can pass a payload of the filter and then filter from allgamesreducer
     [mockSoccerGame0.id]: mockSoccerGame0, [mockSoccerGame1.id]: mockSoccerGame1 
   },
   // savedFilter and tmpFilter must have their attributes in same order. 
@@ -37,6 +35,11 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, tmpFilter: { ...state.tmpFilter, gamesOfInterest: !state.tmpFilter.gamesOfInterest } };
     case TOGGLE_ATTENDING_GAMES:
       return { ...state, tmpFilter: { ...state.tmpFilter, attendingGames: !state.tmpFilter.attendingGames } };
+    case SAVE_TMP_FILTER:
+      return { ...state, savedFilter: state.tmpFilter }
+    case RESTORE_SAVED_FILTER:
+      console.log('state after restore saved filter', { ...state, tmpFilter: state.savedFilter });
+      return { ...state, tmpFilter: state.savedFilter }
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Button, CheckBox, FormLabel } from 'react-native-elements';
+import { View, Alert } from 'react-native';
+import { CheckBox, FormLabel } from 'react-native-elements';
+import { HeaderBackButton } from 'react-navigation';
 import { connect } from 'react-redux';
 import gstyles from '../../styles';
 import { colors, sports, TOGGLE_SOCCER, TOGGLE_BASKETBALL, TOGGLE_TENNIS, TOGGLE_ATTENDING_GAMES, TOGGLE_GAMES_OF_INTEREST } from '../../constants';
@@ -8,13 +9,39 @@ import { getPinColor } from '../../utilities';
 import FooterBlockBtn from '../common/FooterBlockBtn';
 import { toggle, restoreSavedFilter, saveTmpFilter } from '../../actions';
 
+const styles = {
+  multiBtnFooter: {
+    flex: 1,
+    flexDirection: 'row',
+  }
+}
+
 class FilterPage extends Component {
   static navigationOptions = {
     title: "Filter",
+    headerLeft: null,
+    gesturesEnabled: false,
   };
 
-  onPressSaveBtn() {
+  onPressCancelBtn() {
+    if (JSON.stringify(this.props.tmpFilter) === JSON.stringify(this.props.savedFilter)) {
+      this.props.navigation.goBack()
+    }
+    else {
+      Alert.alert(
+        'Discard Changes?',
+        'Are you sure you want to go back without saving? This will discard the changes you\'ve made',
+        [
+          { text: "Yes, Discard Changes", onPress: () => { this.props.restoreSavedFilter(); this.props.navigation.goBack(); } },
+          { text: "No, Stay Here" }
+        ]
+      );
+    }
+  }
 
+  onPressSaveBtn() {
+    this.props.saveTmpFilter();
+    this.props.navigation.goBack();
   }
 
   render() {
@@ -39,11 +66,20 @@ class FilterPage extends Component {
             title="Games you may be interested in" checkedColor={colors.SELECTED} 
             checked={this.props.tmpFilter.gamesOfInterest} onPress={() => this.props.toggle(TOGGLE_GAMES_OF_INTEREST)} />
         </View>
-        <FooterBlockBtn
-          onPress={() => this.onPressSaveBtn()}
-          text='Save'
-          disabled={JSON.stringify(this.props.tmpFilter) === JSON.stringify(this.props.savedFilter)} 
-        />
+        <View style={styles.multiBtnFooter}>
+          <FooterBlockBtn
+            onPress={() => this.onPressSaveBtn()}
+            text='Save'
+            disabled={JSON.stringify(this.props.tmpFilter) === JSON.stringify(this.props.savedFilter)}
+            bgColor={colors.SELECTED}
+          />
+          <FooterBlockBtn
+            onPress={() => this.onPressCancelBtn()}
+            text='Cancel'
+            disabled={false}
+            bgColor={colors.CANCEL}
+          />
+        </View>
       </View>
     )
   }
