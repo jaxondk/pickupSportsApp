@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { Text, List, Button } from 'react-native-elements';
+import { Text, List } from 'react-native-elements';
+import Toast, { DURATION } from 'react-native-easy-toast';
 import { colors } from '../../constants';
 import { removeGame } from '../../actions';
 import GameListItem from '../common/GameListItem';
-import Toast, { DURATION } from 'react-native-easy-toast';
+import FAB from '../common/FAB';
 
 const styles = {
   pageContainer: {
@@ -77,17 +78,10 @@ class HostedGamesPage extends Component {
         <ScrollView>
           {this.renderHostedGamesList(this.props.user)}
         </ScrollView>
-        <View style={styles.footer}>
-          <Button
-            raised
-            icon={{ type: 'material-community', name: 'plus' }}
-            title='Host New Game'
-            borderRadius={20}
-            containerViewStyle={styles.btnContainer}
-            backgroundColor={colors.ACCENT}
-            onPress={() => this.props.navigation.navigate('ChooseSport')}
-          />
-        </View>
+        <FAB 
+          onPress={() => this.props.navigation.navigate('ChooseSport')} 
+          title='Host New Game' 
+          icon={{ type: 'material-community', name: 'plus' }} />
         <Toast
           ref="toast"
           style={{ backgroundColor: colors.SELECTED }}
