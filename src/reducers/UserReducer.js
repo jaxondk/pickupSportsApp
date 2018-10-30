@@ -9,21 +9,8 @@ const INITIAL_STATE =
   displayName: "",
   hostedGamesIds: [],
   attendingGamesIds: [],
-  gamesOfInterestIds: [],
   location: null,
 };
-
-// also removes game from gamesOfInterestIds
-const attend = (state, game) => {
-  state.attendingGamesIds.push(game.id);
-  removeElement(state.gamesOfInterestIds, game.id);
-}
-
-// also adds game to gamesOfInterestIds
-const leave = (state, game) => {
-  removeElement(state.attendingGamesIds, game.id);
-  state.gamesOfInterestIds.push(game.id);
-}
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -34,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
       //If this user created this game, add it to their hosted games
       if (game.hostId === state.id) {
         state.hostedGamesIds.push(game.id);
-        state.attendingGamesIds.push(game.id);
+        // state.attendingGamesIds.push(game.id); //For now, decided to completely separate hosted games from attending games
       }
       return {...state};
     case REMOVE_GAME:
@@ -42,16 +29,15 @@ export default (state = INITIAL_STATE, action) => {
       if (game.hostId === state.id) {
         removeElement(state.hostedGamesIds, game.id);
       }
-      removeElement(state.gamesOfInterestIds, game.id);
       removeElement(state.attendingGamesIds, game.id);
       return {...state };
     case UPDATE_USER_LOCATION:
       return { ...state, location: action.payload };
     case ATTEND_GAME:
-      attend(state, action.payload);
+      state.attendingGamesIds.push(action.payload.id);
       return {...state };
     case LEAVE_GAME:
-      leave(state, action.payload);
+      removeElement(state.attendingGamesIds, action.payload.id);
       return {...state };
     default:
       return state;

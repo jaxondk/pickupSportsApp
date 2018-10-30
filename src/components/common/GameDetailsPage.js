@@ -83,8 +83,6 @@ class GameDetailsPage extends Component {
   render () {
     const game = this.props.navigation.getParam('game');
     const hosting = game.hostId === this.props.user.id;
-    // const sport = this.props.user.subscribedSports.find((sport) => (sport.name === game.sportName));
-    // const attendingGamesIds = sport.attendingGamesIds;
     const attending = this.props.user.attendingGamesIds.indexOf(game.id) > -1
     return (
       <View style={gstyles.pageContainer}>
@@ -108,9 +106,8 @@ class GameDetailsPage extends Component {
             {this.renderDetails(game, hosting)}
           </View>
         </View>
-        {/* TODO: remove game from games of interest on attend, add game to games of interest on leave. This should be handled automatically by filters */}
         <FooterBlockBtn
-          bgColor={!attending ? colors.SELECTED : colors.CANCEL}
+          bgColor={(hosting || attending) ? colors.CANCEL : colors.SELECTED}
           text={hosting ? 'Cancel Game' : !attending ? 'Join Game' : 'Leave Game'}
           onPress={() => this.footerBtnOnPress(game, attending, hosting)}
         />

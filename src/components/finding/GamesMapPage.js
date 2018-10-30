@@ -23,12 +23,11 @@ class GamesMapPage extends Component {
     const filteredGames = allGamesArray.filter((game) => {
       const sportVisible = this.props.savedFilter[game.sportName];
       const attending = this.props.user.attendingGamesIds.indexOf(game.id) > -1;
-      const interested = this.props.user.gamesOfInterestIds.indexOf(game.id) > -1;
       const hosting = this.props.user.hostedGamesIds.indexOf(game.id) > -1;
       return sportVisible && (
         (this.props.savedFilter.attendingGames && attending) ||
-        (this.props.savedFilter.gamesOfInterest && interested) ||
-        (this.props.savedFilter.hostedGames && hosting)
+        (this.props.savedFilter.hostedGames && hosting) ||
+        (this.props.savedFilter.gamesOfInterest && !hosting && !attending)
       );
     });
 

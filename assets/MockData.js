@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { sports, skillLevels, defaultFilter } from "../src/constants";
+import { sports, skillLevels } from "../src/constants";
 
 
 const locations = {
@@ -37,7 +37,6 @@ export const mockUser = {
   firstName: "Jaxon",
   lastName: "Keeler",
   hostedGamesIds: [0],
-  gamesOfInterestIds: [1], //TODO - apply filters to find these
-  attendingGamesIds: [0],
+  attendingGamesIds: [],
   location: null,
 }
