@@ -14,7 +14,7 @@ const styles = {
 
 class GamesMapPage extends Component {
   static navigationOptions = {
-    title: "Games For You",
+    title: "Find New Games",
   };
 
   renderGameMarkers() {
@@ -35,7 +35,7 @@ class GamesMapPage extends Component {
         identifier={game.id+''}
         coordinate={game.location}
         title={game.name}
-        description='Click for details'
+        description={game.moment.format('MM/DD ddd')}
         onCalloutPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
         pinColor={getPinColor(game.sportName)}
       />
