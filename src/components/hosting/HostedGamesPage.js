@@ -29,15 +29,19 @@ class HostedGamesPage extends Component {
     title: "My Hosted Games",
   };
 
-  removeHostedGame(game) {
+  removeHostedGame (game) {
     Alert.alert(
       'Remove Hosted Game?',
       'Are you sure you want to stop hosting this game? This will permanently remove the game and cannot be undone',
       [
-        { text: "Yes, Remove It", onPress: () => { 
-          this.props.removeGame(game);
-          this.refs.toast.show('Success! You\'re no longer hosting '+game.name, DURATION.LENGTH_LONG);
-        }},
+        {
+          text: "Yes, Remove It", onPress: () => {
+            this.props.removeGame(game);
+            if (this.refs.toast) {
+              this.refs.toast.show('Success! You\'re no longer hosting ' + game.name, DURATION.LENGTH_LONG);
+            }
+          }
+        },
         { text: "No, Keep It" }
       ]
     );
@@ -63,7 +67,7 @@ class HostedGamesPage extends Component {
               // editable
               />
             );
-        })
+          })
         }
       </List>
     );
@@ -74,11 +78,11 @@ class HostedGamesPage extends Component {
       return (
         <FullScreenTextView
           title='No Hosted Games'
-          description="Looks like you're not hosting any games yet! Host a game by pressing the button below" 
+          description="Looks like you're not hosting any games yet! Host a game by pressing the button below"
           FAB={(<FAB
             onPress={() => this.props.navigation.navigate('ChooseSport')}
             title='Host New Game'
-            icon={{ type: 'material-community', name: 'plus' }} />)}/>
+            icon={{ type: 'material-community', name: 'plus' }} />)} />
       );
     } else {
       return (
@@ -86,15 +90,15 @@ class HostedGamesPage extends Component {
           <ScrollView>
             {this.renderHostedGamesList(this.props.user)}
           </ScrollView>
-          <FAB 
-            onPress={() => this.props.navigation.navigate('ChooseSport')} 
-            title='Host New Game' 
+          <FAB
+            onPress={() => this.props.navigation.navigate('ChooseSport')}
+            title='Host New Game'
             icon={{ type: 'material-community', name: 'plus' }} />
           <Toast
             ref="toast"
             style={{ backgroundColor: colors.SELECTED }}
-            position='top'
-            positionValue={50}
+            position='bottom'
+            positionValue={200}
             fadeInDuration={750}
             fadeOutDuration={1250}
           />

@@ -29,15 +29,19 @@ class AttendingGamesPage extends Component {
     title: "Games I'm Attending",
   };
 
-  leaveJoinedGame(game) {
+  leaveJoinedGame (game) {
     Alert.alert(
       'Leave Game?',
       'Are you sure you want to leave this game?',
       [
-        { text: "Yes, Leave It", onPress: () => { 
-          this.props.leaveGame(game);
-          this.refs.toast.show('Success! You\'re no longer attending '+game.name, DURATION.LENGTH_LONG);
-        }},
+        {
+          text: "Yes, Leave It", onPress: () => {
+            this.props.leaveGame(game);
+            if (this.refs.toast) {
+              this.refs.toast.show('Success! You\'re no longer attending ' + game.name, DURATION.LENGTH_LONG);
+            }
+          }
+        },
         { text: "No, Stay" }
       ]
     );
@@ -60,13 +64,13 @@ class AttendingGamesPage extends Component {
                 onPressRightIcon={() => this.leaveJoinedGame(game)}
               />
             );
-        })
+          })
         }
       </List>
     );
   }
 
-  renderFAB() {
+  renderFAB () {
     return (
       <FAB
         onPress={() => this.props.navigation.navigate('GamesMap')}
@@ -80,7 +84,7 @@ class AttendingGamesPage extends Component {
       return (
         <FullScreenTextView
           title='No Joined Games'
-          description="Looks like you haven't joined any games yet! Find a game by pressing the button below" 
+          description="Looks like you haven't joined any games yet! Find a game by pressing the button below"
           FAB={this.renderFAB()} />
       );
     } else {
@@ -93,8 +97,8 @@ class AttendingGamesPage extends Component {
           <Toast
             ref="toast"
             style={{ backgroundColor: colors.SELECTED }}
-            position='top'
-            positionValue={50}
+            position='bottom'
+            positionValue={200}
             fadeInDuration={750}
             fadeOutDuration={1250}
           />

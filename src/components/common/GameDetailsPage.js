@@ -115,8 +115,8 @@ class GameDetailsPage extends Component {
         <Toast 
           ref="toast" 
           style={{backgroundColor: colors.SELECTED}} 
-          position='top'
-          positionValue={50}
+          position='bottom'
+          positionValue={250}
           fadeInDuration={750}
           fadeOutDuration={1250}
         />
