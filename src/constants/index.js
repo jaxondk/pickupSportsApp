@@ -12,6 +12,8 @@ export const colors = {
   CANCEL: '#c20000', //TODO - find better red
   BBALL_ORANGE: '#f28500',
   TENNIS_GREEN: '#ccff00',
+  LIGHT_BLUE: '#F5FCFF',
+  DARK_GRAY: '#333333',
 };
 
 export const sports = {

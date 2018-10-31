@@ -29,7 +29,6 @@ class GamesMapPage extends Component {
         (this.props.savedFilter.gamesOfInterest && !hosting && !attending)
       );
     });
-
     return filteredGames.map((game) => (
       <MapView.Marker
         key={game.id}

@@ -7,6 +7,7 @@ import { colors } from '../../constants';
 import { removeGame } from '../../actions';
 import GameListItem from '../common/GameListItem';
 import FAB from '../common/FAB';
+import FullScreenTextView from '../common/FullScreenTextView';
 
 const styles = {
   pageContainer: {
@@ -45,53 +46,61 @@ class HostedGamesPage extends Component {
   // TODO - make this generic so you can use it to render all similar lists in the app -
   //        hosted games, games to checkout, my sports, etc.
   renderHostedGamesList (user) {
-    if (user.hostedGamesIds.length == 0) {
-      return (<Text>No Hosted Games</Text>);
-    } else {
-      return (
-        <List>
-          {
+    return (
+      <List>
+        {
 
-            user.hostedGamesIds.map((gameId) => {
-              const game = this.props.allGames[gameId];
-              return (
-                <GameListItem
-                  key={gameId}
-                  game={game}
-                  userLocation={user.location}
-                  onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
-                  rightIcon={{ name: 'cancel', color: colors.CANCEL }}
-                  onPressRightIcon={() => this.removeHostedGame(game)}
-                // editable
-                />
-              );
-          })
-          }
-        </List>
-      );
-    }
+          user.hostedGamesIds.map((gameId) => {
+            const game = this.props.allGames[gameId];
+            return (
+              <GameListItem
+                key={gameId}
+                game={game}
+                userLocation={user.location}
+                onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
+                rightIcon={{ name: 'cancel', color: colors.CANCEL }}
+                onPressRightIcon={() => this.removeHostedGame(game)}
+              // editable
+              />
+            );
+        })
+        }
+      </List>
+    );
   }
 
   render () {
-    return (
-      <View style={styles.pageContainer}>
-        <ScrollView>
-          {this.renderHostedGamesList(this.props.user)}
-        </ScrollView>
-        <FAB 
-          onPress={() => this.props.navigation.navigate('ChooseSport')} 
-          title='Host New Game' 
-          icon={{ type: 'material-community', name: 'plus' }} />
-        <Toast
-          ref="toast"
-          style={{ backgroundColor: colors.SELECTED }}
-          position='top'
-          positionValue={50}
-          fadeInDuration={750}
-          fadeOutDuration={1250}
-        />
-      </View>
-    );
+    if (this.props.user.hostedGamesIds.length == 0) {
+      return (
+        <FullScreenTextView
+          title='No Hosted Games'
+          description="Looks like you're not hosting any games yet! Host a game by pressing the button below" 
+          FAB={(<FAB
+            onPress={() => this.props.navigation.navigate('ChooseSport')}
+            title='Host New Game'
+            icon={{ type: 'material-community', name: 'plus' }} />)}/>
+      );
+    } else {
+      return (
+        <View style={styles.pageContainer}>
+          <ScrollView>
+            {this.renderHostedGamesList(this.props.user)}
+          </ScrollView>
+          <FAB 
+            onPress={() => this.props.navigation.navigate('ChooseSport')} 
+            title='Host New Game' 
+            icon={{ type: 'material-community', name: 'plus' }} />
+          <Toast
+            ref="toast"
+            style={{ backgroundColor: colors.SELECTED }}
+            position='top'
+            positionValue={50}
+            fadeInDuration={750}
+            fadeOutDuration={1250}
+          />
+        </View>
+      );
+    }
   }
 }
 
