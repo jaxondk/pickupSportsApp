@@ -58,7 +58,7 @@ class FilterPage extends Component {
           <CheckBox 
             title='Tennis Games' checkedColor={getPinColor(sports.TENNIS)}
             checked={this.props.tmpFilter[sports.TENNIS]} onPress={() => this.props.toggle(TOGGLE_TENNIS)} />
-          <FormLabel labelStyle={gstyles.label}>Filter By Attendance</FormLabel>
+          {/* <FormLabel labelStyle={gstyles.label}>Filter By Attendance</FormLabel>
           <CheckBox 
             title="Games you're attending" checkedColor={colors.SELECTED} 
             checked={this.props.tmpFilter.attendingGames} onPress={() => this.props.toggle(TOGGLE_ATTENDING_GAMES)} />
@@ -67,7 +67,7 @@ class FilterPage extends Component {
             checked={this.props.tmpFilter.gamesOfInterest} onPress={() => this.props.toggle(TOGGLE_GAMES_OF_INTEREST)} />
           <CheckBox
             title="Games you're hosting" checkedColor={colors.SELECTED}
-            checked={this.props.tmpFilter.hostedGames} onPress={() => this.props.toggle(TOGGLE_HOSTED_GAMES)} />
+            checked={this.props.tmpFilter.hostedGames} onPress={() => this.props.toggle(TOGGLE_HOSTED_GAMES)} /> */}
         </View>
         <View style={styles.multiBtnFooter}>
           <FooterBlockBtn

@@ -62,7 +62,7 @@ const mockTennisGame1 = {
   hostId: 99,
   sportName: sports.TENNIS,
   moment: moment('11/1/2018 8:00 am', 'MM/DD/YYYY h:mm A'),
-  location: locations.BELMONT,
+  location: locations.IPF,
   // attendeesAllowed: { min: 6, max: 12 },
   // attendees: [],
   // skillLevel: skillLevels.ADVANCED,
@@ -80,7 +80,8 @@ const mockTennisGame2 = {
   // skillLevel: skillLevels.ADVANCED,
 }
 
-export const mockGames = [mockBballGame1, mockBballGame2, mockSoccerGame1, mockSoccerGame2, mockTennisGame1, mockTennisGame2];
+export const mockGames = [mockBballGame1, mockSoccerGame2, mockTennisGame1];
+// export const mockGames = [mockBballGame1, mockBballGame2, mockSoccerGame1, mockSoccerGame2, mockTennisGame1, mockTennisGame2];
 
 export const mockUser = {
   id: 0,

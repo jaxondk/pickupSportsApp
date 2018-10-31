@@ -3,8 +3,8 @@ import { ScrollView, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { List } from 'react-native-elements';
 import Toast, { DURATION } from 'react-native-easy-toast';
-import { colors } from '../../constants';
-import { removeGame } from '../../actions';
+import { colors, icons } from '../../constants';
+import { leaveGame } from '../../actions';
 import GameListItem from '../common/GameListItem';
 import FAB from '../common/FAB';
 import FullScreenTextView from '../common/FullScreenTextView';
@@ -24,33 +24,31 @@ const styles = {
   }
 }
 
-class HostedGamesPage extends Component {
+class AttendingGamesPage extends Component {
   static navigationOptions = {
-    title: "My Hosted Games",
+    title: "Games I'm Attending",
   };
 
-  removeHostedGame(game) {
+  leaveJoinedGame(game) {
     Alert.alert(
-      'Remove Hosted Game?',
-      'Are you sure you want to stop hosting this game? This will permanently remove the game and cannot be undone',
+      'Leave Game?',
+      'Are you sure you want to leave this game?',
       [
-        { text: "Yes, Remove It", onPress: () => { 
-          this.props.removeGame(game);
-          this.refs.toast.show('Success! You\'re no longer hosting '+game.name, DURATION.LENGTH_LONG);
+        { text: "Yes, Leave It", onPress: () => { 
+          this.props.leaveGame(game);
+          this.refs.toast.show('Success! You\'re no longer attending '+game.name, DURATION.LENGTH_LONG);
         }},
-        { text: "No, Keep It" }
+        { text: "No, Stay" }
       ]
     );
   }
 
-  // TODO - make this generic so you can use it to render all similar lists in the app -
-  //        hosted games, games to checkout, my sports, etc.
-  renderHostedGamesList (user) {
+  renderAttendingGamesList (user) {
     return (
       <List>
         {
 
-          user.hostedGamesIds.map((gameId) => {
+          user.attendingGamesIds.map((gameId) => {
             const game = this.props.allGames[gameId];
             return (
               <GameListItem
@@ -59,8 +57,7 @@ class HostedGamesPage extends Component {
                 userLocation={user.location}
                 onPress={() => this.props.navigation.navigate('GameDetails', { game: game })}
                 rightIcon={{ name: 'cancel', color: colors.CANCEL }}
-                onPressRightIcon={() => this.removeHostedGame(game)}
-              // editable
+                onPressRightIcon={() => this.leaveJoinedGame(game)}
               />
             );
         })
@@ -69,27 +66,30 @@ class HostedGamesPage extends Component {
     );
   }
 
+  renderFAB() {
+    return (
+      <FAB
+        onPress={() => this.props.navigation.navigate('GamesMap')}
+        title='Find a Game'
+        icon={{ ...icons.SEARCH }} />
+    );
+  }
+
   render () {
-    if (this.props.user.hostedGamesIds.length == 0) {
+    if (this.props.user.attendingGamesIds.length === 0) {
       return (
         <FullScreenTextView
-          title='No Hosted Games'
-          description="Looks like you're not hosting any games yet! Host a game by pressing the button below" 
-          FAB={(<FAB
-            onPress={() => this.props.navigation.navigate('ChooseSport')}
-            title='Host New Game'
-            icon={{ type: 'material-community', name: 'plus' }} />)}/>
+          title='No Joined Games'
+          description="Looks like you haven't joined any games yet! Find a game by pressing the button below" 
+          FAB={this.renderFAB()} />
       );
     } else {
       return (
         <View style={styles.pageContainer}>
           <ScrollView>
-            {this.renderHostedGamesList(this.props.user)}
+            {this.renderAttendingGamesList(this.props.user)}
           </ScrollView>
-          <FAB 
-            onPress={() => this.props.navigation.navigate('ChooseSport')} 
-            title='Host New Game' 
-            icon={{ type: 'material-community', name: 'plus' }} />
+          {this.renderFAB()}
           <Toast
             ref="toast"
             style={{ backgroundColor: colors.SELECTED }}
@@ -106,4 +106,4 @@ class HostedGamesPage extends Component {
 
 let mapStoreToProps = ({ user, allGames }) => ({ user, allGames });
 
-export default connect(mapStoreToProps, { removeGame })(HostedGamesPage);
+export default connect(mapStoreToProps, { leaveGame })(AttendingGamesPage);

@@ -29,6 +29,7 @@ export const icons = {
   PENCIL: { type: 'material-community', name: 'pencil' },
   SEARCH: { name: 'search' },
   LOCATION: { type: 'entypo', name: 'location-pin' },
+  CHECKMARK: { type: 'ionicon', name: 'md-checkmark'}
 };
 
 export const skillLevels = {
