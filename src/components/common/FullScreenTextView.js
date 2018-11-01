@@ -8,7 +8,7 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.LIGHT_BLUE,
+    backgroundColor: colors.OFF_WHITE,
   },
   errorTitle: {
     fontSize: 20,

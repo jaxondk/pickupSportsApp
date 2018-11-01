@@ -8,21 +8,7 @@ import { removeGame } from '../../actions';
 import GameListItem from '../common/GameListItem';
 import FAB from '../common/FAB';
 import FullScreenTextView from '../common/FullScreenTextView';
-
-const styles = {
-  pageContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  footer: {
-    margin: 25,
-    alignItems: 'center'
-  },
-  btnContainer: {
-    borderRadius: 20,
-    width: '50%'
-  }
-}
+import gstyles from '../../styles';
 
 class HostedGamesPage extends Component {
   static navigationOptions = {
@@ -86,7 +72,7 @@ class HostedGamesPage extends Component {
       );
     } else {
       return (
-        <View style={styles.pageContainer}>
+        <View style={gstyles.pageContainer}>
           <ScrollView>
             {this.renderHostedGamesList(this.props.user)}
           </ScrollView>

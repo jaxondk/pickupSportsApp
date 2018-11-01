@@ -3,25 +3,9 @@ import { View, TouchableOpacity } from 'react-native';
 import { Text, Icon } from 'react-native-elements';
 import { colors, icons } from '../constants';
 import { connect } from 'react-redux';
+import gstyles from '../styles';
 
 const styles = {
-  pageContainer: {
-    flex: 1,
-    backgroundColor: 'gainsboro',
-  },
-  topCard: {
-    flex: 1,
-    borderBottomColor: colors.SILVER,
-    borderBottomWidth: 1,
-    width: '100%',
-    alignItems: 'center',
-  },
-  bottomCard: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    // marginTop: 25,
-  },
   tile: {
     borderTopWidth: 5,
     borderColor: 'rgba(0,0,0,.3)',
@@ -53,7 +37,7 @@ class HomePage extends Component {
 
   render() {
     return (
-      <View style={styles.pageContainer}>
+      <View style={gstyles.pageContainer}>
         <TouchableOpacity style={[styles.tile, {borderTopColor: colors.ACCENT}]} onPress={() => this.props.navigation.navigate('GamesMap')}>
           <Icon reverse name={icons.SEARCH.name} color={colors.ACCENT} size={50} />
           <Text h4 style={styles.tileText}>Find New Games</Text>

@@ -14,6 +14,7 @@ export const colors = {
   TENNIS_GREEN: '#ccff00',
   LIGHT_BLUE: '#F5FCFF',
   DARK_GRAY: '#333333',
+  OFF_WHITE: 'whitesmoke',
 };
 
 export const sports = {

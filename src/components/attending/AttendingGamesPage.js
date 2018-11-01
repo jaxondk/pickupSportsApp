@@ -8,12 +8,9 @@ import { leaveGame } from '../../actions';
 import GameListItem from '../common/GameListItem';
 import FAB from '../common/FAB';
 import FullScreenTextView from '../common/FullScreenTextView';
+import gstyles from '../../styles';
 
 const styles = {
-  pageContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
   footer: {
     margin: 25,
     alignItems: 'center'
@@ -89,7 +86,7 @@ class AttendingGamesPage extends Component {
       );
     } else {
       return (
-        <View style={styles.pageContainer}>
+        <View style={gstyles.pageContainer}>
           <ScrollView>
             {this.renderAttendingGamesList(this.props.user)}
           </ScrollView>

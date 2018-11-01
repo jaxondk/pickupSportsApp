@@ -1,7 +1,9 @@
+import { colors } from "../constants";
+
 export default gstyles = {
   pageContainer: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.OFF_WHITE,
   },
   content: {
     flex: 9,

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Alert } from 'react-native';
 import { CheckBox, FormLabel } from 'react-native-elements';
-import { HeaderBackButton } from 'react-navigation';
 import { connect } from 'react-redux';
 import gstyles from '../../styles';
 import { colors, sports, TOGGLE_SOCCER, TOGGLE_BASKETBALL, TOGGLE_TENNIS, TOGGLE_ATTENDING_GAMES, TOGGLE_GAMES_OF_INTEREST, TOGGLE_HOSTED_GAMES } from '../../constants';
@@ -10,6 +9,9 @@ import FooterBlockBtn from '../common/FooterBlockBtn';
 import { toggle, restoreSavedFilter, saveTmpFilter } from '../../actions';
 
 const styles = {
+  checkBox: {
+    backgroundColor: 'white'
+  },
   multiBtnFooter: {
     flex: 1,
     flexDirection: 'row',
@@ -50,22 +52,28 @@ class FilterPage extends Component {
         <View style={gstyles.content}>
           <FormLabel labelStyle={gstyles.label}>Filter By Sport</FormLabel>
           <CheckBox 
+            containerStyle={styles.checkBox}
             title='Basketball Games' checkedColor={getPinColor(sports.BASKETBALL)} 
             checked={this.props.tmpFilter[sports.BASKETBALL]} onPress={() => this.props.toggle(TOGGLE_BASKETBALL)}/>
-          <CheckBox 
+          <CheckBox
+            containerStyle={styles.checkBox}
             title='Soccer Games' checkedColor={getPinColor(sports.SOCCER)} 
             checked={this.props.tmpFilter[sports.SOCCER]} onPress={() => this.props.toggle(TOGGLE_SOCCER)} />
-          <CheckBox 
+          <CheckBox
+            containerStyle={styles.checkBox}
             title='Tennis Games' checkedColor={getPinColor(sports.TENNIS)}
             checked={this.props.tmpFilter[sports.TENNIS]} onPress={() => this.props.toggle(TOGGLE_TENNIS)} />
           {/* <FormLabel labelStyle={gstyles.label}>Filter By Attendance</FormLabel>
-          <CheckBox 
+          <CheckBox
+            containerStyle={styles.checkBox}
             title="Games you're attending" checkedColor={colors.SELECTED} 
             checked={this.props.tmpFilter.attendingGames} onPress={() => this.props.toggle(TOGGLE_ATTENDING_GAMES)} />
-          <CheckBox 
+          <CheckBox
+            containerStyle={styles.checkBox}
             title="Games you may be interested in" checkedColor={colors.SELECTED} 
             checked={this.props.tmpFilter.gamesOfInterest} onPress={() => this.props.toggle(TOGGLE_GAMES_OF_INTEREST)} />
           <CheckBox
+            containerStyle={styles.checkBox}
             title="Games you're hosting" checkedColor={colors.SELECTED}
             checked={this.props.tmpFilter.hostedGames} onPress={() => this.props.toggle(TOGGLE_HOSTED_GAMES)} /> */}
         </View>

@@ -7,7 +7,6 @@ import { selectDate, selectTime, updateDateTimeChoice, initRegion } from '../../
 import { colors } from '../../constants';
 import FooterBlockBtn from '../common/FooterBlockBtn';
 import gstyles from '../../styles';
-import { FormLabel } from 'react-native-elements';
 
 const styles = {
   calendar: {
@@ -43,13 +42,12 @@ class ChooseTimePage extends Component {
     return (
       <View style={gstyles.pageContainer}>
         <View style={gstyles.content}>
-          {/* <FormLabel labelStyle={gstyles.label}>Choose a Day and Time</FormLabel> */}
           <View style={styles.calendar}>
             <CalendarPicker
               onDateChange={(date) => this.props.selectDate(date)}
               selectedDayColor={colors.SELECTED}
               minDate={moment().startOf('day')}
-              todayBackgroundColor={'white'}
+              todayBackgroundColor={'transparent'}
             />
           </View>
           <DatePickerIOS

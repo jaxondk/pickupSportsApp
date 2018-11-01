@@ -11,6 +11,10 @@ import FooterBlockBtn from '../common/FooterBlockBtn';
 import { leaveGame, attendGame, removeGame, removeGameOfInterest, addGameOfInterest } from '../../actions';
 
 const styles = {
+  pageContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
   map: {
     flex: 1
   },
@@ -86,7 +90,7 @@ class GameDetailsPage extends Component {
     const hosting = game.hostId === this.props.user.id;
     const attending = this.props.user.attendingGamesIds.indexOf(game.id) > -1
     return (
-      <View style={gstyles.pageContainer}>
+      <View style={styles.pageContainer}>
         <View style={gstyles.content} >
           <MapView
             style={styles.map}
